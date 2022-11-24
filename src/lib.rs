@@ -8,26 +8,26 @@ use tantivy::{collector::TopDocs, query::QueryParser, schema::*, Index};
 #[serde_as]
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Book {
-    id: u64,
+    pub id: u64,
 
-    title: String,
+    pub title: String,
     #[serde_as(deserialize_as = "DefaultOnNull")]
-    author: String,
+    pub author: String,
     #[serde_as(deserialize_as = "DefaultOnNull")]
-    publisher: String,
-    extension: String,
-    filesize: u64,
+    pub publisher: String,
+    pub extension: String,
+    pub filesize: u64,
     #[serde_as(deserialize_as = "DefaultOnNull")]
-    language: String,
+    pub language: String,
     #[serde_as(deserialize_as = "DefaultOnError")]
-    year: u64,
+    pub year: u64,
     #[serde_as(deserialize_as = "DefaultOnError")]
-    pages: u64,
+    pub pages: u64,
     #[serde_as(deserialize_as = "DefaultOnNull")]
-    description: String,
+    pub description: String,
     #[serde_as(deserialize_as = "DefaultOnNull")]
-    isbn: String,
-    ipfs_cid: String,
+    pub isbn: String,
+    pub ipfs_cid: String,
 }
 
 impl From<(&Schema, Document)> for Book {
@@ -143,12 +143,9 @@ impl Searcher {
         let query_parser = QueryParser::for_index(
             &self.index,
             vec![
-                self.id.clone(),
                 self.title.clone(),
                 self.author.clone(),
                 self.publisher.clone(),
-                self.extension.clone(),
-                self.language.clone(),
                 self.isbn.clone(),
             ],
         );
