@@ -17,10 +17,10 @@ struct AppState {
 }
 
 impl AppState {
-    pub fn init() -> Self {
+    pub fn init(index_dir: &str) -> Self {
         info!("AppState init!");
         AppState {
-            searcher: Arc::new(Searcher::new()),
+            searcher: Arc::new(Searcher::new(index_dir)),
         }
     }
 }
@@ -55,7 +55,16 @@ async fn search(query: web::Query<SearchQuery>, state: web::Data<AppState>) -> i
 async fn main() -> std::io::Result<()> {
     env_logger::init();
     info!("book-searcher started!");
-    let app_state = AppState::init();
+
+    let index_dir = std::env::current_exe()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .join("index")
+        .to_str()
+        .unwrap()
+        .to_string();
+    let app_state = AppState::init(&index_dir);
 
     HttpServer::new(move || {
         App::new()

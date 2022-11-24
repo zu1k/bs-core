@@ -88,8 +88,8 @@ pub struct Searcher {
 }
 
 impl Searcher {
-    pub fn new() -> Self {
-        let index = Index::open_in_dir("index").unwrap();
+    pub fn new(index_dir: &str) -> Self {
+        let index = Index::open_in_dir(index_dir).unwrap();
         let tokenizer = CangJieTokenizer {
             worker: Arc::new(Jieba::new()),
             option: TokenizerOption::Unicode,
