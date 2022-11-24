@@ -5,11 +5,9 @@ use log::info;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use book_searcher::{Book, Searcher};
+use actix_web_static_files::ResourceFiles;
 
-#[get("/")]
-async fn index() -> impl Responder {
-    HttpResponse::Ok()
-}
+include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
 #[derive(Clone)]
 struct AppState {
@@ -67,11 +65,12 @@ async fn main() -> std::io::Result<()> {
     let app_state = AppState::init(&index_dir);
 
     HttpServer::new(move || {
+        let generated = generate();
         App::new()
             .wrap(Logger::default())
             .app_data(web::Data::new(app_state.clone()))
-            .service(index)
             .service(search)
+            .service(ResourceFiles::new("/", generated))
     })
     .bind(("127.0.0.1", 7070))?
     .run()
