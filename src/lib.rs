@@ -104,13 +104,13 @@ impl Searcher {
             .set_stored();
 
         let mut schema_builder = Schema::builder();
-        let zlib_id = schema_builder.add_u64_field("zlib_id", STORED);
+        let zlib_id = schema_builder.add_u64_field("zlib_id", INDEXED | STORED);
         let title = schema_builder.add_text_field("title", text_options.clone());
         let author = schema_builder.add_text_field("author", text_options.clone());
         let publisher = schema_builder.add_text_field("publisher", text_options.clone());
-        let extension = schema_builder.add_text_field("extension", STORED);
+        let extension = schema_builder.add_text_field("extension", STRING | STORED);
         let filesize = schema_builder.add_u64_field("filesize", STORED);
-        let language = schema_builder.add_text_field("language", STORED);
+        let language = schema_builder.add_text_field("language", STRING | STORED);
         let year = schema_builder.add_u64_field("year", STORED);
         let pages = schema_builder.add_u64_field("pages", STORED);
         let description = schema_builder.add_text_field("description", STORED);
@@ -143,9 +143,12 @@ impl Searcher {
         let query_parser = QueryParser::for_index(
             &self.index,
             vec![
+                self.zlib_id.clone(),
                 self.title.clone(),
                 self.author.clone(),
                 self.publisher.clone(),
+                self.extension.clone(),
+                self.language.clone(),
                 self.isbn.clone(),
             ],
         );
