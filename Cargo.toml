@@ -2,6 +2,13 @@
 name = "zlib-searcher"
 version = "0.1.0"
 edition = "2021"
+authors = ["zu1k <i@zu1k.com>"]
+description = "search z-library index."
+homepage = "https://github.com/zu1k/zlib-searcher"
+repository = "https://github.com/zu1k/zlib-searcher"
+license = "MIT"
+exclude = [".github/", "index/"]
+
 
 [profile.release]
 strip = true
