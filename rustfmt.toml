@@ -1,0 +1,4 @@
+version = "Two"
+
+indent_style = "Block"
+imports_granularity = "Crate"

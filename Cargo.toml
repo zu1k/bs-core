@@ -1,0 +1,23 @@
+[package]
+name = "zlib-searcher"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+strip = true
+lto = true
+opt-level = 3
+codegen-units = 1
+
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_with = "2.0"
+tantivy = "0.18"
+cang-jie = "0.14"
+jieba-rs = { version = "0.6", features = ["default-dict"] }
+
+actix-web = "4"
+anyhow = "1.0"
+env_logger = "0.9"
+log = "0.4"
