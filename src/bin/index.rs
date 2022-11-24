@@ -1,0 +1,97 @@
+use cang_jie::{CangJieTokenizer, TokenizerOption, CANG_JIE};
+use jieba_rs::Jieba;
+use std::{fs::File, io::BufReader, sync::Arc};
+use zlib_searcher::Book;
+
+#[macro_use]
+extern crate tantivy;
+use tantivy::{schema::*, Index};
+
+fn main() {
+    let text_indexing = TextFieldIndexing::default()
+        .set_tokenizer(CANG_JIE)
+        .set_index_option(IndexRecordOption::WithFreqsAndPositions);
+    let text_options = TextOptions::default()
+        .set_indexing_options(text_indexing)
+        .set_stored();
+
+    let mut schema_builder = Schema::builder();
+
+    let zlib_id = schema_builder.add_u64_field("zlib_id", INDEXED | STORED);
+    let title = schema_builder.add_text_field("title", text_options.clone());
+    let author = schema_builder.add_text_field("author", text_options.clone());
+    let publisher = schema_builder.add_text_field("publisher", text_options.clone());
+    let extension = schema_builder.add_text_field("extension", STRING | STORED);
+    let filesize = schema_builder.add_u64_field("filesize", STORED);
+    let language = schema_builder.add_text_field("language", STRING | STORED);
+    let year = schema_builder.add_u64_field("year", STORED);
+    let pages = schema_builder.add_u64_field("pages", STORED);
+    let description = schema_builder.add_text_field("description", STORED);
+    let isbn = schema_builder.add_text_field("isbn", STRING | STORED);
+    let ipfs_cid = schema_builder.add_text_field("ipfs_cid", STORED);
+
+    let schema = schema_builder.build();
+
+    // index
+    let index = Index::create_in_dir("index", schema.clone()).unwrap();
+
+    let tokenizer = CangJieTokenizer {
+        worker: Arc::new(Jieba::new()),
+        option: TokenizerOption::Unicode,
+    };
+    index.tokenizers().register(CANG_JIE, tokenizer);
+
+    let mut writer = index.writer(10 * 1024 * 1024 * 1024).unwrap();
+
+    let file = File::open("index_books.csv").unwrap();
+    let reader = BufReader::new(file);
+
+    let mut rdr = csv::ReaderBuilder::new()
+        .has_headers(false)
+        .from_reader(reader);
+
+    for result in rdr.deserialize::<Book>() {
+        match result {
+            Ok(item) => {
+                if let Err(err) = writer.add_document(doc!(
+                    zlib_id => item.zlib_id,
+                    title => item.title,
+                    author => item.author,
+                    publisher => item.publisher,
+                    extension => item.extension,
+                    filesize => item.filesize,
+                    language => item.language,
+                    year => item.year,
+                    pages => item.pages,
+                    description => item.description,
+                    isbn => item.isbn,
+                    ipfs_cid => item.ipfs_cid,
+                )) {
+                    println!("{err}");
+                }
+            }
+            Err(err) => {
+                println!("{err}");
+            }
+        }
+    }
+
+    writer.commit().unwrap();
+}
+
+#[test]
+fn test_csv_der() {
+    let file = File::open("index_books.csv").unwrap();
+    let reader = BufReader::new(file);
+
+    let mut rdr = csv::ReaderBuilder::new()
+        .has_headers(false)
+        .from_reader(reader);
+    for result in rdr.records() {
+        if let Err(err) = result {
+            println!("{err:?}");
+            break;
+        }
+    }
+    println!("{:?}", rdr.position());
+}
