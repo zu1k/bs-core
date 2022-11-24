@@ -1,6 +1,6 @@
 [package]
 name = "zlib-searcher"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 authors = ["zu1k <i@zu1k.com>"]
 description = "search z-library index."
@@ -28,5 +28,10 @@ actix-web = "4"
 anyhow = "1.0"
 env_logger = "0.9"
 log = "0.4"
+actix-web-static-files = "4.0"
+static-files = "0.2"
 
 csv = "1.1"
+
+[build-dependencies]
+static-files = "0.2"
