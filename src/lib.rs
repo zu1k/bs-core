@@ -8,14 +8,16 @@ use tantivy::{collector::TopDocs, query::QueryParser, schema::*, Index};
 #[serde_as]
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Book {
-    pub zlib_id: u64,
+    pub id: u64,
 
     pub title: String,
     #[serde_as(deserialize_as = "DefaultOnNull")]
     pub author: String,
     #[serde_as(deserialize_as = "DefaultOnNull")]
     pub publisher: String,
+    #[serde_as(deserialize_as = "DefaultOnNull")]
     pub extension: String,
+    #[serde_as(deserialize_as = "DefaultOnError")]
     pub filesize: u64,
     #[serde_as(deserialize_as = "DefaultOnNull")]
     pub language: String,
@@ -24,9 +26,8 @@ pub struct Book {
     #[serde_as(deserialize_as = "DefaultOnError")]
     pub pages: u64,
     #[serde_as(deserialize_as = "DefaultOnNull")]
-    pub description: String,
-    #[serde_as(deserialize_as = "DefaultOnNull")]
     pub isbn: String,
+    #[serde_as(deserialize_as = "DefaultOnNull")]
     pub ipfs_cid: String,
 }
 
@@ -52,7 +53,7 @@ impl From<(&Schema, Document)> for Book {
         }
 
         Book {
-            zlib_id: get_field_u64!("zlib_id"),
+            id: get_field_u64!("id"),
             title: get_field_text!("title"),
             author: get_field_text!("author"),
             publisher: get_field_text!("publisher"),
@@ -61,7 +62,6 @@ impl From<(&Schema, Document)> for Book {
             language: get_field_text!("language"),
             year: get_field_u64!("year"),
             pages: get_field_u64!("pages"),
-            description: get_field_text!("description"),
             isbn: get_field_text!("isbn"),
             ipfs_cid: get_field_text!("ipfs_cid"),
         }
@@ -73,7 +73,7 @@ pub struct Searcher {
     schema: Schema,
 
     // fields
-    zlib_id: Field,
+    id: Field,
     title: Field,
     author: Field,
     publisher: Field,
@@ -82,7 +82,6 @@ pub struct Searcher {
     language: Field,
     year: Field,
     pages: Field,
-    description: Field,
     isbn: Field,
     ipfs_cid: Field,
 }
@@ -104,24 +103,23 @@ impl Searcher {
             .set_stored();
 
         let mut schema_builder = Schema::builder();
-        let zlib_id = schema_builder.add_u64_field("zlib_id", INDEXED | STORED);
+        let id = schema_builder.add_u64_field("id", INDEXED | STORED);
         let title = schema_builder.add_text_field("title", text_options.clone());
         let author = schema_builder.add_text_field("author", text_options.clone());
         let publisher = schema_builder.add_text_field("publisher", text_options.clone());
         let extension = schema_builder.add_text_field("extension", STRING | STORED);
         let filesize = schema_builder.add_u64_field("filesize", STORED);
-        let language = schema_builder.add_text_field("language", STRING | STORED);
+        let language = schema_builder.add_text_field("language", TEXT | STORED);
         let year = schema_builder.add_u64_field("year", STORED);
         let pages = schema_builder.add_u64_field("pages", STORED);
-        let description = schema_builder.add_text_field("description", STORED);
-        let isbn = schema_builder.add_text_field("isbn", STRING | STORED);
+        let isbn = schema_builder.add_text_field("isbn", TEXT | STORED);
         let ipfs_cid = schema_builder.add_text_field("ipfs_cid", STORED);
         let schema = schema_builder.build();
 
         Self {
             index,
             schema,
-            zlib_id,
+            id,
             title,
             author,
             publisher,
@@ -130,7 +128,6 @@ impl Searcher {
             language,
             year,
             pages,
-            description,
             isbn,
             ipfs_cid,
         }
@@ -140,7 +137,7 @@ impl Searcher {
         let reader = self.index.reader().unwrap();
         let searcher = reader.searcher();
 
-        let query_parser = QueryParser::for_index(
+        let mut query_parser = QueryParser::for_index(
             &self.index,
             vec![
                 self.title.clone(),
@@ -149,6 +146,7 @@ impl Searcher {
                 self.isbn.clone(),
             ],
         );
+        query_parser.set_conjunction_by_default();
         let query = query_parser.parse_query(query).unwrap();
 
         let top_docs = searcher
