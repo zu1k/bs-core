@@ -1,4 +1,4 @@
 /target
 /index
 
-index_books.csv
+*.csv

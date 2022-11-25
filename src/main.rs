@@ -1,11 +1,11 @@
 use actix_web::{
     get, http::header, middleware::Logger, web, App, HttpResponse, HttpServer, Responder,
 };
+use actix_web_static_files::ResourceFiles;
 use log::info;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use book_searcher::{Book, Searcher};
-use actix_web_static_files::ResourceFiles;
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 

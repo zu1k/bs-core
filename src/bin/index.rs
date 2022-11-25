@@ -23,11 +23,10 @@ fn main() {
     let publisher = schema_builder.add_text_field("publisher", text_options.clone());
     let extension = schema_builder.add_text_field("extension", STRING | STORED);
     let filesize = schema_builder.add_u64_field("filesize", STORED);
-    let language = schema_builder.add_text_field("language", STRING | STORED);
+    let language = schema_builder.add_text_field("language", TEXT | STORED);
     let year = schema_builder.add_u64_field("year", STORED);
     let pages = schema_builder.add_u64_field("pages", STORED);
-    let description = schema_builder.add_text_field("description", STORED);
-    let isbn = schema_builder.add_text_field("isbn", STRING | STORED);
+    let isbn = schema_builder.add_text_field("isbn", TEXT | STORED);
     let ipfs_cid = schema_builder.add_text_field("ipfs_cid", STORED);
 
     let schema = schema_builder.build();
@@ -43,45 +42,49 @@ fn main() {
 
     let mut writer = index.writer(10 * 1024 * 1024 * 1024).unwrap();
 
-    let file = File::open("index_books.csv").unwrap();
-    let reader = BufReader::new(file);
+    let mut do_index = move |csv_file: &str| {
+        let file = File::open(csv_file).unwrap();
+        let reader = BufReader::new(file);
 
-    let mut rdr = csv::ReaderBuilder::new()
-        .has_headers(false)
-        .from_reader(reader);
+        let mut rdr = csv::ReaderBuilder::new()
+            .has_headers(false)
+            .from_reader(reader);
 
-    for result in rdr.deserialize::<Book>() {
-        match result {
-            Ok(item) => {
-                if let Err(err) = writer.add_document(doc!(
-                    id => item.id,
-                    title => item.title,
-                    author => item.author,
-                    publisher => item.publisher,
-                    extension => item.extension,
-                    filesize => item.filesize,
-                    language => item.language,
-                    year => item.year,
-                    pages => item.pages,
-                    description => item.description,
-                    isbn => item.isbn,
-                    ipfs_cid => item.ipfs_cid,
-                )) {
+        for result in rdr.deserialize::<Book>() {
+            match result {
+                Ok(item) => {
+                    if let Err(err) = writer.add_document(doc!(
+                        id => item.id,
+                        title => item.title,
+                        author => item.author,
+                        publisher => item.publisher,
+                        extension => item.extension,
+                        filesize => item.filesize,
+                        language => item.language,
+                        year => item.year,
+                        pages => item.pages,
+                        isbn => item.isbn,
+                        ipfs_cid => item.ipfs_cid,
+                    )) {
+                        println!("{err}");
+                    }
+                }
+                Err(err) => {
                     println!("{err}");
                 }
             }
-            Err(err) => {
-                println!("{err}");
-            }
         }
-    }
 
-    writer.commit().unwrap();
+        writer.commit().unwrap();
+    };
+
+    do_index("books.csv");
+    do_index("libgen_index_books.csv");
 }
 
 #[test]
 fn test_csv_der() {
-    let file = File::open("index_books.csv").unwrap();
+    let file = File::open("books.csv").unwrap();
     let reader = BufReader::new(file);
 
     let mut rdr = csv::ReaderBuilder::new()
