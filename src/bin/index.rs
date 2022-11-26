@@ -5,7 +5,7 @@ use book_searcher::Book;
 
 #[macro_use]
 extern crate tantivy;
-use tantivy::{schema::*, Index, store::Compressor};
+use tantivy::{schema::*, store::Compressor, Index};
 
 fn main() {
     let text_indexing = TextFieldIndexing::default()
