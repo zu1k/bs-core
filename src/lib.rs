@@ -3,7 +3,7 @@ use jieba_rs::Jieba;
 use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DefaultOnError, DefaultOnNull};
 use std::sync::Arc;
-use tantivy::{collector::TopDocs, query::QueryParser, schema::*, Index, store::Compressor};
+use tantivy::{collector::TopDocs, query::QueryParser, schema::*, store::Compressor, Index};
 
 #[serde_as]
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -97,7 +97,7 @@ impl Searcher {
         {
             index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
         }
-        
+
         let tokenizer = CangJieTokenizer {
             worker: Arc::new(Jieba::new()),
             option: TokenizerOption::Unicode,
