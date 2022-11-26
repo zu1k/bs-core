@@ -33,10 +33,14 @@ fn main() {
 
     // index
     let mut index = Index::create_in_dir("index", schema.clone()).unwrap();
-    index.settings_mut().docstore_compression = Compressor::Brotli; // size: 2.1G, size is best
-    // index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
-    // index.settings_mut().docstore_compression = Compressor::Zstd; // size: 2.7G
-    // index.settings_mut().docstore_compression = Compressor::Snappy; // size: 3.2G
+    #[cfg(feature = "best-size")]
+    {
+        index.settings_mut().docstore_compression = Compressor::Brotli; // size: 2.1G, size is best
+    }
+    #[cfg(feature = "best-speed")]
+    {
+        index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
+    }
 
     let tokenizer = CangJieTokenizer {
         worker: Arc::new(Jieba::new()),
