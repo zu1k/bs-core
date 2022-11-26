@@ -33,3 +33,8 @@ csv = "1.1"
 
 [build-dependencies]
 static-files = "0.2"
+
+[features]
+default = ["best-size"]
+best-size = []
+best-speed = []

@@ -89,7 +89,15 @@ pub struct Searcher {
 impl Searcher {
     pub fn new(index_dir: &str) -> Self {
         let mut index = Index::open_in_dir(index_dir).unwrap();
-        index.settings_mut().docstore_compression = Compressor::Brotli;
+        #[cfg(feature = "best-size")]
+        {
+            index.settings_mut().docstore_compression = Compressor::Brotli; // size: 2.1G, size is best
+        }
+        #[cfg(feature = "best-speed")]
+        {
+            index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
+        }
+        
         let tokenizer = CangJieTokenizer {
             worker: Arc::new(Jieba::new()),
             option: TokenizerOption::Unicode,
