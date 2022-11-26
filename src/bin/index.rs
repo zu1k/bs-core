@@ -5,7 +5,7 @@ use book_searcher::Book;
 
 #[macro_use]
 extern crate tantivy;
-use tantivy::{schema::*, Index};
+use tantivy::{schema::*, Index, store::Compressor};
 
 fn main() {
     let text_indexing = TextFieldIndexing::default()
@@ -32,7 +32,11 @@ fn main() {
     let schema = schema_builder.build();
 
     // index
-    let index = Index::create_in_dir("index", schema.clone()).unwrap();
+    let mut index = Index::create_in_dir("index", schema.clone()).unwrap();
+    index.settings_mut().docstore_compression = Compressor::Brotli; // size: 2.1G, size is best
+    // index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
+    // index.settings_mut().docstore_compression = Compressor::Zstd; // size: 2.7G
+    // index.settings_mut().docstore_compression = Compressor::Snappy; // size: 3.2G
 
     let tokenizer = CangJieTokenizer {
         worker: Arc::new(Jieba::new()),

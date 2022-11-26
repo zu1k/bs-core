@@ -1,6 +1,6 @@
 [package]
 name = "book-searcher"
-version = "0.4.2"
+version = "0.5.0"
 edition = "2021"
 authors = ["zu1k <i@zu1k.com>"]
 description = "search book index."
@@ -18,7 +18,7 @@ codegen-units = 1
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
 serde_with = "2.0"
-tantivy = "0.18"
+tantivy = { version = "0.18", default-features = false, features = ["mmap", "brotli-compression"] }
 cang-jie = "0.14"
 jieba-rs = { version = "0.6", features = ["default-dict"] }
 
