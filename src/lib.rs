@@ -3,7 +3,7 @@ use jieba_rs::Jieba;
 use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DefaultOnError, DefaultOnNull};
 use std::sync::Arc;
-use tantivy::{collector::TopDocs, query::QueryParser, schema::*, Index};
+use tantivy::{collector::TopDocs, query::QueryParser, schema::*, Index, store::Compressor};
 
 #[serde_as]
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -88,12 +88,14 @@ pub struct Searcher {
 
 impl Searcher {
     pub fn new(index_dir: &str) -> Self {
-        let index = Index::open_in_dir(index_dir).unwrap();
+        let mut index = Index::open_in_dir(index_dir).unwrap();
+        index.settings_mut().docstore_compression = Compressor::Brotli;
         let tokenizer = CangJieTokenizer {
             worker: Arc::new(Jieba::new()),
             option: TokenizerOption::Unicode,
         };
         index.tokenizers().register(CANG_JIE, tokenizer);
+        _ = index.set_default_multithread_executor();
 
         let text_indexing = TextFieldIndexing::default()
             .set_tokenizer(CANG_JIE)
