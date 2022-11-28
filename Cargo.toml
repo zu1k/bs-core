@@ -1,6 +1,6 @@
 [package]
 name = "book-searcher"
-version = "0.5.0"
+version = "0.5.1"
 edition = "2021"
 authors = ["zu1k <i@zu1k.com>"]
 description = "search book index."
