@@ -88,12 +88,11 @@
               <a-descriptions-item label="页数">{{ record.pages }}</a-descriptions-item>
               <a-descriptions-item label="语言">{{ record.language }}</a-descriptions-item>
               <a-descriptions-item label="发布年份">{{ record.year }}</a-descriptions-item>
-            </a-descriptions>
+              </a-descriptions>
             </a-row>
             <a-row style="margin-top: 10px;">
               <a-space>
                 <a-button v-for="item in ipfsGateways" :key="item" @click="downloadFromIPFS(item, record)">{{ item }}</a-button>
-                <a-button @click="downloadFromIPFS('127.0.0.1:8080', record, 'http')">127.0.0.1:8080</a-button>
               </a-space>
             </a-row>
           </a-card>
