@@ -9,7 +9,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v2
 
       - name: Login to GitHub Container Registry
