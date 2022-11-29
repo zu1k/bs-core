@@ -2,7 +2,7 @@ version: '3'
 
 services:
   zlib:
-    image: ghcr.io/knatnetwork/zlib-searcher:latest
+    image: ghcr.io/zu1k/zlib-searcher:latest
     restart: always
     ports:
       - "7070:7070"
