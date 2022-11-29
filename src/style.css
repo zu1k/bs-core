@@ -1,0 +1,6 @@
+#app {
+  height: 100%;
+}
+.ant-layout.layout {
+  min-height: 100%;
+}
