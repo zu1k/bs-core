@@ -5,6 +5,7 @@ specifiers:
   '@vitejs/plugin-vue': ^3.2.0
   ant-design-vue: ^3.2.15
   axios: ^1.2.0
+  filesize: ^10.0.5
   typescript: ^4.6.4
   unplugin-auto-import: ^0.12.0
   unplugin-vue-components: ^0.22.11
@@ -16,6 +17,7 @@ dependencies:
   '@ant-design/icons-vue': 6.1.0_vue@3.2.45
   ant-design-vue: 3.2.15_vue@3.2.45
   axios: 1.2.0
+  filesize: 10.0.5
   vue: 3.2.45
 
 devDependencies:
@@ -660,6 +662,11 @@ packages:
     dependencies:
       reusify: 1.0.4
     dev: true
+
+  /filesize/10.0.5:
+    resolution: {integrity: sha512-qrzyt8gLh86nsyYiC3ibI5KyIYRCWg2yqIklYrWF4a0qNfekik4OQfn7AoPJG2hRrPMSlH6fET4VEITweZAzjA==}
+    engines: {node: '>= 14.0.0'}
+    dev: false
 
   /fill-range/7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}

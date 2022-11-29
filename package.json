@@ -12,6 +12,7 @@
     "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^3.2.15",
     "axios": "^1.2.0",
+    "filesize": "^10.0.5",
     "vue": "^3.2.41"
   },
   "devDependencies": {
