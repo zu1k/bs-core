@@ -72,7 +72,7 @@ async fn main() -> std::io::Result<()> {
             .service(search)
             .service(ResourceFiles::new("/", generated))
     })
-    .bind(("127.0.0.1", 7070))?
+    .bind(("0.0.0.0", 7070))?
     .run()
     .await
 }

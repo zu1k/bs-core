@@ -10,6 +10,16 @@ We don't save and provide files, we provide search.
 
 I hope everyone have a copy of the index locally, so that no need to rely on any centralized service.
 
+## Deploy with Docker
+
+```
+git clone https://github.com/zu1k/book-searcher.git && cd book-searcher
+wget https://github.com/zu1k/book-searcher/releases/download/0.5.0/index_0.5.zip && unzip index_0.5.zip
+docker-compose up -d
+```
+
+Now `book-searcher` it will listen to `0.0.0.0:7070`.
+
 ## Usage
 
 ### 1. Download the pre-compiled binary from [Release](https://github.com/zu1k/book-searcher/releases).

@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  book:
+    image: ghcr.io/zu1k/book-searcher:latest
+    restart: always
+    ports:
+      - "7070:7070"
+    volumes:
+      - ./index:/index
