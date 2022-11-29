@@ -93,6 +93,7 @@
             <a-row style="margin-top: 10px;">
               <a-space>
                 <a-button v-for="item in ipfsGateways" :key="item" @click="downloadFromIPFS(item, record)">{{ item }}</a-button>
+                <a-button @click="downloadFromIPFS('127.0.0.1:8080', record, 'http')">127.0.0.1:8080</a-button>
               </a-space>
             </a-row>
           </a-card>
@@ -246,7 +247,8 @@ export default defineComponent({
     const ipfsGateways: string[] = [
       'cloudflare-ipfs.com',
       'dweb.link',
-      'ipfs.io'
+      'ipfs.io',
+      'gateway.pinata.cloud'
     ];
 
     return {
@@ -319,9 +321,14 @@ export default defineComponent({
       console.log(query);
       return query;
     },
-    downloadFromIPFS(gateway: string, book: TableDataType) {
-      let downloadUrl = 'https://'+gateway+'/ipfs/'+book.ipfs_cid+'?filename='+ encodeURIComponent(book.title+'_'+book.author+'.'+book.extension)
-      window.open(downloadUrl, '_blank')
+    downloadFromIPFS(gateway: string, book: TableDataType, schema?: string) {
+      if (schema) {
+        let downloadUrl = schema+'://'+gateway+'/ipfs/'+book.ipfs_cid+'?filename='+ encodeURIComponent(book.title+'_'+book.author+'.'+book.extension)
+        window.open(downloadUrl, '_blank')
+      } else {
+        let downloadUrl = 'https://'+gateway+'/ipfs/'+book.ipfs_cid+'?filename='+ encodeURIComponent(book.title+'_'+book.author+'.'+book.extension)
+        window.open(downloadUrl, '_blank')
+      }
     }
   },
 });
