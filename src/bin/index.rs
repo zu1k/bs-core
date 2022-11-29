@@ -1,6 +1,11 @@
 use cang_jie::{CangJieTokenizer, TokenizerOption, CANG_JIE};
+use indicatif::{ProgressBar, ProgressIterator, ProgressStyle};
 use jieba_rs::Jieba;
-use std::{fs::File, io::BufReader, sync::Arc};
+use std::{
+    fs::File,
+    io::{BufRead, BufReader},
+    sync::Arc,
+};
 use book_searcher::Book;
 
 #[macro_use]
@@ -58,7 +63,15 @@ fn main() {
             .has_headers(false)
             .from_reader(reader);
 
-        for result in rdr.deserialize::<Book>() {
+        let line_count = BufReader::new(File::open(csv_file).unwrap())
+            .lines()
+            .count();
+        let style = ProgressStyle::default_bar()
+        .template("[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7} {msg}").unwrap();
+        let bar = ProgressBar::new(line_count as u64)
+            .with_message(format!("Indexing {}", csv_file))
+            .with_style(style);
+        for result in rdr.deserialize::<Book>().progress_with(bar) {
             match result {
                 Ok(item) => {
                     if let Err(err) = writer.add_document(doc!(
