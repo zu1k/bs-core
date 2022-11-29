@@ -30,6 +30,7 @@ actix-web-static-files = "4.0"
 static-files = "0.2"
 
 csv = "1.1"
+indicatif = "0.17.2"
 
 [build-dependencies]
 static-files = "0.2"

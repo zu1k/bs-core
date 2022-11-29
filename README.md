@@ -14,7 +14,7 @@ I hope everyone have a copy of the index locally, so that no need to rely on any
 
 ### 1. Download the pre-compiled binary from [Release](https://github.com/zu1k/book-searcher/releases).
 
-Or you can compile by yourself.
+Or you can compile by yourself. Refer to [Build from source](##build-from-source) for instructions.
 
 ### 2. Create the index.
 
@@ -33,6 +33,49 @@ project_dir
 ### 3. Run `book-searcher`, it will listen to `127.0.0.1:7070`.
 
 Access http://127.0.0.1:7070/ to use webui, or you can use the original api.
+
+## Build from source
+
+### 1. Build `book-searcher`
+
+You need the frontend code in the `frontend` branch, and organize it like this:
+
+```
+├── book-searcher // this repo
+│   └── src
+└── book-searcher-frontend
+    ├── dist   // this is what we need.
+    ├── public
+    └── src
+```
+
+Then run
+```bash
+cd ../book-searcher-frontend
+npm install && npm run build
+
+cd ../book-searcher
+cargo build --release
+
+# move the compiled binary to the project root directory
+mv target/release/book-searcher .
+```
+
+### 2. Build `index`
+
+Download `books.csv.zip` and `libgen_index_books.csv.zip` to the project root directory.
+
+Then run `cargo run --bin index --release`. You may need to `mkdir index` or `rm index/*` first to make sure `index` is an existing empty folder.
+
+The finally folder structure should look like this:
+
+```
+project_dir // in the example above, it is project root directory.
+├── index
+│   ├── some index files...
+│   └── meta.json
+└── book-searcher
+```
 
 #### original search api
 
