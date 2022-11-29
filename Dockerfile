@@ -1,6 +1,7 @@
 # docker build . -t ghcr.io/knatnetwork/zlib-searcher:latest
 FROM node:18-buster as frontend
 
+RUN ln -s /usr/local/bin/node /usr/local/sbin/node
 COPY . /app
 RUN cd /app && git checkout frontend && npm install -g pnpm && pnpm install && pnpm run build
 
