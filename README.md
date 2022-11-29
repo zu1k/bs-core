@@ -6,6 +6,12 @@
 [![GitHub issues](https://img.shields.io/github/issues/zu1k/zlib-searcher)](https://github.com/zu1k/zlib-searcher/issues)
 [![GitHub license](https://img.shields.io/github/license/zu1k/zlib-searcher)](https://github.com/zu1k/zlib-searcher/blob/master/LICENSE)
 
+Search `zlib`/`libgen` index to get `ipfs_cid`.
+
+We don't save and provide files, we provide search.
+
+I hope everyone have a copy of the index locally, so that no need to rely on any centralized service.
+
 ## Usage
 
 ### 1. Download the pre-compiled binary from [Release](https://github.com/zu1k/zlib-searcher/releases).
