@@ -38,6 +38,25 @@ zlib_searcher_dir
 
 Access http://127.0.0.1:7070/ to use webui, or you can use the original api.
 
+#### original search api
+
+You can search by the following fields:
+
+- title
+- author
+- publisher
+- extension
+- language
+- isbn
+- zlib_id
+
+Examples:
+
+- `http://127.0.0.1:7070/search?limit=30&query=余华`
+- `http://127.0.0.1:7070/search?limit=30&query=title:机器学习 extension:azw3 publisher:清华`
+- `http://127.0.0.1:7070/search?limit=30&query=zlib_id:18557063`
+- `http://127.0.0.1:7070/search?limit=30&query=isbn:9787302423287`
+
 ## Build from source
 
 ### 1. Build `zlib-searcher`
@@ -67,7 +86,7 @@ mv target/release/zlib-searcher .
 
 ### 2. Build `index`
 
-Download `zlib_index_books.csv.zip` and `libgen_index_books.csv.zip` to the project root directory.
+Download `zlib_index_books.csv.zip` and `libgen_index_books.csv.zip` and extract the `csv` files to the project root directory.
 
 Then run `cargo run --bin index --release`. You may need to `mkdir index` or `rm index/*` first to make sure `index` is an existing empty folder.
 
@@ -80,25 +99,6 @@ zlib_searcher_dir // in the example above, it is project root directory.
 │   └── meta.json
 └── zlib-searcher
 ```
-
-#### original search api
-
-You can search by the following fields:
-
-- title
-- author
-- publisher
-- extension
-- language
-- isbn
-- zlib_id
-
-Examples:
-
-- `http://127.0.0.1:7070/search?limit=30&query=余华`
-- `http://127.0.0.1:7070/search?limit=30&query=title:机器学习 extension:azw3 publisher:清华`
-- `http://127.0.0.1:7070/search?limit=30&query=zlib_id:18557063`
-- `http://127.0.0.1:7070/search?limit=30&query=isbn:9787302423287`
 
 ## Raw data
 
