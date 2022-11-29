@@ -14,7 +14,7 @@ I hope everyone have a copy of the index locally, so that no need to rely on any
 
 ### 1. Download the pre-compiled binary from [Release](https://github.com/zu1k/book-searcher/releases).
 
-Or you can compile by yourself. Refer to [Build from source](##build-from-source) for instructions.
+Or you can compile by yourself. Refer to [Build from source](#build-from-source) for instructions.
 
 ### 2. Create the index.
 
