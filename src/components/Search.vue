@@ -53,6 +53,7 @@
       <a-table :dataSource="books" :columns="columns" :rowKey="(record: any) => record.id" 
         :pagination="{ defaultPageSize: 20 }"
         bordered expandRowByClick
+        :expand-icon-column-index="-1"
         size="middle" 
         @resizeColumn="handleResizeColumn"
       >
