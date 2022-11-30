@@ -1,5 +1,4 @@
 #!/bin/bash
-source build_frontend.sh
 
 NAME=book-searcher
 
