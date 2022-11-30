@@ -20,7 +20,7 @@ jobs:
             filetag: macos-x86_64
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rs/toolchain@v2
         with:
           toolchain: stable
       - name: Install Node.js
@@ -56,21 +56,25 @@ jobs:
           pnpm install && pnpm build
           popd
 
-      - name: Make executable windows
-        if: matrix.os == 'windows'
-        run: |
-          cargo build --release -p book-searcher.exe
-          mv target/release/book-searcher dist
-      - name: Make executable linux
-        if: matrix.os != 'windows'
+      - name: Make executable
         run: |
           cargo build --release -p book-searcher
-          mv target/release/book-searcher dist
+
       - name: Make dist(MacOS)
         if: matrix.os == 'macos'
         run: |
-          cargo build --release -p book-searcher
-          mv target/release/book-searcher dist
+          cp target/release/book-searcher .
+          zip book-searcher-macos.zip book-searcher && cp book-searcher-macos.zip dist/ 
+      - name: Make dist(Windows)
+        if: matrix.os == 'windows'
+        run: |
+          cp target/release/book-searcher.exe .
+          zip book-searcher-windows.zip book-searcher.exe && cp book-searcher-windows.zip dist/ 
+      - name: Make dist(Linux)
+        if: matrix.os == 'ubuntu'
+        run: |
+          cp target/release/book-searcher .
+          zip book-searcher-linux.zip book-searcher && cp book-searcher-linux.zip dist/ 
 
       - name: Archive Distribution Files
         uses: actions/upload-artifact@v2
