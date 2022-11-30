@@ -72,23 +72,17 @@ Examples:
 
 ### 1. Build `zlib-searcher`
 
-You need the frontend code in the `frontend` branch, and organize it like this:
+First build frontend
 
-```
-├── zlib-searcher // this repo
-│   └── src
-└── zlib-searcher-frontend
-    ├── dist   // this is what we need.
-    ├── public
-    └── src
-```
-
-Then run
 ```bash
-cd ../zlib-searcher-frontend
-npm install && npm run build
+pushd frontend
+pnpm install && pnpm run build
+popd
+```
 
-cd ../zlib-searcher
+Then build zlib-searcher
+
+```bash
 cargo build --release
 
 # move the compiled binary to the project root directory

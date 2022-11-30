@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir frontend
-git --work-tree=./frontend checkout frontend -- .
+pushd frontend
 pnpm install
 pnpm run build
+popd
