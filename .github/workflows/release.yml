@@ -1,0 +1,103 @@
+name: Make Distribution
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  make_dist:
+    name: Make Distribution File(${{ matrix.os }})
+    runs-on: ${{ matrix.os }}-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows
+            filetag: win-x86_64
+          - os: ubuntu
+            filetag: linux-x86_64
+          - os: macos
+            filetag: macos-x86_64
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: |
+          mkdir dist
+          pushd frontend 
+          pnpm install && pnpm build
+          popd
+
+      - name: Make executable windows
+        if: matrix.os == 'windows'
+        run: |
+          cargo build --release -p zlib-searcher.exe
+          mv target/release/zlib-searcher dist
+      - name: Make executable linux
+        if: matrix.os != 'windows'
+        run: |
+          cargo build --release -p zlib-searcher
+          mv target/release/zlib-searcher dist
+      - name: Make dist(MacOS)
+        if: matrix.os == 'macos'
+        run: |
+          cargo build --release -p zlib-searcher
+          mv target/release/zlib-searcher dist
+
+      - name: Archive Distribution Files
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: downloads/*
+
+  create_release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: make_dist
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Dists
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
