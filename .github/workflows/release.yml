@@ -3,6 +3,8 @@ name: Make Distribution
 on:
   workflow_dispatch:
   push:
+    tags:
+      - "*"
 
 jobs:
   make_dist:
