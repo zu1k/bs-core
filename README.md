@@ -14,7 +14,7 @@ I hope everyone have a copy of the index locally, so that no need to rely on any
 
 ```
 git clone https://github.com/zu1k/book-searcher.git && cd book-searcher
-wget https://github.com/zu1k/book-searcher/releases/download/0.5.0/index_0.5.zip && unzip index_0.5.zip
+
 docker-compose up -d
 ```
 
