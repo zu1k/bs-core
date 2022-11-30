@@ -20,9 +20,7 @@ jobs:
             filetag: macos-x86_64
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
+      - uses: dtolnay/rust-toolchain@stable
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
@@ -69,7 +67,7 @@ jobs:
         if: matrix.os == 'windows'
         run: |
           cp target/release/book-searcher.exe .
-          zip book-searcher-windows.zip book-searcher.exe && cp book-searcher-windows.zip dist/ 
+          Compress-Archive -Path book-searcher.exe -DestinationPath dist/book-searcher-windows.zip
       - name: Make dist(Linux)
         if: matrix.os == 'ubuntu'
         run: |
