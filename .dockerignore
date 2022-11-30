@@ -1,3 +1,7 @@
 index
 .github
 target
+
+.vscode/*
+.idea
+.DS_Store
