@@ -28,6 +28,13 @@ jobs:
         with:
           string: ${{ github.event.repository.full_name }}
 
+      - name: Set the image tag as output if not master branch
+        if: github.ref_name != 'master'
+        id: imageTag
+        run: |
+          IMAGE_TAG=$(echo ${{ steps.gitTag.outputs.tag }}); \
+          echo "::set-output name=tag::$IMAGE_TAG"; \
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
     
