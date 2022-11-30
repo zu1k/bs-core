@@ -1,12 +1,11 @@
-use cang_jie::{CangJieTokenizer, TokenizerOption, CANG_JIE};
-use jieba_rs::Jieba;
 use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DefaultOnError, DefaultOnNull};
-use std::sync::Arc;
 use tantivy::{schema::*, store::Compressor, Index};
+use tokenizer::{get_tokenizer, META_DATA_TOKENIZER};
 
 pub mod index;
 pub mod search;
+mod tokenizer;
 
 #[serde_as]
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -92,7 +91,7 @@ pub struct Searcher {
 impl Searcher {
     pub fn new(index_dir: &str) -> Self {
         let text_indexing = TextFieldIndexing::default()
-            .set_tokenizer(CANG_JIE)
+            .set_tokenizer(META_DATA_TOKENIZER)
             .set_index_option(IndexRecordOption::WithFreqsAndPositions);
         let text_options = TextOptions::default()
             .set_indexing_options(text_indexing)
@@ -126,11 +125,9 @@ impl Searcher {
             index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
         }
 
-        let tokenizer = CangJieTokenizer {
-            worker: Arc::new(Jieba::new()),
-            option: TokenizerOption::Unicode,
-        };
-        index.tokenizers().register(CANG_JIE, tokenizer);
+        index
+            .tokenizers()
+            .register(META_DATA_TOKENIZER, get_tokenizer());
         _ = index.set_default_multithread_executor();
 
         Self {
