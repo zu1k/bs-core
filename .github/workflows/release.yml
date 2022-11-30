@@ -78,7 +78,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: downloads/*
+          path: dist/*
 
   create_release:
     name: Create GitHub Release
