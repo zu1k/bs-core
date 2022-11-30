@@ -28,7 +28,7 @@ Or you can compile by yourself. Refer to [Build from source](#build-from-source)
 
 ### 2. Create the index.
 
-Or you can make your own via `bin/index.rs`.
+Or you can make your own via `book-searcher index`.
 
 It should look like the following:
 
@@ -40,7 +40,7 @@ project_dir
 └── book-searcher
 ```
 
-### 3. Run `book-searcher`, it will listen to `127.0.0.1:7070`.
+### 3. Run `book-searcher run`, it will listen to `127.0.0.1:7070`.
 
 Access http://127.0.0.1:7070/ to use webui, or you can use the original api.
 
@@ -78,7 +78,7 @@ popd
 Then build book-searcher
 
 ```bash
-cargo build --release
+cargo build --release -p book-searcher
 
 # move the compiled binary to the project root directory
 mv target/release/book-searcher .
@@ -88,7 +88,7 @@ mv target/release/book-searcher .
 
 Prepare the raw data, put files to the project root directory.
 
-Then run `cargo run --bin index --release`. You may need to `mkdir index` or `rm index/*` first to make sure `index` is an existing empty folder.
+Then run `book-searcher index`. You may need to `rm index/*` first.
 
 The finally folder structure should look like this:
 
