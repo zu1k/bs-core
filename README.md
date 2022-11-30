@@ -16,7 +16,7 @@ I hope everyone have a copy of the index locally, so that no need to rely on any
 
 ```
 git clone https://github.com/zu1k/zlib-searcher.git && cd zlib-searcher
-wget https://github.com/zu1k/zlib-searcher/releases/download/0.5.0/index_0.5.zip && unzip index_0.5.zip
+wget https://github.com/zu1k/zlib-searcher/releases/download/0.6.0/index_0.6.zip && unzip index_0.6.zip
 docker-compose up -d
 ```
 
