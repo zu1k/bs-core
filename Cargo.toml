@@ -1,13 +1,17 @@
-[package]
-name = "book-searcher"
-version = "0.5.1"
+[workspace]
+members = [
+    "crates/book-searcher",
+    "crates/book-searcher-core",
+]
+
+[workspace.package]
 edition = "2021"
 authors = ["zu1k <i@zu1k.com>"]
 description = "search book index."
 homepage = "https://github.com/zu1k/book-searcher"
 repository = "https://github.com/zu1k/book-searcher"
 license = "MIT"
-exclude = [".github/", "index/"]
+exclude = [".github/", "index/", "frontend/"]
 
 [profile.release]
 strip = true
@@ -15,27 +19,11 @@ lto = true
 opt-level = 3
 codegen-units = 1
 
-[dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_with = "2.0"
-tantivy = { version = "0.18", default-features = false, features = ["mmap"] }
-cang-jie = "0.14"
-jieba-rs = { version = "0.6", features = ["default-dict"] }
-
-actix-web = "4"
+[workspace.dependencies]
 anyhow = "1.0"
 env_logger = "0.10"
 log = "0.4"
-actix-web-static-files = "4.0"
-static-files = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_with = "2.0"
 
-csv = "1.1"
-indicatif = "0.17.2"
-
-[build-dependencies]
-static-files = "0.2"
-
-[features]
-default = ["best-size"]
-best-size = ["tantivy/brotli-compression"]
-best-speed = ["tantivy/lz4-compression"]
+book-searcher-core = { path = "crates/book-searcher-core" }

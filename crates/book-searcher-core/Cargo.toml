@@ -1,0 +1,28 @@
+[package]
+name = "book-searcher-core"
+version = "0.6.0"
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+env_logger = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }
+serde_with = { workspace = true }
+
+tantivy = { version = "0.18", default-features = false, features = ["mmap"] }
+cang-jie = "0.14"
+jieba-rs = { version = "0.6", features = ["default-dict"] }
+
+csv = "1.1"
+indicatif = "0.17.2"
+
+[features]
+default = ["best-size"]
+best-size = ["tantivy/brotli-compression"]
+best-speed = ["tantivy/lz4-compression"]

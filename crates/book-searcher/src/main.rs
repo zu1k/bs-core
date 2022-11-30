@@ -2,10 +2,11 @@ use actix_web::{
     get, http::header, middleware::Logger, web, App, HttpResponse, HttpServer, Responder,
 };
 use actix_web_static_files::ResourceFiles;
-use log::info;
+use clap::Parser;
+use log::{info, LevelFilter};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
-use book_searcher::{Book, Searcher};
+use book_searcher_core::{Book, Searcher};
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
@@ -49,10 +50,45 @@ async fn search(query: web::Query<SearchQuery>, state: web::Data<AppState>) -> i
         .json(result);
 }
 
+#[derive(Parser)]
+#[clap(author, version, about, long_about)]
+struct AppOpts {
+    #[clap(subcommand)]
+    subcmd: SubCommand,
+}
+
+#[derive(Parser)]
+enum SubCommand {
+    /// run search webserver
+    Run(Run),
+    /// index the raw data
+    Index,
+}
+
+#[derive(Parser)]
+struct Run {
+    #[clap(
+        short,
+        long,
+        default_value = "127.0.0.1:7070",
+        help = "webserver bind address"
+    )]
+    bind: String,
+}
+
+fn main() {
+    env_logger::builder().filter_level(LevelFilter::Info).init();
+
+    let args = AppOpts::parse();
+    match args.subcmd {
+        SubCommand::Run(opts) => run(opts).unwrap(),
+        SubCommand::Index => index(),
+    }
+}
+
 #[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    env_logger::init();
-    info!("book-searcher started!");
+async fn run(opts: Run) -> std::io::Result<()> {
+    info!("book-searcher webserver started!");
 
     let index_dir = std::env::current_exe()
         .unwrap()
@@ -72,7 +108,20 @@ async fn main() -> std::io::Result<()> {
             .service(search)
             .service(ResourceFiles::new("/", generated))
     })
-    .bind(("0.0.0.0", 7070))?
+    .bind(opts.bind)?
     .run()
     .await
+}
+
+fn index() {
+    let index_dir = std::env::current_exe()
+        .unwrap()
+        .parent()
+        .unwrap()
+        .join("index")
+        .to_str()
+        .unwrap()
+        .to_string();
+    let mut searcher = Searcher::new(&index_dir);
+    searcher.index();
 }
