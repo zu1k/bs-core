@@ -50,7 +50,7 @@
   </div>
 
   <div id="result" style="margin-top: 20px;">
-      <a-table :dataSource="books" :columns="columns" :rowKey="(record: any) => record.id" 
+      <a-table style="word-break: break-all;" :dataSource="books" :columns="columns" :rowKey="(record: any) => record.id" 
         :pagination="{ defaultPageSize: 20 }"
         bordered expandRowByClick
         :expand-icon-column-index="-1"
@@ -90,8 +90,8 @@
               <a-descriptions-item label="发布年份">{{ record.year }}</a-descriptions-item>
             </a-descriptions>
             </a-row>
-            <a-row style="margin-top: 10px;">
-              <a-space>
+            <a-row style="margin-top: 10px;overflow-x: scroll;">
+              <a-space style="width:100px;">
                 <a-button v-for="item in ipfsGateways" :key="item" @click="downloadFromIPFS(item, record)">{{ item }}</a-button>
                 <a-button @click="downloadFromIPFS('127.0.0.1:8080', record, 'http')">127.0.0.1:8080</a-button>
               </a-space>
