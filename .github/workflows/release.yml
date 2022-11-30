@@ -20,7 +20,7 @@ jobs:
             filetag: macos-x86_64
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rs/toolchain@v2
         with:
           toolchain: stable
       - name: Install Node.js
@@ -56,21 +56,25 @@ jobs:
           pnpm install && pnpm build
           popd
 
-      - name: Make executable windows
-        if: matrix.os == 'windows'
-        run: |
-          cargo build --release -p zlib-searcher.exe
-          mv target/release/zlib-searcher dist
-      - name: Make executable linux
-        if: matrix.os != 'windows'
+      - name: Make executable
         run: |
           cargo build --release -p zlib-searcher
-          mv target/release/zlib-searcher dist
+
       - name: Make dist(MacOS)
         if: matrix.os == 'macos'
         run: |
-          cargo build --release -p zlib-searcher
-          mv target/release/zlib-searcher dist
+          cp target/release/zlib-searcher .
+          zip zlib-searcher-macos.zip zlib-searcher && cp zlib-searcher-macos.zip dist/ 
+      - name: Make dist(Windows)
+        if: matrix.os == 'windows'
+        run: |
+          cp target/release/zlib-searcher.exe .
+          zip zlib-searcher-windows.zip zlib-searcher.exe && cp zlib-searcher-windows.zip dist/ 
+      - name: Make dist(Linux)
+        if: matrix.os == 'ubuntu'
+        run: |
+          cp target/release/zlib-searcher .
+          zip zlib-searcher-linux.zip zlib-searcher && cp zlib-searcher-linux.zip dist/ 
 
       - name: Archive Distribution Files
         uses: actions/upload-artifact@v2
