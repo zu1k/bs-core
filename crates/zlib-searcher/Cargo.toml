@@ -1,0 +1,33 @@
+[package]
+name = "zlib-searcher"
+version = "0.6.0"
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+zlib-searcher-core = { workspace = true }
+
+anyhow = { workspace = true }
+env_logger = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }
+serde_with = { workspace = true }
+
+actix-web = "4"
+actix-web-static-files = "4.0"
+static-files = "0.2"
+
+csv = "1.1"
+clap = { version = "4", features = ["derive"] }
+
+[build-dependencies]
+static-files = "0.2"
+
+[features]
+default = ["best-size"]
+best-size = ["zlib-searcher-core/best-size"]
+best-speed = ["zlib-searcher-core/best-speed"]

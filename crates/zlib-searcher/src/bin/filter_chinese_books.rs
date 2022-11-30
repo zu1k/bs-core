@@ -1,5 +1,5 @@
 use std::{fs::File, io::BufReader};
-use zlib_searcher::Book;
+use zlib_searcher_core::Book;
 
 fn main() {
     let mut writer = csv::Writer::from_path("zlib_libgen_chinese_books.csv").unwrap();

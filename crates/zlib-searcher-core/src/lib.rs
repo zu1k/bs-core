@@ -3,7 +3,10 @@ use jieba_rs::Jieba;
 use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DefaultOnError, DefaultOnNull};
 use std::sync::Arc;
-use tantivy::{collector::TopDocs, query::QueryParser, schema::*, store::Compressor, Index};
+use tantivy::{schema::*, store::Compressor, Index};
+
+pub mod index;
+pub mod search;
 
 #[serde_as]
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -88,23 +91,6 @@ pub struct Searcher {
 
 impl Searcher {
     pub fn new(index_dir: &str) -> Self {
-        let mut index = Index::open_in_dir(index_dir).unwrap();
-        #[cfg(feature = "best-size")]
-        {
-            index.settings_mut().docstore_compression = Compressor::Brotli; // size: 2.1G, size is best
-        }
-        #[cfg(feature = "best-speed")]
-        {
-            index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
-        }
-
-        let tokenizer = CangJieTokenizer {
-            worker: Arc::new(Jieba::new()),
-            option: TokenizerOption::Unicode,
-        };
-        index.tokenizers().register(CANG_JIE, tokenizer);
-        _ = index.set_default_multithread_executor();
-
         let text_indexing = TextFieldIndexing::default()
             .set_tokenizer(CANG_JIE)
             .set_index_option(IndexRecordOption::WithFreqsAndPositions);
@@ -126,6 +112,27 @@ impl Searcher {
         let ipfs_cid = schema_builder.add_text_field("ipfs_cid", STORED);
         let schema = schema_builder.build();
 
+        // open or create index
+        let mut index = Index::open_in_dir(index_dir).unwrap_or_else(|_| {
+            std::fs::create_dir_all(index_dir).expect("create index directory");
+            Index::create_in_dir(index_dir, schema.clone()).unwrap()
+        });
+        #[cfg(feature = "best-size")]
+        {
+            index.settings_mut().docstore_compression = Compressor::Brotli; // size: 2.1G, size is best
+        }
+        #[cfg(feature = "best-speed")]
+        {
+            index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
+        }
+
+        let tokenizer = CangJieTokenizer {
+            worker: Arc::new(Jieba::new()),
+            option: TokenizerOption::Unicode,
+        };
+        index.tokenizers().register(CANG_JIE, tokenizer);
+        _ = index.set_default_multithread_executor();
+
         Self {
             index,
             schema,
@@ -141,35 +148,5 @@ impl Searcher {
             isbn,
             ipfs_cid,
         }
-    }
-
-    pub fn search(&self, query: &str, limit: usize) -> Vec<Book> {
-        let reader = self.index.reader().unwrap();
-        let searcher = reader.searcher();
-
-        let mut query_parser = QueryParser::for_index(
-            &self.index,
-            vec![
-                self.title.clone(),
-                self.author.clone(),
-                self.publisher.clone(),
-                self.isbn.clone(),
-            ],
-        );
-        query_parser.set_conjunction_by_default();
-        let query = query_parser.parse_query(query).unwrap();
-
-        let top_docs = searcher
-            .search(&query, &TopDocs::with_limit(limit))
-            .unwrap();
-
-        top_docs
-            .iter()
-            .map(|d| {
-                let doc = searcher.doc(d.1).unwrap();
-                let item: Book = (&self.schema, doc).into();
-                item
-            })
-            .collect()
     }
 }
