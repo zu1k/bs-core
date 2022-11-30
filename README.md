@@ -33,7 +33,7 @@ Or you can compile by yourself. Refer to [Build from source](#build-from-source)
 
 We will give the corresponding `index` download links for each version in the release page.
 
-Or you can make your own via `bin/index.rs`.
+Or you can make your own via `zlib-searcher index`.
 
 Extract the `index` folder to the same level as the program, it should look like the following:
 
@@ -45,7 +45,7 @@ zlib_searcher_dir
 └── zlib-searcher
 ```
 
-### 3. Run `zlib-searcher`, it will listen to `127.0.0.1:7070`.
+### 3. Run `zlib-searcher run`, it will listen to `127.0.0.1:7070`.
 
 Access http://127.0.0.1:7070/ to use webui, or you can use the original api.
 
@@ -83,7 +83,7 @@ popd
 Then build zlib-searcher
 
 ```bash
-cargo build --release
+cargo build --release -p zlib-searcher
 
 # move the compiled binary to the project root directory
 mv target/release/zlib-searcher .
@@ -93,7 +93,7 @@ mv target/release/zlib-searcher .
 
 Download `zlib_index_books.csv.zip` and `libgen_index_books.csv.zip` and extract the `csv` files to the project root directory.
 
-Then run `cargo run --bin index --release`. You may need to `mkdir index` or `rm index/*` first to make sure `index` is an existing empty folder.
+Then run `zlib-searcher index`. You may need to `rm index/*` first.
 
 The finally folder structure should look like this:
 
