@@ -67,23 +67,17 @@ Examples:
 
 ### 1. Build `book-searcher`
 
-You need the frontend code in the `frontend` branch, and organize it like this:
+First build frontend
 
-```
-├── book-searcher // this repo
-│   └── src
-└── book-searcher-frontend
-    ├── dist   // this is what we need.
-    ├── public
-    └── src
-```
-
-Then run
 ```bash
-cd ../book-searcher-frontend
-npm install && npm run build
+pushd frontend
+pnpm install && pnpm run build
+popd
+```
 
-cd ../book-searcher
+Then build book-searcher
+
+```bash
 cargo build --release
 
 # move the compiled binary to the project root directory
