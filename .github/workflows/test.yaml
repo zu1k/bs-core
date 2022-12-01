@@ -53,5 +53,5 @@ jobs:
       - name: Archive App File
         uses: actions/upload-artifact@v2
         with:
-          name: book-sercher
-          path: target/debug/book-sercher
+          name: book-searcher
+          path: target/debug/book-searcher
