@@ -160,7 +160,8 @@ import {
 } from '@ant-design/icons-vue';
 import { filesize } from 'filesize';
 import type { TableColumnType } from 'ant-design-vue';
-import { Book, useSearcher } from '../scripts/searcher';
+import { Book } from '../scripts/searcher';
+import useSearcher from '../platform/__platform__/searcher';
 import { createDebounce } from '../scripts/debounce';
 const columns: TableColumnType<Book>[] = [
   {
@@ -275,8 +276,8 @@ const ipfsGateways: string[] = [
 const searcher = useSearcher();
 const debounce = createDebounce();
 function handleSearch() {
-  searcher?.value
-    ?.handleSearch(constructQuery(), 100)
+  searcher
+    .search(constructQuery(), 100)
     .then((data) => {
       books.value = data;
     })
