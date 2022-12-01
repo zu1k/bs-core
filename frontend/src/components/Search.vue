@@ -6,9 +6,7 @@
           v-model:value="title"
           placeholder="书名"
           allow-clear
-          @input="handleSearch"
-          @change="handleSearch"
-          @click="handleSearch"
+          @input="debounce(handleSearch)"
         >
           <template #prefix>
             <BookOutlined />
@@ -20,9 +18,7 @@
           v-model:value="author"
           placeholder="作者"
           allow-clear
-          @input="handleSearch"
-          @change="handleSearch"
-          @click="handleSearch"
+          @input="debounce(handleSearch)"
         >
           <template #prefix>
             <UserOutlined />
@@ -34,9 +30,7 @@
           v-model:value="publisher"
           placeholder="出版社"
           allow-clear
-          @input="handleSearch"
-          @change="handleSearch"
-          @click="handleSearch"
+          @input="debounce(handleSearch)"
         >
           <template #prefix>
             <BankOutlined />
@@ -50,9 +44,7 @@
           v-model:value="extension"
           placeholder="扩展名"
           allow-clear
-          @input="handleSearch"
-          @change="handleSearch"
-          @click="handleSearch"
+          @input="debounce(handleSearch)"
         >
           <template #prefix>
             <FileTextOutlined />
@@ -64,9 +56,7 @@
           v-model:value="language"
           placeholder="语言"
           allow-clear
-          @input="handleSearch"
-          @change="handleSearch"
-          @click="handleSearch"
+          @input="debounce(handleSearch)"
         >
           <template #prefix>
             <TranslationOutlined />
@@ -78,9 +68,7 @@
           v-model:value="isbn"
           placeholder="ISBN"
           allow-clear
-          @input="handleSearch"
-          @change="handleSearch"
-          @click="handleSearch"
+          @input="debounce(handleSearch)"
         >
           <template #prefix>
             <BorderlessTableOutlined />
@@ -92,9 +80,7 @@
       v-model:value="complexQuery"
       placeholder="复杂查询"
       allow-clear
-      @input="handleSearch"
-      @change="handleSearch"
-      @click="handleSearch"
+      @input="debounce(handleSearch)"
     />
   </div>
 
@@ -175,6 +161,7 @@ import {
 import { filesize } from 'filesize';
 import type { TableColumnType } from 'ant-design-vue';
 import { Book, useSearcher } from '../scripts/searcher';
+import { createDebounce } from '../scripts/debounce';
 
 const columns: TableColumnType<Book>[] = [
   {
@@ -291,6 +278,7 @@ const ipfsGateways: string[] = [
 
 const searcher = useSearcher();
 
+const debounce = createDebounce();
 function handleSearch() {
   searcher?.value
     ?.handleSearch(constructQuery(), 100)

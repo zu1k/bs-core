@@ -1,6 +1,7 @@
 index
 .github
 target
+/release
 
 .vscode/*
 .idea

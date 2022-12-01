@@ -24,8 +24,16 @@ struct AppConfig {
 
 impl Default for AppConfig {
     fn default() -> Self {
+        let index_dir = std::env::current_exe()
+            .unwrap()
+            .parent()
+            .unwrap()
+            .join("index")
+            .to_str()
+            .unwrap()
+            .to_string();
         Self {
-            index_dir: "./index".to_string(),
+            index_dir,
             ipfs_api_url: "http://localhost:5001".to_string(),
             download_path: "./".to_string(),
         }
