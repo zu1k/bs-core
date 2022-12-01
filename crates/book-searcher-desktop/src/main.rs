@@ -3,7 +3,8 @@
     windows_subsystem = "windows"
 )]
 
-use std::error::Error;
+use log::info;
+use std::{error::Error, path::PathBuf};
 use book_searcher_core::{Book, Searcher};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -15,19 +16,28 @@ use tokio::sync::Mutex;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 struct AppConfig {
     /// Index files of z-library
-    pub index_dir: String,
+    pub index_dir: PathBuf,
     /// IPFS daemon RPC address
     pub ipfs_api_url: String,
     /// Where to store downloaded files
-    pub download_path: String,
+    pub download_path: PathBuf,
+}
+
+fn get_dir(name: &str) -> Option<PathBuf> {
+    let dir = std::env::current_exe().ok()?.parent()?.join(name);
+    std::fs::create_dir_all(&dir).ok()?;
+    let dir = dunce::canonicalize(dir).ok()?;
+    Some(dir)
 }
 
 impl Default for AppConfig {
     fn default() -> Self {
+        let index_dir = get_dir("index").unwrap_or_else(|| PathBuf::from("index"));
+        let download_path = get_dir("download").unwrap_or_else(|| PathBuf::from("download"));
         Self {
-            index_dir: "./index".to_string(),
+            index_dir,
             ipfs_api_url: "http://localhost:5001".to_string(),
-            download_path: "./".to_string(),
+            download_path,
         }
     }
 }
@@ -44,6 +54,10 @@ impl AppConfig {
         confy::store(Self::APP_NAME, None, self)?;
         Ok(())
     }
+
+    pub fn configuration_file_path() -> Result<PathBuf, Box<dyn std::error::Error>> {
+        Ok(confy::get_configuration_file_path(Self::APP_NAME, None)?)
+    }
 }
 
 #[tauri::command]
@@ -55,10 +69,21 @@ async fn get_config(config: State<'_, Mutex<AppConfig>>) -> Result<AppConfig, St
 async fn set_config(
     new_config: AppConfig,
     config: State<'_, Mutex<AppConfig>>,
+    searcher: tauri::State<'_, Mutex<Searcher>>,
 ) -> Result<(), String> {
     let mut config = config.lock().await;
+
+    // reload searcher if index_dir changed
+    if config.index_dir != new_config.index_dir {
+        info!("index_dir changed, reloading searcher");
+        let mut searcher = searcher.lock().await;
+        *searcher = Searcher::new(new_config.index_dir.clone());
+    }
+
     *config = new_config;
     config.save().map_err(|e| e.to_string())?;
+
+    info!("Config saved: {:?}", config);
     Ok(())
 }
 
@@ -68,6 +93,7 @@ async fn search(
     query: String,
     limit: usize,
 ) -> Result<Vec<Book>, ()> {
+    info!("Search: {}", query);
     Ok(searcher.lock().await.search(&query, limit))
 }
 
@@ -77,9 +103,16 @@ fn version() -> String {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
+    env_logger::init();
+
     let config = AppConfig::load()?;
     let searcher = Mutex::new(Searcher::new(&config.index_dir));
     let config = Mutex::new(config);
+
+    info!(
+        "load config from {:?}",
+        AppConfig::configuration_file_path()?
+    );
 
     tauri::Builder::default()
         .manage(config)

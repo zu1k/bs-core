@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DefaultOnError, DefaultOnNull};
 use tantivy::{schema::*, store::Compressor, Index};
@@ -89,7 +91,7 @@ pub struct Searcher {
 }
 
 impl Searcher {
-    pub fn new(index_dir: &str) -> Self {
+    pub fn new(index_dir: impl AsRef<Path>) -> Self {
         let text_indexing = TextFieldIndexing::default()
             .set_tokenizer(META_DATA_TOKENIZER)
             .set_index_option(IndexRecordOption::WithFreqsAndPositions);
@@ -112,6 +114,7 @@ impl Searcher {
         let schema = schema_builder.build();
 
         // open or create index
+        let index_dir = index_dir.as_ref();
         let mut index = Index::open_in_dir(index_dir).unwrap_or_else(|_| {
             std::fs::create_dir_all(index_dir).expect("create index directory");
             Index::create_in_dir(index_dir, schema.clone()).unwrap()
