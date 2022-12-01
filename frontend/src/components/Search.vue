@@ -2,21 +2,21 @@
   <div id="input">
       <a-row type="flex">
         <a-col :flex="1">
-          <a-input v-model:value="title" placeholder="书名" allow-clear @input="handleSearch" @change="handleSearch" @click="handleSearch">
+          <a-input v-model:value="title" placeholder="书名" allow-clear @input="debounce(handleSearch)">
             <template #prefix>
               <BookOutlined />
             </template>
           </a-input>
         </a-col>
         <a-col :flex="1">
-          <a-input v-model:value="author" placeholder="作者" allow-clear @input="handleSearch" @change="handleSearch" @click="handleSearch">
+          <a-input v-model:value="author" placeholder="作者" allow-clear @input="debounce(handleSearch)">
             <template #prefix>
               <UserOutlined />
             </template>
           </a-input>
         </a-col>
         <a-col :flex="1">
-          <a-input v-model:value="publisher" placeholder="出版社" allow-clear @input="handleSearch" @change="handleSearch" @click="handleSearch">
+          <a-input v-model:value="publisher" placeholder="出版社" allow-clear @input="debounce(handleSearch)">
             <template #prefix>
               <BankOutlined />
             </template>
@@ -25,28 +25,28 @@
       </a-row>
       <a-row>
         <a-col :flex="1">
-          <a-input v-model:value="extension" placeholder="扩展名" allow-clear @input="handleSearch" @change="handleSearch" @click="handleSearch">
+          <a-input v-model:value="extension" placeholder="扩展名" allow-clear @input="debounce(handleSearch)">
             <template #prefix>
               <FileTextOutlined />
             </template>
           </a-input>
         </a-col>
         <a-col :flex="1">
-          <a-input v-model:value="language" placeholder="语言" allow-clear @input="handleSearch" @change="handleSearch" @click="handleSearch">
+          <a-input v-model:value="language" placeholder="语言" allow-clear @input="debounce(handleSearch)">
             <template #prefix>
               <TranslationOutlined />
             </template>
           </a-input>
         </a-col>
         <a-col :flex="1">
-          <a-input v-model:value="isbn" placeholder="ISBN" allow-clear @input="handleSearch" @change="handleSearch" @click="handleSearch">
+          <a-input v-model:value="isbn" placeholder="ISBN" allow-clear @input="debounce(handleSearch)">
             <template #prefix>
               <BorderlessTableOutlined />
             </template>
           </a-input>
         </a-col>
       </a-row>
-      <a-input v-model:value="query" placeholder="复杂查询" allow-clear @input="handleSearch" @change="handleSearch" @click="handleSearch"/>
+      <a-input v-model:value="query" placeholder="复杂查询" allow-clear @input="debounce(handleSearch)"/>
   </div>
 
   <div id="result" style="margin-top: 20px;">
@@ -250,6 +250,16 @@ export default defineComponent({
       'gateway.pinata.cloud'
     ];
 
+    function createDebounce() {
+      let timeout:ReturnType<typeof setTimeout>;
+      return function (fnc: () => void, delayMs?: number) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          fnc();
+        }, delayMs || 500);
+      };
+    }
+
     return {
       query,
       title,
@@ -260,6 +270,7 @@ export default defineComponent({
       isbn,
       books,
       columns,
+      debounce: createDebounce(),
       handleResizeColumn: (w: number, col: any) => {
         col.width = w;
       },
