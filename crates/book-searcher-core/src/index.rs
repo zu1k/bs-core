@@ -1,14 +1,40 @@
 use crate::{Book, Searcher};
 use indicatif::{ProgressBar, ProgressIterator, ProgressStyle};
+use log::info;
 use std::{
     fs::File,
     io::{BufRead, BufReader},
 };
+use sysinfo::{System, SystemExt};
 use tantivy::doc;
+
+fn get_memory_arena_num_bytes() -> usize {
+    let sys = System::new_all();
+    let available_memory = sys.available_memory() as usize;
+    let cpu_num = sys.cpus().len();
+    info!("Your system has cpu {cpu_num} cores and {available_memory} Bytes available");
+
+    let chunk_size = 1024 * 1024 * 1024; // 1GB
+    let total_num_chunk = available_memory / chunk_size;
+
+    let s = if total_num_chunk < 2 {
+        // <2G
+        available_memory - 100 * 1024 * 1024 // available_memory-100MB
+    } else {
+        // >2G
+        available_memory * (total_num_chunk - 1) // available_memory-1GB
+    };
+
+    let num_threads = std::cmp::min(cpu_num, 8);
+    let s = std::cmp::min(s, num_threads * 4293967294);
+
+    info!("Using {num_threads} threads and {s} Bytes to do index");
+    s
+}
 
 impl Searcher {
     pub fn index(&mut self) {
-        let mut writer = self.index.writer(10 * 1024 * 1024 * 1024).unwrap();
+        let mut writer = self.index.writer(get_memory_arena_num_bytes()).unwrap();
 
         let mut do_index = move |csv_file: &str| {
             let file = File::open(csv_file).unwrap();
