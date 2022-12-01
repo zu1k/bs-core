@@ -11,8 +11,7 @@
     </a-layout-content>
 
     <a-layout-footer style="text-align: center">
-      zLib Searcher ©2022 Created by <a href="https://github.com/zu1k" id="author">zu1k</a> | 
-      <a href="https://github.com/zu1k/zlib-searcher" id="source">Source Code</a>
+      zLib Searcher ©2022 | <a href="https://github.com/zu1k/zlib-searcher" id="source">Source Code</a>
     </a-layout-footer>
   </a-layout>
 </template>
