@@ -106,5 +106,4 @@ id, title, author, publisher, extension, filesize, language, year, pages, isbn, 
 
 ## License
 
-**book-searcher** © [zu1k](https://github.com/zu1k), Released under the [MIT](./LICENSE) License.<br>
-
+**book-searcher** © [book-searcher's authors](https://github.com/zu1k/book-searcher/graphs/contributors), Released under the [MIT](./LICENSE) License.
