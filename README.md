@@ -70,15 +70,13 @@ Examples:
 First build frontend
 
 ```bash
-pushd frontend
-pnpm install && pnpm run build
-popd
+make frontend_preinstall frontend
 ```
 
 Then build book-searcher
 
 ```bash
-cargo build --release -p book-searcher
+TARGET=release make
 
 # move the compiled binary to the project root directory
 mv target/release/book-searcher .
