@@ -2,6 +2,7 @@
 members = [
     "crates/zlib-searcher",
     "crates/zlib-searcher-core",
+    "crates/zlib-searcher-desktop",
 ]
 
 
