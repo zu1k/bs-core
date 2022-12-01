@@ -256,7 +256,7 @@ export default defineComponent({
         clearTimeout(timeout);
         timeout = setTimeout(() => {
           fnc();
-        }, delayMs || 500);
+        }, delayMs || 300);
       };
     }
 
