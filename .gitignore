@@ -2,4 +2,5 @@
 /index
 
 *.csv
+/release
 /zlib-searcher
