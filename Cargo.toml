@@ -2,6 +2,7 @@
 members = [
     "crates/book-searcher",
     "crates/book-searcher-core",
+    "crates/book-searcher-desktop",
 ]
 
 [workspace.package]

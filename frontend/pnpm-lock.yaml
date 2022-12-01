@@ -2,10 +2,12 @@ lockfileVersion: 5.4
 
 specifiers:
   '@ant-design/icons-vue': ^6.1.0
+  '@tauri-apps/api': ^1.2.0
   '@vitejs/plugin-vue': ^3.2.0
   ant-design-vue: ^3.2.15
   axios: ^1.2.0
   filesize: ^10.0.5
+  prettier: ^2.8.0
   typescript: ^4.6.4
   unplugin-auto-import: ^0.12.0
   unplugin-vue-components: ^0.22.11
@@ -15,6 +17,7 @@ specifiers:
 
 dependencies:
   '@ant-design/icons-vue': 6.1.0_vue@3.2.45
+  '@tauri-apps/api': 1.2.0
   ant-design-vue: 3.2.15_vue@3.2.45
   axios: 1.2.0
   filesize: 10.0.5
@@ -22,6 +25,7 @@ dependencies:
 
 devDependencies:
   '@vitejs/plugin-vue': 3.2.0_vite@3.2.4+vue@3.2.45
+  prettier: 2.8.0
   typescript: 4.9.3
   unplugin-auto-import: 0.12.0
   unplugin-vue-components: 0.22.11_vue@3.2.45
@@ -147,6 +151,11 @@ packages:
     dependencies:
       core-js: 3.26.1
       nanopop: 2.2.0
+    dev: false
+
+  /@tauri-apps/api/1.2.0:
+    resolution: {integrity: sha512-lsI54KI6HGf7VImuf/T9pnoejfgkNoXveP14pVV7XarrQ46rOejIVJLFqHI9sRReJMGdh2YuCoI3cc/yCWCsrw==}
+    engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
   /@types/estree/1.0.0:
@@ -894,6 +903,12 @@ packages:
       nanoid: 3.3.4
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
 
   /proxy-from-env/1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}

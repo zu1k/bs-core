@@ -101,7 +101,7 @@ impl Searcher {
         let id = schema_builder.add_u64_field("id", INDEXED | STORED);
         let title = schema_builder.add_text_field("title", text_options.clone());
         let author = schema_builder.add_text_field("author", text_options.clone());
-        let publisher = schema_builder.add_text_field("publisher", text_options.clone());
+        let publisher = schema_builder.add_text_field("publisher", text_options);
         let extension = schema_builder.add_text_field("extension", STRING | STORED);
         let filesize = schema_builder.add_u64_field("filesize", STORED);
         let language = schema_builder.add_text_field("language", TEXT | STORED);
