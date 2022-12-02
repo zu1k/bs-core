@@ -38,7 +38,7 @@
         </a-input>
       </a-col>
     </a-row>
-    <a-row>
+    <a-row type="flex">
       <a-col :flex="1">
         <a-input
           v-model:value="extension"
@@ -154,6 +154,7 @@ import BookOutlined from '@ant-design/icons-vue/BookOutlined';
 import TranslationOutlined from '@ant-design/icons-vue/TranslationOutlined';
 import FileTextOutlined from '@ant-design/icons-vue/FileTextOutlined';
 import BankOutlined from '@ant-design/icons-vue/BankOutlined';
+import BorderlessTableOutlined from '@ant-design/icons-vue/BorderlessTableOutlined';
 
 import { ref } from 'vue';
 import { filesize } from 'filesize';
