@@ -2,10 +2,13 @@ lockfileVersion: 5.4
 
 specifiers:
   '@ant-design/icons-vue': ^6.1.0
+  '@tauri-apps/api': ^1.2.0
+  '@types/node': ^18.11.10
   '@vitejs/plugin-vue': ^3.2.0
   ant-design-vue: ^3.2.15
   axios: ^1.2.0
   filesize: ^10.0.5
+  prettier: ^2.8.0
   typescript: ^4.6.4
   unplugin-auto-import: ^0.12.0
   unplugin-vue-components: ^0.22.11
@@ -15,17 +18,20 @@ specifiers:
 
 dependencies:
   '@ant-design/icons-vue': 6.1.0_vue@3.2.45
+  '@tauri-apps/api': 1.2.0
   ant-design-vue: 3.2.15_vue@3.2.45
   axios: 1.2.0
   filesize: 10.0.5
   vue: 3.2.45
 
 devDependencies:
+  '@types/node': 18.11.10
   '@vitejs/plugin-vue': 3.2.0_vite@3.2.4+vue@3.2.45
+  prettier: 2.8.0
   typescript: 4.9.3
   unplugin-auto-import: 0.12.0
   unplugin-vue-components: 0.22.11_vue@3.2.45
-  vite: 3.2.4
+  vite: 3.2.4_@types+node@18.11.10
   vue-tsc: 1.0.9_typescript@4.9.3
 
 packages:
@@ -149,8 +155,17 @@ packages:
       nanopop: 2.2.0
     dev: false
 
+  /@tauri-apps/api/1.2.0:
+    resolution: {integrity: sha512-lsI54KI6HGf7VImuf/T9pnoejfgkNoXveP14pVV7XarrQ46rOejIVJLFqHI9sRReJMGdh2YuCoI3cc/yCWCsrw==}
+    engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+    dev: false
+
   /@types/estree/1.0.0:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
+    dev: true
+
+  /@types/node/18.11.10:
+    resolution: {integrity: sha512-juG3RWMBOqcOuXC643OAdSA525V44cVgGV6dUDuiFtss+8Fk5x1hI93Rsld43VeJVIeqlP9I7Fn9/qaVqoEAuQ==}
     dev: true
 
   /@vitejs/plugin-vue/3.2.0_vite@3.2.4+vue@3.2.45:
@@ -160,7 +175,7 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.4
+      vite: 3.2.4_@types+node@18.11.10
       vue: 3.2.45
     dev: true
 
@@ -895,6 +910,12 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
   /proxy-from-env/1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: false
@@ -1075,7 +1096,7 @@ packages:
       webpack-virtual-modules: 0.4.6
     dev: true
 
-  /vite/3.2.4:
+  /vite/3.2.4_@types+node@18.11.10:
     resolution: {integrity: sha512-Z2X6SRAffOUYTa+sLy3NQ7nlHFU100xwanq1WDwqaiFiCe+25zdxP1TfCS5ojPV2oDDcXudHIoPnI1Z/66B7Yw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -1100,6 +1121,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 18.11.10
       esbuild: 0.15.16
       postcss: 8.4.19
       resolve: 1.22.1

@@ -7,6 +7,7 @@ description.workspace = true
 homepage.workspace = true
 repository.workspace = true
 license.workspace = true
+default-run = "zlib-searcher"
 
 [dependencies]
 zlib-searcher-core = { workspace = true }

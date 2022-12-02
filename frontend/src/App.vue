@@ -1,11 +1,12 @@
 <template>
   <a-layout class="layout">
-    <a-page-header style="padding: 10px 30px"
-        title="zLib Searcher"
-    />
+    <a-page-header style="padding: 10px 30px" title="zLib Searcher">
+      <template #extra>
+        <Settings />
+      </template>
+    </a-page-header>
 
     <a-layout-content style="padding: 0 20px">
-
       <Search />
     </a-layout-content>
 
@@ -16,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import Search from './components/Search.vue'
+import Search from './components/Search.vue';
+import Settings from './platform/__platform__/Settings.vue';
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
