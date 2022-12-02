@@ -26,8 +26,8 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { SettingOutlined } from '@ant-design/icons-vue';
 import { invoke } from '@tauri-apps/api';
+import SettingOutlined from '@ant-design/icons-vue/SettingOutlined';
 
 const visible = ref<boolean>(false);
 const confirmLoading = ref<boolean>(false);

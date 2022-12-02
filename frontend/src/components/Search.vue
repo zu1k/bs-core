@@ -149,20 +149,21 @@
 </template>
 
 <script lang="ts" setup>
+import UserOutlined from '@ant-design/icons-vue/UserOutlined';
+import BookOutlined from '@ant-design/icons-vue/BookOutlined';
+import TranslationOutlined from '@ant-design/icons-vue/TranslationOutlined';
+import FileTextOutlined from '@ant-design/icons-vue/FileTextOutlined';
+import BankOutlined from '@ant-design/icons-vue/BankOutlined';
+
 import { ref } from 'vue';
-import {
-  UserOutlined,
-  BookOutlined,
-  TranslationOutlined,
-  FileTextOutlined,
-  BankOutlined,
-  BorderlessTableOutlined
-} from '@ant-design/icons-vue';
 import { filesize } from 'filesize';
-import type { TableColumnType } from 'ant-design-vue';
+
 import { Book } from '../scripts/searcher';
 import useSearcher from '../platform/__platform__/searcher';
 import { createDebounce } from '../scripts/debounce';
+
+import type { TableColumnType } from 'ant-design-vue';
+
 const columns: TableColumnType<Book>[] = [
   {
     title: '书名',
@@ -259,6 +260,7 @@ const columns: TableColumnType<Book>[] = [
     responsive: ['xxxl', 'xxl', 'xl', 'lg']
   }
 ];
+
 const complexQuery = ref<string>('');
 const title = ref<string>('');
 const author = ref<string>('');
@@ -267,13 +269,16 @@ const extension = ref<string>('');
 const language = ref<string>('');
 const isbn = ref<string>('');
 const books = ref<Book[]>([]);
+
 const ipfsGateways: string[] = [
   'cloudflare-ipfs.com',
   'dweb.link',
   'ipfs.io',
   'gateway.pinata.cloud'
 ];
+
 const searcher = useSearcher();
+
 const debounce = createDebounce();
 function handleSearch() {
   searcher
@@ -283,6 +288,7 @@ function handleSearch() {
     })
     .catch(() => {});
 }
+
 function handleResizeColumn(w: number, col: any) {
   col.width = w;
 }
