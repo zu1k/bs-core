@@ -29,8 +29,8 @@ seed_everything()
 """
 专业级：本地模型
 """
-def Pro_tokenize():
-    mul_tokenizer = hanlp.load(hanlp.pretrained.tok.UD_TOK_MMINILMV2L12)
+mul_tokenizer = hanlp.load(hanlp.pretrained.tok.UD_TOK_MMINILMV2L12)
+def file_tokenation():
     df_zlib = pd.read_csv('zlib_index_books.csv', header=None)
     df_title = df_zlib.iloc[:, :2].astype(str)
     df_title.columns = ["id", "title"]
@@ -50,5 +50,15 @@ def Pro_tokenize():
     print("分词结果保存完成……")
 
 
+def tokenize_api(title: str) -> list:
+    """
+    :param title: the title
+    :return: tokenized title
+    """
+    return mul_tokenizer(title)
+
+
+
 if __name__ == '__main__':
-    Pro_tokenize()
+    # file_tokenation()
+    print(tokenize_api("推荐使用本项目。"))
