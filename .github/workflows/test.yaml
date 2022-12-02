@@ -49,9 +49,9 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Build Debug App
-        run: make build
+        run: TARGET=release make build
       - name: Archive App File
         uses: actions/upload-artifact@v2
         with:
           name: book-searcher
-          path: target/debug/book-searcher
+          path: target/release/book-searcher
