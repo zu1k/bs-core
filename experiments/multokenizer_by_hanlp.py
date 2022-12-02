@@ -6,7 +6,6 @@ import random
 import os
 import numpy as np
 from tqdm import tqdm
-from hanlp_restful import HanLPClient
 
 
 def seed_everything(seed=2022):
@@ -24,16 +23,7 @@ def seed_everything(seed=2022):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-
 seed_everything()
-
-"""
-Restful 方式，不能一直调用
-"""
-# HanLP = HanLPClient('https://www.hanlp.com/api', auth=None, language='mul')  # auth不填则匿名，zh中文，mul多语种
-# s = time.time()
-# print(HanLP.tokenize("2021年HanLPv2.1为生产环境带来次世代最先进的多语种NLP技术。阿婆主来到北京立方庭参观自然语义科技公司。"))
-# print(f"分词耗时{time.time()-s}s")
 
 
 """
