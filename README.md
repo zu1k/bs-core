@@ -88,6 +88,8 @@ Prepare the raw data, put files to the project root directory.
 
 Then run `book-searcher index`. You may need to `rm index/*` first.
 
+If you have other csv files, you can run `book-searcher index -f *.csv` to index them.
+
 The finally folder structure should look like this:
 
 ```
