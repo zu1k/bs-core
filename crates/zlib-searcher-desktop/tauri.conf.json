@@ -6,7 +6,7 @@
     "distDir": "../../frontend/dist"
   },
   "package": {
-    "productName": "zlib-searcher-desktop",
+    "productName": "zLib Searcher",
     "version": "0.1.0"
   },
   "tauri": {
