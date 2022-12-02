@@ -1,5 +1,4 @@
 import type { Book, UseSearcher } from '../../scripts/searcher';
-
 import { invoke } from '@tauri-apps/api';
 
 const useSearcher: UseSearcher = () => {

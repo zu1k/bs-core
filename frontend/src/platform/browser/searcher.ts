@@ -1,5 +1,5 @@
-import type { Book, UseSearcher } from '../../scripts/searcher';
-import axios, { AxiosInstance } from 'axios';
+import type { UseSearcher } from '../../scripts/searcher';
+import axios from 'axios';
 
 const useSearcher: UseSearcher = () => {
   const http = axios.create({
