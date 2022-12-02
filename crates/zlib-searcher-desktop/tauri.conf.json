@@ -55,10 +55,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 800,
+        "height": 900,
         "resizable": true,
         "title": "zLib Searcher",
-        "width": 1200
+        "width": 1500
       }
     ]
   }

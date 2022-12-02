@@ -93,6 +93,8 @@ Download `zlib_index_books.csv.zip` and `libgen_index_books.csv.zip` and extract
 
 Then run `zlib-searcher index`. You may need to `rm index/*` first.
 
+If you have other csv files, you can run `zlib-searcher index -f *.csv` to index them.
+
 The finally folder structure should look like this:
 
 ```

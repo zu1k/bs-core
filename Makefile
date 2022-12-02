@@ -12,7 +12,7 @@ frontend_preinstall:
 frontend:
 	pnpm -C frontend run build
 
-build:
+build: frontend
 ifeq (${TARGET}, release)
 	cargo build -p zlib-searcher --release
 else
