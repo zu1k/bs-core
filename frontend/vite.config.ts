@@ -22,6 +22,15 @@ export default defineConfig(() => {
       Components({
         resolvers: [AntDesignVueResolver()]
       })
-    ]
+    ],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            antdv: ['ant-design-vue']
+          }
+        }
+      }
+    }
   };
 });
