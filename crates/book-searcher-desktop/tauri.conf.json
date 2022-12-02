@@ -6,7 +6,7 @@
     "distDir": "../../frontend/dist"
   },
   "package": {
-    "productName": "book-searcher-desktop",
+    "productName": "Book Searcher",
     "version": "0.1.0"
   },
   "tauri": {
