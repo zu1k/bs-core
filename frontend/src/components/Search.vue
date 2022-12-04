@@ -135,11 +135,11 @@
                 v-for="item in ipfsGateways"
                 :key="item"
                 @click="downloadFromIPFS(item, record)"
-                >{{ item }}</a-button
-              >
+                ><a :href="urlFromIPFS(item, record)">{{ item }}</a>
+              </a-button>
               <a-button @click="downloadFromIPFS('127.0.0.1:8080', record, 'http')"
-                >127.0.0.1:8080</a-button
-              >
+                ><a :href="urlFromIPFS('127.0.0.1:8080', record, 'http')">127.0.0.1:8080</a>
+              </a-button>
             </a-space>
           </a-row>
         </a-card>
@@ -321,10 +321,14 @@ function constructQuery() {
   console.log(query);
   return query;
 }
-function downloadFromIPFS(gateway: string, book: Book, schema: string = 'https') {
+function urlFromIPFS(gateway: string, book: Book, schema: string = 'https') {
   const downloadUrl =
     `${schema}://${gateway}/ipfs/${book.ipfs_cid}?filename=` +
     encodeURIComponent(`${book.title}_${book.author}.${book.extension}`);
+  return downloadUrl;
+}
+function downloadFromIPFS(gateway: string, book: Book, schema: string = 'https') {
+  const downloadUrl = urlFromIPFS(gateway, book, schema);
   window.open(downloadUrl, '_blank');
 }
 </script>
