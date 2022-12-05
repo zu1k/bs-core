@@ -57,7 +57,11 @@ const Search: React.FC<SearchProps> = ({ setBooks }) => {
   );
 
   return (
-    <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={4} px={8}>
+    <SimpleGrid
+      columns={{ sm: 1, md: 2, lg: 3 }}
+      spacing={{ base: 2, md: 4 }}
+      px={{ base: 4, md: 8 }}
+    >
       <SearchInput
         icon={<Icon as={TbBook2} />}
         placeholder={t('book.title')}
