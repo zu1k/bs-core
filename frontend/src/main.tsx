@@ -17,8 +17,6 @@ const resources =
     ? merge(i18nResource, (await import('./i18n-tauri.json')).default)
     : i18nResource;
 
-console.log('resources', resources);
-
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)

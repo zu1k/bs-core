@@ -34,7 +34,7 @@ const App: React.FC = () => {
   return (
     <Flex direction="column" minH="100vh">
       <Header title="zLib Searcher">
-        <HStack spacing={2}>
+        <HStack spacing={{ base: 1, md: 2 }}>
           <IconButton
             as={ExternalLink}
             aria-label={t('nav.repository')}
