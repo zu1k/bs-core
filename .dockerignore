@@ -1,7 +1,8 @@
 index
 .github
 target
-/release
+*.csv
+.git
 
 .vscode/*
 .idea
