@@ -1,33 +1,31 @@
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import faviconsPlugin from '@darkobits/vite-plugin-favicons';
+import react from '@vitejs/plugin-react';
+import topLevelAwait from 'vite-plugin-top-level-await';
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
+  if (process.env.TAURI_PLATFORM) {
+    process.env.VITE_TAURI = '1';
+  } else {
+    process.env.VITE_TAURI = '0';
+  }
+
   return {
     plugins: [
-      {
-        name: 'vite-plugin-replace',
-        transform: (code: string) => {
-          return code.replace(/__platform__/g, process.env.TAURI_PLATFORM ? 'tauri' : 'browser');
-        },
-        enforce: 'pre'
-      },
-      vue(),
-      AutoImport({
-        resolvers: [AntDesignVueResolver()]
-      }),
-      Components({
-        resolvers: [AntDesignVueResolver()]
-      })
+      process.env.VITE_TAURI === '1' ? topLevelAwait() : null,
+      react(),
+      process.env.VITE_TAURI === '0'
+        ? faviconsPlugin({
+            icons: { favicons: { source: '../crates/book-searcher-desktop/icons/icon.png' } }
+          })
+        : null
     ],
     build: {
       rollupOptions: {
         output: {
           manualChunks: {
-            antdv: ['ant-design-vue']
+            'chakra-ui': ['@chakra-ui/react']
           }
         }
       }

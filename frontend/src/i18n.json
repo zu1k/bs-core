@@ -1,0 +1,86 @@
+{
+  "en": {
+    "translation": {
+      "nav": {
+        "repository": "GitHub Repository",
+        "toggle_dark": "Toggle to Dark Mode",
+        "toggle_light": "Toggle to Light Mode",
+        "toggle_language": "Toggle Language"
+      },
+      "input": {
+        "clear": "Clear"
+      },
+      "book": {
+        "id": "id",
+        "title": "Title",
+        "author": "Author",
+        "publisher": "Publisher",
+        "extension": "Extension",
+        "filesize": "Filesize",
+        "language": "Language",
+        "year": "Year",
+        "pages": "Pages",
+        "isbn": "ISBN",
+        "ipfs_cid": "IPFS CID",
+        "unknown": "Unknown"
+      },
+      "table": {
+        "sort_asc": "Sort ascending",
+        "sort_desc": "Sort descending",
+        "not_sorted": "Not sorted",
+        "filter": "Filter",
+        "no_data": "No data",
+        "first_page": "First page",
+        "last_page": "Last page",
+        "next_page": "Next page",
+        "previous_page": "Previous page",
+        "page": "Page {{page}}"
+      },
+      "search": {
+        "complex": "Complex search"
+      }
+    }
+  },
+  "zh-CN": {
+    "translation": {
+      "nav": {
+        "repository": "GitHub 仓库",
+        "toggle_dark": "切换到暗黑模式",
+        "toggle_light": "切换到亮色模式",
+        "toggle_language": "切换语言"
+      },
+      "input": {
+        "clear": "清空"
+      },
+      "book": {
+        "id": "id",
+        "title": "书名",
+        "author": "作者",
+        "publisher": "出版社",
+        "extension": "扩展名",
+        "filesize": "文件大小",
+        "language": "语言",
+        "year": "年份",
+        "pages": "页数",
+        "isbn": "ISBN",
+        "ipfs_cid": "IPFS CID",
+        "unknown": "未知"
+      },
+      "table": {
+        "sort_asc": "升序排序",
+        "sort_desc": "降序排序",
+        "not_sorted": "未排序",
+        "filter": "过滤",
+        "no_data": "无数据",
+        "first_page": "第一页",
+        "last_page": "最后一页",
+        "next_page": "下一页",
+        "previous_page": "上一页",
+        "page": "第 {{page}} 页"
+      },
+      "search": {
+        "complex": "复杂搜索"
+      }
+    }
+  }
+}
