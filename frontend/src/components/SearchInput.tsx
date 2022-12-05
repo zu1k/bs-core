@@ -37,19 +37,18 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, icon, value, onC
         value={controlledValue}
         onChange={(e) => setControlledValue(e.target.value)}
       />
-      <InputRightElement
-        children={
-          value === '' ? null : (
-            <IconButton
-              aria-label={t('input.clear')}
-              title={t('input.clear') ?? ''}
-              icon={<Icon as={TbCircleX} color="GrayText" />}
-              variant="unstyled"
-              onClick={() => setControlledValue('')}
-            />
-          )
-        }
-      />
+      <InputRightElement>
+        {value === '' ? null : (
+          <IconButton
+            aria-label={t('input.clear')}
+            tabIndex={-1}
+            title={t('input.clear') ?? ''}
+            icon={<Icon as={TbCircleX} color="GrayText" />}
+            variant="unstyled"
+            onClick={() => setControlledValue('')}
+          />
+        )}
+      </InputRightElement>
     </InputGroup>
   );
 };
