@@ -51,7 +51,7 @@ jobs:
       - name: Build Debug App
         run: TARGET=release make build
       - name: Archive App File
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: book-searcher
           path: target/release/book-searcher
