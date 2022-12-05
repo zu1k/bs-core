@@ -132,7 +132,6 @@ export default function DataTable<Data extends object>({
                 return header.column.getIsVisible() ? (
                   <Th
                     key={header.id}
-                    onClick={header.column.getToggleSortingHandler()}
                     w={meta?.width ?? 'auto'}
                     isNumeric={meta?.isNumeric ?? false}
                   >
@@ -142,23 +141,32 @@ export default function DataTable<Data extends object>({
                       <Text as="span" pl={2} position="relative" top={0.5}>
                         {header.column.getIsSorted() ? (
                           header.column.getIsSorted() === 'desc' ? (
-                            <Icon
+                            <IconButton
                               aria-label={t('table.sort_desc') ?? ''}
                               title={t('table.sort_desc') ?? ''}
-                              as={TbArrowNarrowDown}
+                              icon={<Icon as={TbArrowNarrowDown} />}
+                              variant="unstyled"
+                              size="xs"
+                              onClick={header.column.getToggleSortingHandler()}
                             />
                           ) : (
-                            <Icon
+                            <IconButton
                               aria-label={t('table.sort_asc') ?? ''}
                               title={t('table.sort_asc') ?? ''}
-                              as={TbArrowNarrowUp}
+                              icon={<Icon as={TbArrowNarrowUp} />}
+                              variant="unstyled"
+                              size="xs"
+                              onClick={header.column.getToggleSortingHandler()}
                             />
                           )
                         ) : (
-                          <Icon
+                          <IconButton
                             aria-label={t('table.not_sorted') ?? ''}
                             title={t('table.not_sorted') ?? ''}
-                            as={TbArrowsSort}
+                            icon={<Icon as={TbArrowsSort} />}
+                            variant="unstyled"
+                            size="xs"
+                            onClick={header.column.getToggleSortingHandler()}
                           />
                         )}
                       </Text>
@@ -170,10 +178,12 @@ export default function DataTable<Data extends object>({
                           <MenuButton
                             aria-label={t('table.filter') ?? ''}
                             title={t('table.filter') ?? ''}
+                            as={IconButton}
                             type="button"
-                          >
-                            <Icon as={TbFilter} />
-                          </MenuButton>
+                            icon={<Icon as={TbFilter} />}
+                            variant="unstyled"
+                            size="xs"
+                          />
                           <Portal>
                             <MenuList>
                               <MenuOptionGroup
