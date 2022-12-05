@@ -47,6 +47,7 @@ async fn search(query: web::Query<SearchQuery>, state: web::Data<AppState>) -> i
 
     return HttpResponse::Ok()
         .insert_header(header::ContentType::json())
+        .insert_header((header::ACCESS_CONTROL_ALLOW_ORIGIN, "*"))
         .json(result);
 }
 
