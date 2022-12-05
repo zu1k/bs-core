@@ -6,8 +6,10 @@ import {
   CardFooter,
   CardHeader,
   Divider,
+  Flex,
   GridItem,
   Heading,
+  Icon,
   Link,
   SimpleGrid,
   TableContainer,
@@ -20,6 +22,7 @@ import { Book } from '../scripts/searcher';
 import DataTable from './DataTable';
 import ExternalLink from './ExternalLink';
 import React from 'react';
+import { TbChevronUp } from 'react-icons/tb';
 import { filesize as formatFileSize } from 'filesize';
 import { useTranslation } from 'react-i18next';
 
@@ -184,7 +187,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
   const languages = [...new Set(books.map((book) => book.language.toLowerCase()))].sort();
 
   return (
-    <TableContainer px={8} my={4} overflowY="unset">
+    <TableContainer px={{ base: 4, md: 8 }} my={{ base: 2, md: 4 }} overflowY="unset">
       <DataTable
         data={data}
         columns={columns}
@@ -206,7 +209,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
             ipfs_cid
           } = row.original;
           return (
-            <Card mt={2} mb={4} mx={8}>
+            <Card mt={{ base: 1, md: 2 }} mb={{ base: 2, md: 4 }} mx={{ base: 4, md: 8 }}>
               <CardHeader>
                 <Heading as="h3" fontSize="xl">
                   {title}
@@ -214,7 +217,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
               </CardHeader>
               <Divider />
               <CardBody>
-                <SimpleGrid columns={{ sm: 1, md: 3, lg: 4 }} spacing={4}>
+                <SimpleGrid columns={{ sm: 1, md: 3, lg: 4 }} spacing={{ base: 2, md: 4 }}>
                   <Description name={`${t('book.id') ?? 'zlib/libgen id'}: `}>{id}</Description>
                   <GridItem colSpan={{ sm: 1, md: 2, lg: 3 }}>
                     <Description name={`${t('book.ipfs_cid') ?? 'IPFS CID'}: `}>
@@ -247,8 +250,8 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
                   </Description>
                 </SimpleGrid>
               </CardBody>
-              <CardFooter>
-                <SimpleGrid columns={{ sm: 2, md: 3, lg: 4, xl: 5 }} spacing={4}>
+              <CardFooter flexDirection="column">
+                <SimpleGrid columns={{ sm: 2, md: 3, lg: 4, xl: 5 }} spacing={{ base: 2, md: 4 }}>
                   {ipfsGateways.map((gateway) => (
                     <Button
                       as={ExternalLink}
@@ -267,6 +270,18 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
                     localhost:8080
                   </Button>
                 </SimpleGrid>
+                <Flex justify="flex-end">
+                  <Button
+                    variant="unstyled"
+                    onClick={() => row.toggleExpanded(false)}
+                    color="gray.500"
+                    mt={2}
+                    mb={-2}
+                  >
+                    {t('table.collaspe')}
+                    <Icon as={TbChevronUp} boxSize={4} position="relative" top={0.5} left={1} />
+                  </Button>
+                </Flex>
               </CardFooter>
             </Card>
           );

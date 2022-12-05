@@ -1,5 +1,6 @@
-import { Flex, HStack, Icon, IconButton, Link, Spacer } from '@chakra-ui/react';
+import { Flex, HStack, Icon, IconButton, Spacer } from '@chakra-ui/react';
 import React, { Suspense, useState } from 'react';
+import { SkipNavContent, SkipNavLink } from '@chakra-ui/skip-nav';
 
 import { Book } from './scripts/searcher';
 import BooksView from './components/BooksView';
@@ -17,6 +18,7 @@ const Main: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   return (
     <>
+      <SkipNavContent />
       <Search setBooks={setBooks} />
       <BooksView books={books} />
     </>
@@ -32,9 +34,10 @@ const App: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Flex direction="column" h="full">
+    <Flex direction="column" minH="100vh">
+      <SkipNavLink>Skip to content</SkipNavLink>
       <Header title="zLib Searcher">
-        <HStack spacing={2}>
+        <HStack spacing={{ base: 1, md: 2 }}>
           <IconButton
             as={ExternalLink}
             aria-label={t('nav.repository')}

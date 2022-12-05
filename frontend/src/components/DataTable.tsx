@@ -132,7 +132,6 @@ export default function DataTable<Data extends object>({
                 return header.column.getIsVisible() ? (
                   <Th
                     key={header.id}
-                    onClick={header.column.getToggleSortingHandler()}
                     w={meta?.width ?? 'auto'}
                     isNumeric={meta?.isNumeric ?? false}
                   >
@@ -142,23 +141,32 @@ export default function DataTable<Data extends object>({
                       <Text as="span" pl={2} position="relative" top={0.5}>
                         {header.column.getIsSorted() ? (
                           header.column.getIsSorted() === 'desc' ? (
-                            <Icon
+                            <IconButton
                               aria-label={t('table.sort_desc') ?? ''}
                               title={t('table.sort_desc') ?? ''}
-                              as={TbArrowNarrowDown}
+                              icon={<Icon as={TbArrowNarrowDown} />}
+                              variant="unstyled"
+                              size="xs"
+                              onClick={header.column.getToggleSortingHandler()}
                             />
                           ) : (
-                            <Icon
+                            <IconButton
                               aria-label={t('table.sort_asc') ?? ''}
                               title={t('table.sort_asc') ?? ''}
-                              as={TbArrowNarrowUp}
+                              icon={<Icon as={TbArrowNarrowUp} />}
+                              variant="unstyled"
+                              size="xs"
+                              onClick={header.column.getToggleSortingHandler()}
                             />
                           )
                         ) : (
-                          <Icon
+                          <IconButton
                             aria-label={t('table.not_sorted') ?? ''}
                             title={t('table.not_sorted') ?? ''}
-                            as={TbArrowsSort}
+                            icon={<Icon as={TbArrowsSort} />}
+                            variant="unstyled"
+                            size="xs"
+                            onClick={header.column.getToggleSortingHandler()}
                           />
                         )}
                       </Text>
@@ -170,10 +178,12 @@ export default function DataTable<Data extends object>({
                           <MenuButton
                             aria-label={t('table.filter') ?? ''}
                             title={t('table.filter') ?? ''}
+                            as={IconButton}
                             type="button"
-                          >
-                            <Icon as={TbFilter} />
-                          </MenuButton>
+                            icon={<Icon as={TbFilter} />}
+                            variant="unstyled"
+                            size="xs"
+                          />
                           <Portal>
                             <MenuList>
                               <MenuOptionGroup
@@ -232,27 +242,25 @@ export default function DataTable<Data extends object>({
         </Tbody>
       </Table>
       {data.length === 0 && (
-        <Flex mt={16} mb={12}>
-          <Spacer />
+        <Flex mt={16} mb={12} justifyContent="center">
           <Text color={colorMode === 'light' ? 'gray.400' : 'gray.600'}>{t('table.no_data')}</Text>
-          <Spacer />
         </Flex>
       )}
-      <Flex mt={4}>
-        <Spacer />
+      <Flex w="full" mt={4} justify="flex-end" wrap="wrap">
         <IconButton
           aria-label={t('table.first_page')}
           title={t('table.first_page') ?? ''}
-          ml={1}
           icon={<Icon as={TbChevronsLeft} />}
+          mr={1}
+          display={{ base: 'none', md: 'inline-flex' }}
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
         />
         <IconButton
           aria-label={t('table.previous_page')}
           title={t('table.previous_page') ?? ''}
-          ml={1}
           icon={<Icon as={TbChevronLeft} />}
+          mr={1}
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         />
@@ -264,9 +272,9 @@ export default function DataTable<Data extends object>({
             <IconButton
               aria-label={title}
               title={title}
-              ml={1}
               key={pageIndex}
               icon={<Text>{pageIndex + 1}</Text>}
+              mr={1}
               onClick={() => table.setPageIndex(pageIndex)}
               disabled={disabled}
               {...style}
@@ -276,16 +284,16 @@ export default function DataTable<Data extends object>({
         <IconButton
           aria-label={t('table.next_page')}
           title={t('table.next_page') ?? ''}
-          ml={1}
           icon={<Icon as={TbChevronRight} />}
+          mr={{ base: 0, md: 1 }}
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         />
         <IconButton
           aria-label={t('table.last_page')}
           title={t('table.last_page') ?? ''}
-          ml={1}
           icon={<Icon as={TbChevronsRight} />}
+          display={{ base: 'none', md: 'inline-flex' }}
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
         />

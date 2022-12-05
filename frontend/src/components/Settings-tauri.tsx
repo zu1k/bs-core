@@ -129,6 +129,7 @@ const Settings: React.FC = () => {
                       <IconButton
                         aria-label={t('settings.index_dir_browse')}
                         title={t('settings.index_dir_browse') ?? ''}
+                        tabIndex={-1}
                         icon={<Icon as={TbFolder} />}
                         variant="unstyled"
                         pt={1}
@@ -166,6 +167,7 @@ const Settings: React.FC = () => {
                       <IconButton
                         aria-label={t('settings.download_path_browse')}
                         title={t('settings.download_path_browse') ?? ''}
+                        tabIndex={-1}
                         icon={<Icon as={TbFolder} />}
                         variant="unstyled"
                         pt={1}

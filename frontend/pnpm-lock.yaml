@@ -3,6 +3,8 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/core': ^7.20.5
   '@chakra-ui/react': ^2.4.2
+  '@chakra-ui/skip-nav': ^2.0.12
+  '@chakra-ui/system': ^2.3.4
   '@darkobits/vite-plugin-favicons': ^0.1.8
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
@@ -34,6 +36,8 @@ specifiers:
 
 dependencies:
   '@chakra-ui/react': 2.4.2_di5sk4iix36hlutnofytxi3lwe
+  '@chakra-ui/skip-nav': 2.0.12_xivvz2l3eyrkvszadds3phcwaq
+  '@chakra-ui/system': 2.3.4_dovxhg2tvkkxkdnqyoum6wzcxm
   '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
   '@emotion/styled': 11.10.5_3djhvnr4jirfvebjqpipo7gthy
   '@tanstack/react-table': 8.7.0_biqbaboplfbrettd7655fr4n2y
@@ -1110,6 +1114,16 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@chakra-ui/skip-nav/2.0.12_xivvz2l3eyrkvszadds3phcwaq:
+    resolution: {integrity: sha512-4p1rVml+3hVc87BlXxVCEnf1r9cLzUR6DAVC+s7n857pLQBdC2HsMhlt4NwgoJGchDdZz/lnr7sMS0HzTRV45g==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/system': 2.3.4_dovxhg2tvkkxkdnqyoum6wzcxm
+      react: 18.2.0
+    dev: false
+
   /@chakra-ui/slider/2.0.14_xivvz2l3eyrkvszadds3phcwaq:
     resolution: {integrity: sha512-z4Q5rWtYVTdFgBVvR6aUhSMg3CQuAgjJGHvLHEGDCUjYCuBXrb3SmWyvv03uKyjSbwRyKqSsvAnSCxtmHODt/w==}
     peerDependencies:
@@ -1997,7 +2011,7 @@ packages:
       '@motionone/easing': 10.14.0
       '@motionone/types': 10.14.0
       '@motionone/utils': 10.14.0
-      tslib: 2.4.0
+      tslib: 2.4.1
     dev: false
 
   /@motionone/dom/10.13.1:
@@ -2015,7 +2029,7 @@ packages:
     resolution: {integrity: sha512-2vUBdH9uWTlRbuErhcsMmt1jvMTTqvGmn9fHq8FleFDXBlHFs5jZzHJT9iw+4kR1h6a4SZQuCf72b9ji92qNYA==}
     dependencies:
       '@motionone/utils': 10.14.0
-      tslib: 2.4.0
+      tslib: 2.4.1
     dev: false
 
   /@motionone/generators/10.14.0:
@@ -2023,7 +2037,7 @@ packages:
     dependencies:
       '@motionone/types': 10.14.0
       '@motionone/utils': 10.14.0
-      tslib: 2.4.0
+      tslib: 2.4.1
     dev: false
 
   /@motionone/types/10.14.0:
@@ -2035,7 +2049,7 @@ packages:
     dependencies:
       '@motionone/types': 10.14.0
       hey-listen: 1.0.8
-      tslib: 2.4.0
+      tslib: 2.4.1
     dev: false
 
   /@npmcli/fs/2.1.2:
