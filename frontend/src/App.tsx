@@ -32,7 +32,7 @@ const App: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Flex direction="column" h="full">
+    <Flex direction="column" minH="100vh">
       <Header title="Book Searcher">
         <HStack spacing={2}>
           <IconButton
