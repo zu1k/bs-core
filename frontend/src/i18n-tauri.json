@@ -7,13 +7,6 @@
         "index_dir_help": "The directory where the index is stored.",
         "index_dir_required": "The index directory is required",
         "index_dir_browse": "Browse",
-        "ipfs_api_url": "IPFS API URL",
-        "ipfs_api_url_help": "The URL of the IPFS API.",
-        "ipfs_api_url_required": "The IPFS API URL is required",
-        "download_path": "Download path",
-        "download_path_help": "The path where the books will be downloaded.",
-        "download_path_required": "The download path is required",
-        "download_path_browse": "Browse",
         "cancel": "Cancel",
         "save": "Save"
       }
@@ -27,13 +20,6 @@
         "index_dir_help": "存储索引的目录。",
         "index_dir_required": "索引目录不能为空",
         "index_dir_browse": "浏览",
-        "ipfs_api_url": "IPFS API 地址",
-        "ipfs_api_url_help": "IPFS API 地址。",
-        "ipfs_api_url_required": "IPFS API 地址不能为空",
-        "download_path": "下载路径",
-        "download_path_help": "下载书籍的保存路径。",
-        "download_path_required": "下载路径不能为空",
-        "download_path_browse": "浏览",
         "cancel": "取消",
         "save": "保存"
       }

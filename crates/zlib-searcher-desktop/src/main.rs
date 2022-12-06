@@ -17,10 +17,6 @@ use tokio::sync::Mutex;
 struct AppConfig {
     /// Index files of z-library
     pub index_dir: PathBuf,
-    /// IPFS daemon RPC address
-    pub ipfs_api_url: String,
-    /// Where to store downloaded files
-    pub download_path: PathBuf,
 }
 
 fn get_dir(name: &str) -> Option<PathBuf> {
@@ -33,11 +29,8 @@ fn get_dir(name: &str) -> Option<PathBuf> {
 impl Default for AppConfig {
     fn default() -> Self {
         let index_dir = get_dir("index").unwrap_or_else(|| PathBuf::from("index"));
-        let download_path = get_dir("download").unwrap_or_else(|| PathBuf::from("download"));
         Self {
             index_dir,
-            ipfs_api_url: "http://localhost:5001".to_string(),
-            download_path,
         }
     }
 }
