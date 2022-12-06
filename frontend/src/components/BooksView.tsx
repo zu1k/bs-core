@@ -90,20 +90,20 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
         header: t('book.title') ?? 'Title',
         sortingFn: 'text',
         enableColumnFilter: false,
-        meta: { width: '20%' }
+        meta: { width: '30%' }
       }),
       columnHelper.accessor('author', {
         header: t('book.author') ?? 'Author',
         sortingFn: 'text',
         enableColumnFilter: false,
-        meta: { width: '20%' }
+        meta: { width: '15%' }
       }),
       columnHelper.accessor('publisher', {
         header: t('book.publisher') ?? 'Publisher',
         sortingFn: 'text',
         sortUndefined: 1,
         enableColumnFilter: false,
-        meta: { width: '20%', breakpoint: 'md' }
+        meta: { width: '15%', breakpoint: 'md' }
       }),
       columnHelper.accessor(
         'extension',
