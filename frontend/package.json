@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "repository": "https://github.com/zu1k/book-searcher",
+  "repository": "https://github.com/book-searcher-org/book-searcher",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

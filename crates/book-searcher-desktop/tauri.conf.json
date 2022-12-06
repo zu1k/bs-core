@@ -34,7 +34,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.zu1k.book-searcher",
+      "identifier": "com.github.book-searcher",
       "longDescription": "",
       "macOS": {
         "entitlements": null,

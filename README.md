@@ -1,10 +1,10 @@
 # Book Searcher
 
-[![GitHub stars](https://img.shields.io/github/stars/zu1k/book-searcher)](https://github.com/zu1k/book-searcher/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/zu1k/book-searcher)](https://github.com/zu1k/book-searcher/network)
-[![Release](https://img.shields.io/github/release/zu1k/book-searcher)](https://github.com/zu1k/book-searcher/releases)
-[![GitHub issues](https://img.shields.io/github/issues/zu1k/book-searcher)](https://github.com/zu1k/book-searcher/issues)
-[![GitHub license](https://img.shields.io/github/license/zu1k/book-searcher)](https://github.com/zu1k/book-searcher/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/network)
+[![Release](https://img.shields.io/github/release/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/releases)
+[![GitHub issues](https://img.shields.io/github/issues/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/issues)
+[![GitHub license](https://img.shields.io/github/license/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/blob/master/LICENSE)
 
 We don't save and provide files, we provide search.
 
@@ -13,7 +13,7 @@ I hope everyone have a copy of the index locally, so that no need to rely on any
 ## Deploy with Docker
 
 ```
-git clone https://github.com/zu1k/book-searcher.git && cd book-searcher
+git clone https://github.com/book-searcher-org/book-searcher.git && cd book-searcher
 
 docker-compose up -d
 ```
@@ -22,7 +22,7 @@ Now `book-searcher` it will listen to `0.0.0.0:7070`.
 
 ## Usage
 
-### 1. Download the pre-compiled binary from [Release](https://github.com/zu1k/book-searcher/releases).
+### 1. Download the pre-compiled binary from [Release](https://github.com/book-searcher-org/book-searcher/releases).
 
 Or you can compile by yourself. Refer to [Build from source](#build-from-source) for instructions.
 
@@ -108,4 +108,4 @@ id, title, author, publisher, extension, filesize, language, year, pages, isbn, 
 
 ## License
 
-**book-searcher** © [book-searcher's authors](https://github.com/zu1k/book-searcher/graphs/contributors), Released under the [MIT](./LICENSE) License.
+**book-searcher** © [book-searcher's authors](https://github.com/book-searcher-org/book-searcher/graphs/contributors), Released under the [MIT](./LICENSE) License.
