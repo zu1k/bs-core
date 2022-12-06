@@ -31,8 +31,6 @@ import { useTranslation } from 'react-i18next';
 
 interface Config {
   index_dir: string;
-  ipfs_api_url: string;
-  download_path: string;
 }
 
 interface SettingsItemProps extends InputProps {
@@ -87,8 +85,6 @@ const Settings: React.FC = () => {
       invoke('get_config').then((conf) => {
         const config = conf as Config;
         setValue('index_dir', config.index_dir, { shouldValidate: true });
-        setValue('ipfs_api_url', config.ipfs_api_url, { shouldValidate: true });
-        setValue('download_path', config.download_path, { shouldValidate: true });
       });
   }, [isOpen]);
 
@@ -140,45 +136,6 @@ const Settings: React.FC = () => {
                             multiple: false
                           })) as string | null;
                           if (selected) setValue('index_dir', selected, { shouldValidate: true });
-                        }}
-                      />
-                    </InputRightElement>
-                  }
-                />
-                <SettingsItem
-                  label={t('settings.ipfs_api_url')}
-                  help={t('settings.ipfs_api_url_help') ?? undefined}
-                  {...register('ipfs_api_url', {
-                    required: t('settings.ipfs_api_url_required') ?? true
-                  })}
-                  aria-invalid={errors.ipfs_api_url ? 'true' : 'false'}
-                  error={errors.ipfs_api_url?.message}
-                />
-                <SettingsItem
-                  label={t('settings.download_path')}
-                  help={t('settings.download_path_help') ?? undefined}
-                  {...register('download_path', {
-                    required: t('settings.download_path_required') ?? true
-                  })}
-                  aria-invalid={errors.download_path ? 'true' : 'false'}
-                  error={errors.download_path?.message}
-                  rightElement={
-                    <InputRightElement>
-                      <IconButton
-                        aria-label={t('settings.download_path_browse')}
-                        title={t('settings.download_path_browse') ?? ''}
-                        tabIndex={-1}
-                        icon={<Icon as={TbFolder} />}
-                        variant="unstyled"
-                        pt={1}
-                        onClick={async () => {
-                          const selected = (await open({
-                            defaultPath: watch('download_path'),
-                            directory: true,
-                            multiple: false
-                          })) as string | null;
-                          if (selected)
-                            setValue('download_path', selected, { shouldValidate: true });
                         }}
                       />
                     </InputRightElement>
