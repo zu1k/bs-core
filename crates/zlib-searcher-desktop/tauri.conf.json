@@ -34,7 +34,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.zu1k.zlib-searcher",
+      "identifier": "com.github.zlib-searcher",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
