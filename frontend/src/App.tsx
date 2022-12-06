@@ -60,7 +60,7 @@ const App: React.FC = () => {
 
       <Spacer />
       <Footer>
-        Book Searcher ©2022 | <ExternalLink href={repository}>Source Code</ExternalLink>
+        Book Searcher ©2022
       </Footer>
     </Flex>
   );
