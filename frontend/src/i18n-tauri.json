@@ -24,5 +24,18 @@
         "save": "保存"
       }
     }
+  },
+  "fr": {
+    "translation": {
+      "settings": {
+        "title": "Paramètres",
+        "index_dir": "Répertoire de l'index",
+        "index_dir_help": "Le répertoire où l'index est stocké.",
+        "index_dir_required": "Le répertoire de l'index est requis",
+        "index_dir_browse": "Parcourir",
+        "cancel": "Annuler",
+        "save": "Enregistrer"
+      }
+    }
   }
 }
