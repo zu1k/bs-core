@@ -84,5 +84,48 @@
         "complex": "复杂搜索"
       }
     }
+  },
+  "fr": {
+    "translation": {
+      "nav": {
+        "repository": "Dépôt GitHub",
+        "toggle_dark": "Basculer en mode sombre",
+        "toggle_light": "Basculer en mode clair",
+        "toggle_language": "Basculer la langue"
+      },
+      "input": {
+        "clear": "Effacer"
+      },
+      "book": {
+        "id": "ID",
+        "title": "Titre",
+        "author": "Auteur",
+        "publisher": "Éditeur",
+        "extension": "Extension",
+        "filesize": "Taille du fichier",
+        "language": "Langue",
+        "year": "Année",
+        "pages": "Pages",
+        "isbn": "ISBN",
+        "ipfs_cid": "CID IPFS",
+        "unknown": "Inconnu"
+      },
+      "table": {
+        "sort_asc": "Trier par ordre croissant",
+        "sort_desc": "Trier par ordre décroissant",
+        "not_sorted": "Non trié",
+        "filter": "Filtrer",
+        "no_data": "Aucune donnée",
+        "first_page": "Première page",
+        "last_page": "Dernière page",
+        "next_page": "Page suivante",
+        "previous_page": "Page précédente",
+        "page": "Page {{page}}",
+        "collapse": "Replier"
+      },
+      "search": {
+        "complex": "Recherche complexe"
+      }
+    }
   }
 }
