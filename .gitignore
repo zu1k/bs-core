@@ -4,3 +4,6 @@
 *.csv
 /release
 /zlib-searcher
+
+.vscode
+index_0.6.zip

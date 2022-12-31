@@ -23,7 +23,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
-
+    lng: 'it', // default language
     // debug: true,
     interpolation: { escapeValue: false }
   });

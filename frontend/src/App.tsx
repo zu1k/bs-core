@@ -36,7 +36,7 @@ const App: React.FC = () => {
   return (
     <Flex direction="column" minH="100vh">
       <SkipNavLink>Skip to content</SkipNavLink>
-      <Header title="zLib Searcher">
+      <Header title="Mille libri">
         <HStack spacing={{ base: 1, md: 2 }}>
           <IconButton
             as={ExternalLink}

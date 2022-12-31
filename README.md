@@ -1,3 +1,11 @@
+# Mille libri project
+
+This is a fork from zlib-searcher project. Future goals:
+
+- improve search indexes (language)
+- add books
+- expand file types
+
 # zlib(libgen) searcher
 
 [![GitHub stars](https://img.shields.io/github/stars/zlib-searcher/zlib-searcher)](https://github.com/zlib-searcher/zlib-searcher/stargazers)
