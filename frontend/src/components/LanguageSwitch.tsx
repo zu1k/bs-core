@@ -34,6 +34,7 @@ const LanguageSwitch: React.FC = () => {
           <MenuItemOption value="en">English</MenuItemOption>
           <MenuItemOption value="zh-CN">简体中文</MenuItemOption>
           <MenuItemOption value="fr">French</MenuItemOption>
+          <MenuItemOption value="it">Italian</MenuItemOption>
         </MenuOptionGroup>
       </MenuList>
     </Menu>
