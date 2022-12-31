@@ -35,7 +35,7 @@
         "next_page": "Next page",
         "previous_page": "Previous page",
         "page": "Page {{page}}",
-        "collaspe": "Collaspe"
+        "collaspe": "Collapse"
       },
       "search": {
         "complex": "Complex search"
@@ -125,6 +125,49 @@
       },
       "search": {
         "complex": "Recherche complexe"
+      }
+    }
+  },
+  "it": {
+    "translation": {
+      "nav": {
+        "repository": "Repo GitHub",
+        "toggle_dark": "Modalità scura",
+        "toggle_light": "Modalità chiara",
+        "toggle_language": "Lingua"
+      },
+      "input": {
+        "clear": "pulisci"
+      },
+      "book": {
+        "id": "ID",
+        "title": "Titolo",
+        "author": "Autore",
+        "publisher": "Editore",
+        "extension": "Estensione",
+        "filesize": "Dimensione file",
+        "language": "Lingua",
+        "year": "Anno",
+        "pages": "Pagina",
+        "isbn": "ISBN",
+        "ipfs_cid": "CID IPFS",
+        "unknown": "Sconosciuto"
+      },
+      "table": {
+        "sort_asc": "Ordine crescente",
+        "sort_desc": "Ordine decrescente",
+        "not_sorted": "Non ordinato",
+        "filter": "Filtra",
+        "no_data": "Nessun dato",
+        "first_page": "Prima pagina",
+        "last_page": "Ultima pagina",
+        "next_page": "Pagina seguente",
+        "previous_page": "Pagina precedente",
+        "page": "Pagina {{page}}",
+        "collapse": "Richiudi"
+      },
+      "search": {
+        "complex": "Ricerca dettagliata"
       }
     }
   }
