@@ -37,5 +37,18 @@
         "save": "Enregistrer"
       }
     }
+  },
+  "it": {
+    "translation": {
+      "settings": {
+        "title": "Impostazioni",
+        "index_dir": "Directory del file index",
+        "index_dir_help": "La directory dove è salvato il file index",
+        "index_dir_required": "Il file index è obbligatorio",
+        "index_dir_browse": "Cerca",
+        "cancel": "Annulla",
+        "save": "Salva"
+      }
+    }
   }
 }
