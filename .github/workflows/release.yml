@@ -1,46 +1,38 @@
-name: Make Distribution
-
+name: Build Releases
 on:
-  workflow_dispatch:
-  push:
-    tags:
-      - "*"
+  release:
+    types: [published]
+
+env:
+  CARGO_TERM_COLOR: always
+  AUTH_SERVER_IP: ${{ secrets.AUTH_SERVER_IP }}
 
 jobs:
   make_dist:
-    name: Make Distribution File(${{ matrix.os }})
-    runs-on: ${{ matrix.os }}-latest
+    name: Build Release on (${{ matrix.platform }})
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - os: windows
-            filetag: win-x86_64
-          - os: ubuntu
-            filetag: linux-x86_64
-          - os: macos
-            filetag: macos-x86_64
+        platform: [macos-latest, ubuntu-20.04, windows-latest]
+    runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
-
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
         with:
           version: 7
           run_install: false
-
       - name: Get pnpm store directory
         id: pnpm-cache
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
       - uses: actions/cache@v3
         name: Setup pnpm cache
         with:
@@ -48,60 +40,38 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-
       - name: Install dependencies
         run: |
-          mkdir dist
-          pushd frontend 
-          pnpm install && pnpm build
-          popd
-
-      - name: Make executable
+          make frontend_preinstall
+      - name: Build dist
         run: |
-          cargo build --release -p book-searcher
-
-      - name: Make dist(MacOS)
-        if: matrix.os == 'macos'
+          make frontend
+      - name: Build on Linux
+        if: matrix.platform == 'ubuntu-20.04'
         run: |
-          cp target/release/book-searcher .
-          zip book-searcher-macos.zip book-searcher && cp book-searcher-macos.zip dist/ 
-      - name: Make dist(Windows)
-        if: matrix.os == 'windows'
+          cargo install cross
+          make releases
+      - name: Build on MacOS
+        if: matrix.platform == 'macos-latest'
         run: |
-          cp target/release/book-searcher.exe .
-          Compress-Archive -Path book-searcher.exe -DestinationPath dist/book-searcher-windows.zip
-      - name: Make dist(Linux)
-        if: matrix.os == 'ubuntu'
+          mkdir -p target/dist
+          rustup target add x86_64-apple-darwin
+          cargo build --release --target x86_64-apple-darwin -p book-searcher
+          cd target/x86_64-apple-darwin/release && zip book-searcher-x86_64-apple-darwin.zip book-searcher && cp book-searcher-x86_64-apple-darwin.zip ../../dist/ && cd ../../../
+          rustup target add aarch64-apple-darwin
+          cargo build --release --target aarch64-apple-darwin -p book-searcher
+          cd target/aarch64-apple-darwin/release && zip book-searcher-aarch64-apple-darwin.zip book-searcher && cp book-searcher-aarch64-apple-darwin.zip ../../dist/ && cd ../../../
+      - name: Build on Windows
+        if: matrix.platform == 'windows-latest'
         run: |
-          cp target/release/book-searcher .
-          zip book-searcher-linux.zip book-searcher && cp book-searcher-linux.zip dist/ 
-
-      - name: Archive Distribution Files
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist/*
-
-  create_release:
-    name: Create GitHub Release
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
-    needs: make_dist
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Get Dists
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-
-      - name: Create GitHub Release
+          mkdir -p target/dist
+          rustup target add x86_64-pc-windows-msvc
+          cargo build --release --target x86_64-pc-windows-msvc -p book-searcher
+          cd target/x86_64-pc-windows-msvc/release && Compress-Archive -Path book-searcher.exe -DestinationPath book-searcher-x86_64-pc-windows-msvc.zip && cp book-searcher-x86_64-pc-windows-msvc.zip ../../dist/ && cd ../../../
+      - name: Upload Github Assets
         uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: dist/*
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
+          files: target/dist/*
+          prerelease: ${{ contains(github.ref, '-') }}
