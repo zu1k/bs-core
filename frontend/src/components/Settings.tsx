@@ -9,17 +9,13 @@ import {
   DrawerOverlay,
   Icon,
   IconButton,
-  Input,
-  InputRightElement,
   Stack,
   Textarea,
   useDisclosure
 } from '@chakra-ui/react';
-import { TbFolder, TbHelp, TbSettings } from 'react-icons/tb';
+import { TbSettings } from 'react-icons/tb';
 
 import React from 'react';
-import { invoke } from '@tauri-apps/api';
-import { open } from '@tauri-apps/api/dialog';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SettingsItem } from './SettingsItem';
@@ -27,7 +23,6 @@ import RootContext from '../store';
 import { parseIpfsGateways } from '../scripts/ipfs';
 
 interface Config {
-  index_dir: string;
   ipfs_gateways: string;
 }
 
@@ -46,27 +41,19 @@ const Settings: React.FC = () => {
   const rootContext = React.useContext(RootContext);
 
   React.useEffect(() => {
-    isOpen &&
-      invoke('get_config').then((conf) => {
-        const config = conf as {
-          index_dir: string;
-          ipfs_gateways: string[];
-        };
-        setValue('index_dir', config.index_dir, { shouldValidate: true });
-        setValue('ipfs_gateways', config.ipfs_gateways.join('\n'), { shouldValidate: true });
-      });
+    if (isOpen) {
+      const ipfsGateways: string[] = JSON.parse(localStorage.getItem('ipfs_gateways') || '[]');
+      setValue('ipfs_gateways', ipfsGateways.join('\n'));
+    }
   }, [isOpen]);
 
   const onSubmit = async (newConfig: Config) => {
     setSubmitting(true);
 
-    const ipfsGateways: string[]= parseIpfsGateways(newConfig.ipfs_gateways);
-    const config = {
-      index_dir: newConfig.index_dir,
-      ipfs_gateways: ipfsGateways
-    };
-    await invoke('set_config', { newConfig: config });
+    const ipfsGateways: string[] = parseIpfsGateways(newConfig.ipfs_gateways);
+    localStorage.setItem('ipfs_gateways', JSON.stringify(ipfsGateways));
     rootContext.ipfs_gateways = ipfsGateways;
+
     onClose();
     setSubmitting(false);
   };
@@ -90,37 +77,6 @@ const Settings: React.FC = () => {
           <DrawerBody>
             <form id="settings-form" onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={4}>
-                <SettingsItem
-                  label={t('settings.index_dir')}
-                  help={t('settings.index_dir_help') ?? undefined}
-                  error={errors.index_dir?.message}
-                  element={
-                    <Input
-                      {...register('index_dir', { required: t('settings.index_dir_required') ?? true })}
-                      aria-invalid={errors.index_dir ? 'true' : 'false'}
-                    />
-                  }
-                  rightElement={
-                    <InputRightElement>
-                      <IconButton
-                        aria-label={t('settings.index_dir_browse')}
-                        title={t('settings.index_dir_browse') ?? ''}
-                        tabIndex={-1}
-                        icon={<Icon as={TbFolder} />}
-                        variant="unstyled"
-                        pt={1}
-                        onClick={async () => {
-                          const selected = (await open({
-                            defaultPath: watch('index_dir'),
-                            directory: true,
-                            multiple: false
-                          })) as string | null;
-                          if (selected) setValue('index_dir', selected, { shouldValidate: true });
-                        }}
-                      />
-                    </InputRightElement>
-                  }
-                />
                 <SettingsItem
                   label={t('settings.ipfs_gateways')}
                   help={t('settings.ipfs_gateways_help') ?? undefined}

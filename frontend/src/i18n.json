@@ -35,10 +35,17 @@
         "next_page": "Next page",
         "previous_page": "Previous page",
         "page": "Page {{page}}",
-        "collaspe": "Collapse"
+        "collapse": "Collapse"
       },
       "search": {
         "complex": "Complex search"
+      },
+      "settings": {
+        "title": "Settings",
+        "ipfs_gateways": "IPFS Gateways",
+        "ipfs_gateways_help": "IPFS Gateways List, line break",
+        "cancel": "Cancel",
+        "save": "Save"
       }
     }
   },
@@ -78,10 +85,17 @@
         "next_page": "下一页",
         "previous_page": "上一页",
         "page": "第 {{page}} 页",
-        "collaspe": "收起"
+        "collapse": "收起"
       },
       "search": {
         "complex": "复杂搜索"
+      },
+      "settings": {
+        "title": "设置",
+        "ipfs_gateways": "IPFS 网关",
+        "ipfs_gateways_help": "IPFS 网关列表，一行一个",
+        "cancel": "取消",
+        "save": "保存"
       }
     }
   },
@@ -125,6 +139,13 @@
       },
       "search": {
         "complex": "Recherche complexe"
+      },
+      "settings": {
+        "title": "Paramètres",
+        "ipfs_gateways": "Passerelles IPFS",
+        "ipfs_gateways_help": "Liste des passerelles IPFS, saut de ligne",
+        "cancel": "Annuler",
+        "save": "Enregistrer"
       }
     }
   },
@@ -168,6 +189,13 @@
       },
       "search": {
         "complex": "Ricerca dettagliata"
+      },
+      "settings": {
+        "title": "Impostazioni",
+        "ipfs_gateways": "Gateway IPFS",
+        "ipfs_gateways_help": "Elenco dei gateway IPFS, interruzione di riga",
+        "cancel": "Annullamento",
+        "save": "Risparmiare"
       }
     }
   }
