@@ -5,7 +5,7 @@ use actix_web_static_files::ResourceFiles;
 use clap::Parser;
 use log::{info, LevelFilter};
 use serde::{Deserialize, Serialize};
-use std::sync::Arc;
+use std::{path::PathBuf, sync::Arc};
 use zlib_searcher_core::{Book, Searcher};
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
@@ -47,6 +47,7 @@ async fn search(query: web::Query<SearchQuery>, state: web::Data<AppState>) -> i
 
     return HttpResponse::Ok()
         .insert_header(header::ContentType::json())
+        .insert_header((header::ACCESS_CONTROL_ALLOW_ORIGIN, "*"))
         .json(result);
 }
 
@@ -62,7 +63,7 @@ enum SubCommand {
     /// run search webserver
     Run(Run),
     /// index the raw data
-    Index,
+    Index(Index),
 }
 
 #[derive(Parser)]
@@ -76,13 +77,19 @@ struct Run {
     bind: String,
 }
 
+#[derive(Parser)]
+struct Index {
+    #[clap(short, long, num_args=1.., help = "specify csv file to be indexed")]
+    file: Vec<PathBuf>,
+}
+
 fn main() {
     env_logger::builder().filter_level(LevelFilter::Info).init();
 
     let args = AppOpts::parse();
     match args.subcmd {
         SubCommand::Run(opts) => run(opts).unwrap(),
-        SubCommand::Index => index(),
+        SubCommand::Index(opts) => index(opts),
     }
 }
 
@@ -113,7 +120,7 @@ async fn run(opts: Run) -> std::io::Result<()> {
     .await
 }
 
-fn index() {
+fn index(opts: Index) {
     let index_dir = std::env::current_exe()
         .unwrap()
         .parent()
@@ -123,5 +130,12 @@ fn index() {
         .unwrap()
         .to_string();
     let mut searcher = Searcher::new(&index_dir);
-    searcher.index();
+
+    if opts.file.is_empty() {
+        vec!["zlib_index_books.csv", "libgen_index_books.csv"]
+            .iter()
+            .for_each(|file| searcher.index(file));
+    } else {
+        opts.file.iter().for_each(|file| searcher.index(file));
+    }
 }

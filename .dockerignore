@@ -1,6 +1,8 @@
 index
 .github
 target
+*.csv
+.git
 
 .vscode/*
 .idea

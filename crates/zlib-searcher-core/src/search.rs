@@ -8,12 +8,7 @@ impl Searcher {
 
         let mut query_parser = QueryParser::for_index(
             &self.index,
-            vec![
-                self.title.clone(),
-                self.author.clone(),
-                self.publisher.clone(),
-                self.isbn.clone(),
-            ],
+            vec![self.title, self.author, self.publisher, self.isbn],
         );
         query_parser.set_conjunction_by_default();
         let query = query_parser.parse_query(query).unwrap();

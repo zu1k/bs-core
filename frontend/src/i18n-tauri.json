@@ -1,0 +1,62 @@
+{
+  "en": {
+    "translation": {
+      "settings": {
+        "title": "Settings",
+        "index_dir": "Index directory",
+        "index_dir_help": "The directory where the index is stored.",
+        "index_dir_required": "The index directory is required",
+        "index_dir_browse": "Browse",
+        "ipfs_gateways": "IPFS Gateways",
+        "ipfs_gateways_help": "IPFS Gateways List, line break",
+        "cancel": "Cancel",
+        "save": "Save"
+      }
+    }
+  },
+  "zh-CN": {
+    "translation": {
+      "settings": {
+        "title": "设置",
+        "index_dir": "索引目录",
+        "index_dir_help": "存储索引的目录。",
+        "index_dir_required": "索引目录不能为空",
+        "index_dir_browse": "浏览",
+        "ipfs_gateways": "IPFS 网关",
+        "ipfs_gateways_help": "IPFS 网关列表，一行一个",
+        "cancel": "取消",
+        "save": "保存"
+      }
+    }
+  },
+  "fr": {
+    "translation": {
+      "settings": {
+        "title": "Paramètres",
+        "index_dir": "Répertoire de l'index",
+        "index_dir_help": "Le répertoire où l'index est stocké.",
+        "index_dir_required": "Le répertoire de l'index est requis",
+        "index_dir_browse": "Parcourir",
+        "ipfs_gateways": "Passerelles IPFS",
+        "ipfs_gateways_help": "Liste des passerelles IPFS, saut de ligne",
+        "cancel": "Annuler",
+        "save": "Enregistrer"
+      }
+    }
+  },
+  "it": {
+    "translation": {
+      "settings": {
+        "title": "Impostazioni",
+        "index_dir": "Directory del file index",
+        "index_dir_help": "La directory dove è salvato il file index",
+        "index_dir_required": "Il file index è obbligatorio",
+        "index_dir_browse": "Cerca",
+        "ipfs_gateways": "Gateway IPFS",
+        "ipfs_gateways_help": "Elenco dei gateway IPFS, interruzione di riga",
+        "cancel": "Annulla",
+        "save": "Salva"
+      }
+    }
+  }
+}
