@@ -1,6 +1,6 @@
 [package]
 name = "book-searcher-core"
-version = "0.6.0"
+version = "0.7.0"
 edition.workspace = true
 authors.workspace = true
 description.workspace = true
@@ -20,8 +20,8 @@ cang-jie = "0.14"
 jieba-rs = { version = "0.6", features = ["default-dict"] }
 
 csv = "1.1"
-indicatif = "0.17.2"
-sysinfo = { version = "0.26", default-features = false }
+indicatif = "0.17"
+sysinfo = { version = "0.27", default-features = false }
 
 [features]
 default = ["best-size"]
