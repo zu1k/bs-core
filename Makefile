@@ -22,3 +22,6 @@ endif
 clean:
 	cargo clean
 	rm -rf release
+
+releases:
+	cd scripts && ./build_release.sh -a a
