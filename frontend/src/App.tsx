@@ -28,7 +28,7 @@ const Main: React.FC = () => {
 const Settings =
   import.meta.env.VITE_TAURI === '1'
     ? React.lazy(() => import('./components/Settings-tauri'))
-    : React.Fragment;
+    : React.lazy(() => import('./components/Settings'));
 
 const App: React.FC = () => {
   const { t } = useTranslation();
@@ -48,11 +48,9 @@ const App: React.FC = () => {
           />
           <LanguageSwitch />
           <ColorModeSwitch />
-          {import.meta.env.VITE_TAURI === '1' && (
-            <Suspense>
-              <Settings />
-            </Suspense>
-          )}
+          <Suspense>
+            <Settings />
+          </Suspense>
         </HStack>
       </Header>
 

@@ -15,8 +15,8 @@ use tokio::sync::Mutex;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 struct AppConfig {
-    /// Index files of z-library
     pub index_dir: PathBuf,
+    pub ipfs_gateways: Vec<String>,
 }
 
 fn get_dir(name: &str) -> Option<PathBuf> {
@@ -31,6 +31,7 @@ impl Default for AppConfig {
         let index_dir = get_dir("index").unwrap_or_else(|| PathBuf::from("index"));
         Self {
             index_dir,
+            ipfs_gateways: vec![],
         }
     }
 }
