@@ -6,15 +6,16 @@
 [![GitHub issues](https://img.shields.io/github/issues/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/issues)
 [![GitHub license](https://img.shields.io/github/license/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/blob/master/LICENSE)
 
-We don't save and provide files, we provide search.
+Search Books index, create your private local library.
 
-I hope everyone have a copy of the index locally, so that no need to rely on any centralized service.
+We don't save and provide files, we provide search.
 
 ## Deploy with Docker
 
 ```
-git clone https://github.com/book-searcher-org/book-searcher.git && cd book-searcher
+mkdir book-searcher && cd book-searcher
 
+wget https://raw.githubusercontent.com/book-searcher-org/book-searcher/master/docker-compose.yml
 docker-compose up -d
 ```
 
@@ -28,7 +29,7 @@ Or you can compile by yourself. Refer to [Build from source](#build-from-source)
 
 ### 2. Create the index.
 
-Or you can make your own via `book-searcher index`.
+Download the `index` [file](https://github.com/book-searcher/index), or you can make your own via `book-searcher index`.
 
 It should look like the following:
 
@@ -101,6 +102,8 @@ project_dir // in the example above, it is project root directory.
 ```
 
 ## Raw data
+
+This Raw Data is used to generate our `index`, should be a `csv` file with the following fields:
 
 ```
 id, title, author, publisher, extension, filesize, language, year, pages, isbn, ipfs_cid
