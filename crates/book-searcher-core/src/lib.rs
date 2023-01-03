@@ -2,7 +2,7 @@ use std::path::Path;
 
 use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DefaultOnError, DefaultOnNull};
-use tantivy::{schema::*, store::Compressor, Index};
+use tantivy::{schema::*, store::Compressor, Index, TantivyError};
 use tokenizer::{get_tokenizer, META_DATA_TOKENIZER};
 
 pub mod index;
@@ -115,9 +115,13 @@ impl Searcher {
 
         // open or create index
         let index_dir = index_dir.as_ref();
-        let mut index = Index::open_in_dir(index_dir).unwrap_or_else(|_| {
-            std::fs::create_dir_all(index_dir).expect("create index directory");
-            Index::create_in_dir(index_dir, schema.clone()).unwrap()
+        let mut index = Index::open_in_dir(index_dir).unwrap_or_else(|err| {
+            if let TantivyError::OpenDirectoryError(_) | TantivyError::OpenReadError(_) = err {
+                std::fs::create_dir_all(index_dir).expect("create index directory");
+                Index::create_in_dir(index_dir, schema.clone()).unwrap()
+            } else {
+                panic!("Error opening index: {err:?}")
+            }
         });
         #[cfg(feature = "best-size")]
         {
