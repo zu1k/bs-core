@@ -29,7 +29,6 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({
   leftElement,
   rightElement
 }) => {
-  console.log(label, error);
   return (
     <FormControl isInvalid={error ? true : false}>
       <FormLabel>

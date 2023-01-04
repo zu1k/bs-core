@@ -2,8 +2,6 @@ import './style.css';
 
 import * as ReactDOM from 'react-dom/client';
 
-import RootContext, { initRootContext } from './store';
-
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -34,9 +32,7 @@ const rootElement = document.getElementById('app')!;
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <RootContext.Provider value={initRootContext}>
-        <App />
-      </RootContext.Provider>
+      <App />
     </ChakraProvider>
   </React.StrictMode>
 );
