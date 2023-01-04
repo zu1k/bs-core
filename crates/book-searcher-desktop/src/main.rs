@@ -13,7 +13,9 @@ use serde::{Deserialize, Serialize};
 use tauri::State;
 use tokio::sync::Mutex;
 
+#[non_exhaustive]
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(default)]
 struct AppConfig {
     pub index_dir: PathBuf,
     pub ipfs_gateways: Vec<String>,
