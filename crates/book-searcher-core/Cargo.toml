@@ -15,9 +15,8 @@ log = { workspace = true }
 serde = { workspace = true }
 serde_with = { workspace = true }
 
-tantivy = { version = "0.18", default-features = false, features = ["mmap"] }
-cang-jie = "0.14"
-jieba-rs = { version = "0.6", features = ["default-dict"] }
+tantivy = { workspace = true, features = ["mmap"] }
+tantivy-meta-tokenizer = { path = "../tantivy-meta-tokenizer" }
 
 csv = "1.1"
 indicatif = "0.17"

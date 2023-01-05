@@ -3,6 +3,7 @@ members = [
     "crates/book-searcher",
     "crates/book-searcher-core",
     "crates/book-searcher-desktop",
+    "crates/tantivy-meta-tokenizer"
 ]
 
 [workspace.package]
@@ -26,5 +27,6 @@ env_logger = "0.10"
 log = "0.4"
 serde = { version = "1.0", features = ["derive"] }
 serde_with = "2.0"
+tantivy = { version = "0.19", default-features = false }
 
 book-searcher-core = { path = "crates/book-searcher-core" }
