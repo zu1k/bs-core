@@ -31,6 +31,11 @@ interface Config {
   ipfs_gateways: string;
 }
 
+interface TauriConfig {
+  index_dir: string;
+  ipfs_gateways: string[];
+}
+
 const Settings: React.FC = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,12 +53,10 @@ const Settings: React.FC = () => {
   React.useEffect(() => {
     isOpen &&
       invoke('get_config').then((conf) => {
-        const config = conf as {
-          index_dir: string;
-          ipfs_gateways: string[];
-        };
+        const config = conf as TauriConfig;
         setValue('index_dir', config.index_dir, { shouldValidate: true });
         setValue('ipfs_gateways', config.ipfs_gateways.join('\n'), { shouldValidate: true });
+        rootContext.setIpfsGateways(config.ipfs_gateways);
       });
   }, [isOpen]);
 
@@ -61,12 +64,12 @@ const Settings: React.FC = () => {
     setSubmitting(true);
 
     const ipfsGateways: string[] = parseIpfsGateways(newConfig.ipfs_gateways);
-    const config = {
-      index_dir: newConfig.index_dir,
+    const tauriConfig = {
+      ...newConfig,
       ipfs_gateways: ipfsGateways
     };
-    await invoke('set_config', { newConfig: config });
-    rootContext.ipfs_gateways = ipfsGateways;
+    await invoke('set_config', { newConfig: tauriConfig });
+    rootContext.setIpfsGateways(ipfsGateways);
     onClose();
     setSubmitting(false);
   };

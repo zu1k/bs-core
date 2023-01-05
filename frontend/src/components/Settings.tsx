@@ -13,14 +13,14 @@ import {
   Textarea,
   useDisclosure
 } from '@chakra-ui/react';
-import { TbSettings } from 'react-icons/tb';
 
 import React from 'react';
+import RootContext from '../store';
+import { SettingsItem } from './SettingsItem';
+import { TbSettings } from 'react-icons/tb';
+import { parseIpfsGateways } from '../scripts/ipfs';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { SettingsItem } from './SettingsItem';
-import RootContext from '../store';
-import { parseIpfsGateways } from '../scripts/ipfs';
 
 interface Config {
   ipfs_gateways: string;
@@ -52,7 +52,7 @@ const Settings: React.FC = () => {
 
     const ipfsGateways: string[] = parseIpfsGateways(newConfig.ipfs_gateways);
     localStorage.setItem('ipfs_gateways', JSON.stringify(ipfsGateways));
-    rootContext.ipfs_gateways = ipfsGateways;
+    rootContext.setIpfsGateways(ipfsGateways);
 
     onClose();
     setSubmitting(false);

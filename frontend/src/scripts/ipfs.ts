@@ -19,5 +19,6 @@ export default async function getIpfsGateways() {
 }
 
 export function parseIpfsGateways(text: string) {
-  return text.split('\n').filter((g) => g.length);
+  const gateways = text.split('\n').filter((g) => g.length > 0);
+  return gateways.filter((g, i) => gateways.indexOf(g) === i);
 }

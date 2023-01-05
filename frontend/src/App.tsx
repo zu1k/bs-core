@@ -10,6 +10,7 @@ import { FaGithub } from 'react-icons/fa';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import LanguageSwitch from './components/LanguageSwitch';
+import RootContext from './store';
 import Search from './components/Search';
 import { repository } from '../package.json';
 import { useTranslation } from 'react-i18next';
@@ -32,33 +33,36 @@ const Settings =
 
 const App: React.FC = () => {
   const { t } = useTranslation();
+  const [ipfsGateways, setIpfsGateways] = useState<string[]>([]);
 
   return (
-    <Flex direction="column" minH="100vh">
-      <SkipNavLink>Skip to content</SkipNavLink>
-      <Header title="zLib Searcher">
-        <HStack spacing={{ base: 1, md: 2 }}>
-          <IconButton
-            as={ExternalLink}
-            aria-label={t('nav.repository')}
-            title={t('nav.repository') ?? ''}
-            href={repository}
-            variant="ghost"
-            icon={<Icon as={FaGithub} boxSize={5} />}
-          />
-          <LanguageSwitch />
-          <ColorModeSwitch />
-          <Suspense>
-            <Settings />
-          </Suspense>
-        </HStack>
-      </Header>
+    <RootContext.Provider value={{ ipfsGateways, setIpfsGateways }}>
+      <Flex direction="column" minH="100vh">
+        <SkipNavLink>Skip to content</SkipNavLink>
+        <Header title="zLib Searcher">
+          <HStack spacing={{ base: 1, md: 2 }}>
+            <IconButton
+              as={ExternalLink}
+              aria-label={t('nav.repository')}
+              title={t('nav.repository') ?? ''}
+              href={repository}
+              variant="ghost"
+              icon={<Icon as={FaGithub} boxSize={5} />}
+            />
+            <LanguageSwitch />
+            <ColorModeSwitch />
+            <Suspense>
+              <Settings />
+            </Suspense>
+          </HStack>
+        </Header>
 
-      <Main />
+        <Main />
 
-      <Spacer />
-      <Footer>zLib Searcher ©2022</Footer>
-    </Flex>
+        <Spacer />
+        <Footer>zLib Searcher ©2022</Footer>
+      </Flex>
+    </RootContext.Provider>
   );
 };
 

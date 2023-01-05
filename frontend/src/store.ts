@@ -1,9 +1,8 @@
 import React from 'react';
 
-export const initRootContext = {
-  ipfs_gateways: <string[]>[]
-};
-
-const RootContext = React.createContext(initRootContext);
+const RootContext = React.createContext({
+  ipfsGateways: [] as string[],
+  setIpfsGateways: (gateways: string[]) => {}
+});
 
 export default RootContext;
