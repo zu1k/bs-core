@@ -10,6 +10,22 @@ Search `zlib`/`libgen` index.
 
 We don't save and provide files, we provide search.
 
+## Desktop Usage
+
+### 1. Download the pre-compiled desktop installer from [Release](https://github.com/zlib-searcher/zlib-searcher/releases).
+
+- Windows: zLib-Searcher-desktop_version_x64.msi
+- macOS: zLib-Searcher-desktop_version_x64.dmg
+- Linux:
+    - Deb: zLib-Searcher-desktop_version_amd64.deb
+    - AppImage: zLib-Searcher-desktop_version_amd64.AppImage
+
+### 2. Download the `index` file that has been created.
+
+Download the [index](https://github.com/zlib-searcher/index) file, then extract it.
+
+### 3. Run zlib-searcher-desktop, and specify the decompressed `index` folder path in the settings menu.
+
 ## Deploy with Docker
 
 ```
@@ -30,7 +46,7 @@ Or you can compile by yourself. Refer to [Build from source](#build-from-source)
 
 ### 2. Download the `index` file that has been created.
 
-Download the `index` [file](https://github.com/zlib-searcher/index), or you can make your own via `zlib-searcher index`.
+Download the [index](https://github.com/zlib-searcher/index) file, or you can make your own via `zlib-searcher index`.
 
 Extract the `index` folder to the same level as the program, it should look like the following:
 
