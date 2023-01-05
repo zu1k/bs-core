@@ -57,9 +57,7 @@ const App: React.FC = () => {
       <Main />
 
       <Spacer />
-      <Footer>
-        Book Searcher ©2022
-      </Footer>
+      <Footer>Book Searcher ©2022</Footer>
     </Flex>
   );
 };

@@ -81,9 +81,9 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
 
   async function initIpfsGateways() {
     rootContext.ipfs_gateways = await getIpfsGateways();
-  };
+  }
   React.useEffect(() => {
-    initIpfsGateways()
+    initIpfsGateways();
   }, []);
 
   const columns = React.useMemo(
@@ -253,7 +253,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
                 </SimpleGrid>
               </CardBody>
               <CardFooter flexDirection="column">
-                {rootContext.ipfs_gateways.length > 0 ?
+                {rootContext.ipfs_gateways.length > 0 ? (
                   <SimpleGrid columns={{ sm: 2, md: 3, lg: 4, xl: 5 }} spacing={{ base: 2, md: 4 }}>
                     {rootContext.ipfs_gateways.map((gateway) => (
                       <Button
@@ -266,8 +266,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
                       </Button>
                     ))}
                   </SimpleGrid>
-                  : null
-                }
+                ) : null}
                 <Flex justify="flex-end">
                   <Button
                     variant="unstyled"
