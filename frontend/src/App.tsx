@@ -57,9 +57,7 @@ const App: React.FC = () => {
       <Main />
 
       <Spacer />
-      <Footer>
-        zLib Searcher ©2022
-      </Footer>
+      <Footer>zLib Searcher ©2022</Footer>
     </Flex>
   );
 };
