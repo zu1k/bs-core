@@ -10,6 +10,20 @@ Search Books index, create your private local library.
 
 We don't save and provide files, we provide search.
 
+## Desktop Usage
+
+### 1. Download the pre-compiled desktop installer from [Release](https://github.com/book-searcher-org/book-searcher/releases).
+
+- Windows: Book-Searcher-desktop_version_x64.msi
+- macOS: Book-Searcher-desktop_version_x64.dmg
+- Linux:
+    - Deb: Book-Searcher-desktop_version_amd64.deb
+    - AppImage: Book-Searcher-desktop_version_amd64.AppImage
+
+### 2. Create the index.
+
+### 3. Run book-searcher-desktop, and specify the decompressed `index` folder path in the settings menu.
+
 ## Deploy with Docker
 
 ```
@@ -28,8 +42,6 @@ Now `book-searcher` it will listen to `0.0.0.0:7070`.
 Or you can compile by yourself. Refer to [Build from source](#build-from-source) for instructions.
 
 ### 2. Create the index.
-
-Download the `index` [file](https://github.com/book-searcher/index), or you can make your own via `book-searcher index`.
 
 It should look like the following:
 
