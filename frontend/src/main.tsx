@@ -2,6 +2,8 @@ import './style.css';
 
 import * as ReactDOM from 'react-dom/client';
 
+import RootContext, { initRootContext } from './store';
+
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -11,7 +13,6 @@ import i18nResource from './i18n.json';
 import { initReactI18next } from 'react-i18next';
 import merge from 'lodash/merge';
 import theme from './theme';
-import RootContext, {initRootContext} from './store';
 
 const resources =
   import.meta.env.VITE_TAURI === '1'

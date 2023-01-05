@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ title, children }) => {
   return (
     <>
       <Flex
-        px={{base: 4, md: 8}}
+        px={{ base: 4, md: 8 }}
         py={3}
         mb={2}
         w="full"
