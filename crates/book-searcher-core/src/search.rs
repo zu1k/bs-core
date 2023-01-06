@@ -11,7 +11,9 @@ impl Searcher {
             vec![self.title, self.author, self.publisher, self.isbn],
         );
         query_parser.set_conjunction_by_default();
-        let query = query_parser.parse_query(query).unwrap();
+        let Ok(query) = query_parser.parse_query(query) else {
+            return vec![]
+        };
 
         let top_docs = searcher
             .search(&query, &TopDocs::with_limit(limit))
