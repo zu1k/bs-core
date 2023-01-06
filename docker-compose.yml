@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  book:
+  book-searcher:
     image: ghcr.io/book-searcher-org/book-searcher:latest
     restart: always
     ports:

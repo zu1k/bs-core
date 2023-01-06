@@ -3,9 +3,9 @@
     windows_subsystem = "windows"
 )]
 
+use book_searcher_core::{Book, Searcher};
 use log::info;
 use std::{error::Error, path::PathBuf};
-use book_searcher_core::{Book, Searcher};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 

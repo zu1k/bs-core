@@ -377,6 +377,57 @@ dependencies = [
 ]
 
 [[package]]
+name = "book-searcher"
+version = "0.7.0"
+dependencies = [
+ "actix-web",
+ "actix-web-static-files",
+ "anyhow",
+ "book-searcher-core",
+ "clap",
+ "csv",
+ "env_logger 0.10.0",
+ "log",
+ "serde",
+ "serde_with 2.1.0",
+ "static-files",
+ "tantivy-meta-tokenizer",
+]
+
+[[package]]
+name = "book-searcher-core"
+version = "0.7.0"
+dependencies = [
+ "anyhow",
+ "csv",
+ "env_logger 0.10.0",
+ "indicatif",
+ "log",
+ "serde",
+ "serde_with 2.1.0",
+ "sysinfo",
+ "tantivy",
+ "tantivy-meta-tokenizer",
+]
+
+[[package]]
+name = "book-searcher-desktop"
+version = "0.7.0"
+dependencies = [
+ "anyhow",
+ "book-searcher-core",
+ "confy",
+ "dunce",
+ "env_logger 0.10.0",
+ "log",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tokio",
+]
+
+[[package]]
 name = "brotli"
 version = "3.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4686,57 +4737,6 @@ name = "xml-rs"
 version = "0.8.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d2d7d3948613f75c98fd9328cfdcc45acc4d360655289d0a7d4ec931392200a3"
-
-[[package]]
-name = "book-searcher"
-version = "0.7.0"
-dependencies = [
- "actix-web",
- "actix-web-static-files",
- "anyhow",
- "clap",
- "csv",
- "env_logger 0.10.0",
- "log",
- "serde",
- "serde_with 2.1.0",
- "static-files",
- "tantivy-meta-tokenizer",
- "book-searcher-core",
-]
-
-[[package]]
-name = "book-searcher-core"
-version = "0.7.0"
-dependencies = [
- "anyhow",
- "csv",
- "env_logger 0.10.0",
- "indicatif",
- "log",
- "serde",
- "serde_with 2.1.0",
- "sysinfo",
- "tantivy",
- "tantivy-meta-tokenizer",
-]
-
-[[package]]
-name = "book-searcher-desktop"
-version = "0.7.0"
-dependencies = [
- "anyhow",
- "confy",
- "dunce",
- "env_logger 0.10.0",
- "log",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tokio",
- "book-searcher-core",
-]
 
 [[package]]
 name = "zstd"

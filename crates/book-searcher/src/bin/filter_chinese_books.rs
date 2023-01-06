@@ -1,6 +1,6 @@
+use book_searcher_core::Book;
 use std::{fs::File, io::BufReader};
 use tantivy_meta_tokenizer::utils::is_chinese;
-use book_searcher_core::Book;
 
 fn main() {
     let mut writer = csv::Writer::from_path("chinese_books.csv").unwrap();
@@ -30,5 +30,4 @@ fn main() {
     };
 
     filter_csv("books.csv");
-    
 }

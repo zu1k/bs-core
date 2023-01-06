@@ -2,11 +2,11 @@ use actix_web::{
     get, http::header, middleware::Logger, web, App, HttpResponse, HttpServer, Responder,
 };
 use actix_web_static_files::ResourceFiles;
+use book_searcher_core::{Book, Searcher};
 use clap::Parser;
 use log::{info, LevelFilter};
 use serde::{Deserialize, Serialize};
 use std::{path::PathBuf, sync::Arc};
-use book_searcher_core::{Book, Searcher};
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
@@ -132,9 +132,7 @@ fn index(opts: Index) {
     let mut searcher = Searcher::new(index_dir);
 
     if opts.file.is_empty() {
-        vec!["books.csv"]
-            .iter()
-            .for_each(|file| searcher.index(file));
+        println!("csv file is missing!");
     } else {
         opts.file.iter().for_each(|file| searcher.index(file));
     }

@@ -8,7 +8,7 @@
 
 Search Books index, create your private local library.
 
-We don't save and provide files, we provide search.
+We don't save and provide files, we provide books searching.
 
 ## Desktop Usage
 
@@ -20,7 +20,9 @@ We don't save and provide files, we provide search.
     - Deb: Book-Searcher-desktop_version_amd64.deb
     - AppImage: Book-Searcher-desktop_version_amd64.AppImage
 
-### 2. Create the index.
+### 2. Prepare the `index`
+
+Download the `index` file, then extract it,  or you can make your own via `book-searcher index -f *.csv`.
 
 ### 3. Run book-searcher-desktop, and specify the decompressed `index` folder path in the settings menu.
 
@@ -28,7 +30,7 @@ We don't save and provide files, we provide search.
 
 ```
 mkdir book-searcher && cd book-searcher
-
+// Prepare the index, download or you can make your own via `book-searcher index -f *.csv`
 wget https://raw.githubusercontent.com/book-searcher-org/book-searcher/master/docker-compose.yml
 docker-compose up -d
 ```
@@ -41,12 +43,14 @@ Now `book-searcher` it will listen to `0.0.0.0:7070`.
 
 Or you can compile by yourself. Refer to [Build from source](#build-from-source) for instructions.
 
-### 2. Create the index.
+### 2. Prepare the `index`
+
+Download the `index` file, or you can make your own via `book-searcher index -f *.csv`.
 
 It should look like the following:
 
 ```
-project_dir
+book_searcher_dir
 ├── index
 │   ├── some index files...
 │   └── meta.json
@@ -97,25 +101,23 @@ mv target/release/book-searcher .
 
 ### 2. Build `index`
 
-Prepare the raw data, put files to the project root directory.
+Prepare the raw books metadata and extract the `csv` files to the project root directory.
 
-Then run `book-searcher index`. You may need to `rm index/*` first.
-
-If you have other csv files, you can run `book-searcher index -f *.csv` to index them.
+Then run `book-searcher index -f *.csv`. You may need to `rm index/*` first.
 
 The finally folder structure should look like this:
 
 ```
-project_dir // in the example above, it is project root directory.
+book_searcher_dir // in the example above, it is project root directory.
 ├── index
 │   ├── some index files...
 │   └── meta.json
 └── book-searcher
 ```
 
-## Raw data
+## Raw metadata
 
-This Raw Data is used to generate our `index`, should be a `csv` file with the following fields:
+This raw metadata is used to generate `index`, should be a `csv` file with the following fields:
 
 ```
 id, title, author, publisher, extension, filesize, language, year, pages, isbn, ipfs_cid
