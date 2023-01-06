@@ -129,7 +129,7 @@ fn index(opts: Index) {
         .to_str()
         .unwrap()
         .to_string();
-    let mut searcher = Searcher::new(&index_dir);
+    let mut searcher = Searcher::new(index_dir);
 
     if opts.file.is_empty() {
         vec!["books.csv"]

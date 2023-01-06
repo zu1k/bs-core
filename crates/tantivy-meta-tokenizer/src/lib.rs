@@ -29,7 +29,7 @@ pub struct MetaTokenStream {
 impl TokenStream for MetaTokenStream {
     fn advance(&mut self) -> bool {
         if self.index < self.tokens.len() {
-            self.index = self.index + 1;
+            self.index += 1;
             true
         } else {
             false

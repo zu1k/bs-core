@@ -4,6 +4,6 @@ lazy_static::lazy_static! {
     static ref SIMPLE: SimpleTokenizer = SimpleTokenizer;
 }
 
-pub fn token_stream<'a>(text: &'a str) -> BoxTokenStream<'a> {
+pub fn token_stream(text: &str) -> BoxTokenStream {
     SIMPLE.token_stream(text)
 }
