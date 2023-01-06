@@ -131,9 +131,7 @@ impl Searcher {
             index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
         }
 
-        index
-            .tokenizers()
-            .register(META_TOKENIZER, get_tokenizer());
+        index.tokenizers().register(META_TOKENIZER, get_tokenizer());
         _ = index.set_default_multithread_executor();
 
         Self {

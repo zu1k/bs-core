@@ -11,6 +11,7 @@ default-run = "book-searcher"
 
 [dependencies]
 book-searcher-core = { workspace = true }
+tantivy-meta-tokenizer = { workspace = true }
 
 anyhow = { workspace = true }
 env_logger = { workspace = true }

@@ -8,7 +8,7 @@ members = [
 
 [workspace.package]
 edition = "2021"
-authors = ["zu1k <i@zu1k.com>"]
+authors = ["The Book Searcher Authors"]
 description = "search book index."
 homepage = "https://github.com/book-searcher-org/book-searcher"
 repository = "https://github.com/book-searcher-org/book-searcher"
@@ -30,3 +30,4 @@ serde_with = "2.0"
 tantivy = { version = "0.19", default-features = false }
 
 book-searcher-core = { path = "crates/book-searcher-core" }
+tantivy-meta-tokenizer = { path = "crates/tantivy-meta-tokenizer" }

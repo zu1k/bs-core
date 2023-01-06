@@ -123,4 +123,4 @@ id, title, author, publisher, extension, filesize, language, year, pages, isbn, 
 
 ## License
 
-**book-searcher** © [book-searcher's authors](https://github.com/book-searcher-org/book-searcher/graphs/contributors), Released under the [MIT](./LICENSE) License.
+**book-searcher** © [The Book Searcher Authors](https://github.com/book-searcher-org/book-searcher/graphs/contributors), Released under the [MIT](./LICENSE) License.

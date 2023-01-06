@@ -2,7 +2,7 @@
 name = "book-searcher-desktop"
 version = "0.7.0"
 edition = "2021"
-authors = ["Wybxc <wybxc@qq.com>", "zu1k <i@zu1k.com>"]
+authors = ["The Book Searcher Authors"]
 description = "search book index."
 homepage = "https://github.com/book-searcher-org/book-searcher"
 repository = "https://github.com/book-searcher-org/book-searcher"
