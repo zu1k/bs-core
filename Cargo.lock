@@ -347,6 +347,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e1b586273c5702936fe7b7d6896644d8be71e6314cfe09d3167c95f712589e8"
 
 [[package]]
+name = "bincode"
+version = "1.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b1f45e9417d87227c7a56d22e471c6206462cba514c7590c09aff4cf6d1ddcad"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "bitflags"
 version = "1.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1247,6 +1256,17 @@ dependencies = [
  "log",
  "once_cell",
  "rand 0.8.5",
+]
+
+[[package]]
+name = "fast2s"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1316063b5422f1f7bf4cc784c959eaf04b843de7c9ecbd4190c60614aa23b27e"
+dependencies = [
+ "bincode",
+ "hashbrown",
+ "lazy_static",
 ]
 
 [[package]]
@@ -3670,6 +3690,7 @@ dependencies = [
 name = "tantivy-meta-tokenizer"
 version = "0.1.0"
 dependencies = [
+ "fast2s",
  "jieba-rs",
  "lazy_static",
  "tantivy",

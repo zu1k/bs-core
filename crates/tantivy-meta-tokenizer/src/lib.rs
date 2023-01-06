@@ -47,6 +47,13 @@ impl TokenStream for MetaTokenStream {
 
 impl Tokenizer for MetaTokenizer {
     fn token_stream<'a>(&self, text: &'a str) -> BoxTokenStream<'a> {
+        if text.is_empty() {
+            return BoxTokenStream::from(MetaTokenStream {
+                tokens: vec![],
+                index: 0,
+            });
+        }
+
         if utils::is_chinese(text) {
             return chinese::token_stream(text);
         }

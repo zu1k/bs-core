@@ -12,3 +12,4 @@ license.workspace = true
 tantivy = { workspace = true }
 jieba-rs = { version = "0.6", features = ["default-dict"] }
 lazy_static = "1.4"
+fast2s = "0.3"
