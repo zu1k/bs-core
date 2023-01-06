@@ -6,7 +6,7 @@ authors = ["The Book Searcher Authors"]
 description = "search book index."
 homepage = "https://github.com/book-searcher-org/book-searcher"
 repository = "https://github.com/book-searcher-org/book-searcher"
-license = "MIT"
+license = "BSD-3-Clause"
 
 [build-dependencies]
 tauri-build = { version = "2.0.0-alpha", features = [] }

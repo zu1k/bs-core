@@ -12,7 +12,7 @@ authors = ["The Book Searcher Authors"]
 description = "search book index."
 homepage = "https://github.com/book-searcher-org/book-searcher"
 repository = "https://github.com/book-searcher-org/book-searcher"
-license = "MIT"
+license = "BSD-3-Clause"
 exclude = [".github/", "index/", "frontend/"]
 
 [profile.release]

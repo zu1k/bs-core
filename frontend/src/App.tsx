@@ -5,8 +5,6 @@ import { SkipNavContent, SkipNavLink } from '@chakra-ui/skip-nav';
 import { Book } from './scripts/searcher';
 import BooksView from './components/BooksView';
 import ColorModeSwitch from './components/ColorModeSwitch';
-import ExternalLink from './components/ExternalLink';
-import { FaGithub } from 'react-icons/fa';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import LanguageSwitch from './components/LanguageSwitch';
@@ -41,14 +39,6 @@ const App: React.FC = () => {
         <SkipNavLink>Skip to content</SkipNavLink>
         <Header title="Book Searcher">
           <HStack spacing={{ base: 1, md: 2 }}>
-            <IconButton
-              as={ExternalLink}
-              aria-label={t('nav.repository')}
-              title={t('nav.repository') ?? ''}
-              href={repository}
-              variant="ghost"
-              icon={<Icon as={FaGithub} boxSize={5} />}
-            />
             <LanguageSwitch />
             <ColorModeSwitch />
             <Suspense>
