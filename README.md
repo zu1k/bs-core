@@ -6,7 +6,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/issues)
 [![GitHub license](https://img.shields.io/github/license/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/blob/master/LICENSE)
 
-Search Books index, create your private local library.
+Search books index, create your private local library.
 
 We don't save and provide files, we provide books searching.
 
