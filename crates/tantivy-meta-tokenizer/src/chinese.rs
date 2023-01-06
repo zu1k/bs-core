@@ -9,7 +9,7 @@ lazy_static::lazy_static! {
 pub fn token_stream<'a>(text: &'a str) -> BoxTokenStream<'a> {
     let mut indices = text.char_indices().collect::<Vec<_>>();
     indices.push((text.len(), '\0'));
-    let orig_tokens = JIEBA.tokenize(&text, jieba_rs::TokenizeMode::Search, true);
+    let orig_tokens = JIEBA.tokenize(text, jieba_rs::TokenizeMode::Search, false);
     let mut tokens = Vec::new();
     for i in 0..orig_tokens.len() {
         let token = &orig_tokens[i];
