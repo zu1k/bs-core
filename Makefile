@@ -7,7 +7,7 @@ TARGET ?= debug
 all: build
 
 frontend_preinstall:
-	pnpm -C frontend install 
+	pnpm -C frontend install
 
 frontend:
 	pnpm -C frontend run build
