@@ -13,7 +13,7 @@ authors = ["The zLib Searcher Authors"]
 description = "search z-library index."
 homepage = "https://github.com/zlib-searcher/zlib-searcher"
 repository = "https://github.com/zlib-searcher/zlib-searcher"
-license = "MIT"
+license = "BSD-3-Clause"
 exclude = [".github/", "index/", "frontend/"]
 
 
