@@ -9,7 +9,7 @@ members = [
 
 [workspace.package]
 edition = "2021"
-authors = ["zu1k <i@zu1k.com>"]
+authors = ["The zLib Searcher Authors"]
 description = "search z-library index."
 homepage = "https://github.com/zlib-searcher/zlib-searcher"
 repository = "https://github.com/zlib-searcher/zlib-searcher"
@@ -33,3 +33,4 @@ serde_with = "2.0"
 tantivy = { version = "0.19", default-features = false }
 
 zlib-searcher-core = { path = "crates/zlib-searcher-core" }
+tantivy-meta-tokenizer = { path = "crates/tantivy-meta-tokenizer" }

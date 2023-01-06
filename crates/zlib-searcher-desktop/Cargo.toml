@@ -2,7 +2,7 @@
 name = "zlib-searcher-desktop"
 version = "0.7.0"
 edition = "2021"
-authors = ["Wybxc <wybxc@qq.com>", "zu1k <i@zu1k.com>"]
+authors = ["The zLib Searcher Authors"]
 description = "search z-library index."
 homepage = "https://github.com/zlib-searcher/zlib-searcher"
 repository = "https://github.com/zlib-searcher/zlib-searcher"

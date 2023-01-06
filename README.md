@@ -128,4 +128,4 @@ id, title, author, publisher, extension, filesize, language, year, pages, isbn, 
 
 ## License
 
-**zlib-searcher** © [zlib-searcher's authors](https://github.com/zlib-searcher/zlib-searcher/graphs/contributors), Released under the [MIT](./LICENSE) License.
+**zlib-searcher** © [The zLib Searcher Authors](https://github.com/zlib-searcher/zlib-searcher/graphs/contributors), Released under the [MIT](./LICENSE) License.
