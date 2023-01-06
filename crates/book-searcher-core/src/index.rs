@@ -85,7 +85,7 @@ impl Searcher {
 
 #[test]
 fn test_csv_der() {
-    let file = File::open("zlib_index_books.csv").unwrap();
+    let file = File::open("books.csv").unwrap();
     let reader = BufReader::new(file);
 
     let mut rdr = csv::ReaderBuilder::new()

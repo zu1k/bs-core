@@ -6,7 +6,7 @@
     "distDir": "../../frontend/dist"
   },
   "package": {
-    "productName": "zLib Searcher",
+    "productName": "Book Searcher",
     "version": "0.7.0"
   },
   "tauri": {
@@ -34,7 +34,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.github.zlib-searcher",
+      "identifier": "com.github.book-searcher",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -63,7 +63,7 @@
         "fullscreen": false,
         "height": 900,
         "resizable": true,
-        "title": "zLib Searcher",
+        "title": "Book Searcher",
         "width": 1500
       }
     ]

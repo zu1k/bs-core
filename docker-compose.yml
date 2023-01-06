@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  zlib:
-    image: ghcr.io/zlib-searcher/zlib-searcher:latest
+  book-searcher:
+    image: ghcr.io/book-searcher-org/book-searcher:latest
     restart: always
     ports:
       - "7070:7070"

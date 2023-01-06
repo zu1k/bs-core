@@ -1,18 +1,18 @@
 [workspace]
 members = [
-    "crates/zlib-searcher",
-    "crates/zlib-searcher-core",
-    "crates/zlib-searcher-desktop",
+    "crates/book-searcher",
+    "crates/book-searcher-core",
+    "crates/book-searcher-desktop",
     "crates/tantivy-meta-tokenizer"
 ]
 
 
 [workspace.package]
 edition = "2021"
-authors = ["The zLib Searcher Authors"]
+authors = ["The Book Searcher Authors"]
 description = "search z-library index."
-homepage = "https://github.com/zlib-searcher/zlib-searcher"
-repository = "https://github.com/zlib-searcher/zlib-searcher"
+homepage = "https://github.com/book-searcher-org/book-searcher"
+repository = "https://github.com/book-searcher-org/book-searcher"
 license = "BSD-3-Clause"
 exclude = [".github/", "index/", "frontend/"]
 
@@ -32,5 +32,5 @@ serde = { version = "1.0", features = ["derive"] }
 serde_with = "2.0"
 tantivy = { version = "0.19", default-features = false }
 
-zlib-searcher-core = { path = "crates/zlib-searcher-core" }
+book-searcher-core = { path = "crates/book-searcher-core" }
 tantivy-meta-tokenizer = { path = "crates/tantivy-meta-tokenizer" }

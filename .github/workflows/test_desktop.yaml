@@ -61,7 +61,7 @@ jobs:
       - name: Archive Bundles File
         uses: actions/upload-artifact@v3
         with:
-          name: zlib-searcher-desktop-${{ runner.os }}
+          name: book-searcher-desktop-${{ runner.os }}
           path: |
             target/release/bundle/dmg/*.dmg
             target/release/bundle/appimage/*.AppImage

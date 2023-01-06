@@ -11,7 +11,7 @@
         "clear": "Clear"
       },
       "book": {
-        "id": "zlib/libgen id",
+        "id": "ID",
         "title": "Title",
         "author": "Author",
         "publisher": "Publisher",
@@ -61,7 +61,7 @@
         "clear": "清空"
       },
       "book": {
-        "id": "zlib/libgen id",
+        "id": "ID",
         "title": "书名",
         "author": "作者",
         "publisher": "出版社",
@@ -111,7 +111,7 @@
         "clear": "Effacer"
       },
       "book": {
-        "id": "ID zlib/libgen",
+        "id": "ID",
         "title": "Titre",
         "author": "Auteur",
         "publisher": "Éditeur",
@@ -161,7 +161,7 @@
         "clear": "pulisci"
       },
       "book": {
-        "id": "ID zlib/libgen",
+        "id": "ID",
         "title": "Titolo",
         "author": "Autore",
         "publisher": "Editore",

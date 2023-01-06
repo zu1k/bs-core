@@ -1,5 +1,5 @@
 [package]
-name = "zlib-searcher"
+name = "book-searcher"
 version = "0.7.0"
 edition.workspace = true
 authors.workspace = true
@@ -7,10 +7,10 @@ description.workspace = true
 homepage.workspace = true
 repository.workspace = true
 license.workspace = true
-default-run = "zlib-searcher"
+default-run = "book-searcher"
 
 [dependencies]
-zlib-searcher-core = { workspace = true }
+book-searcher-core = { workspace = true }
 tantivy-meta-tokenizer = { workspace = true }
 
 anyhow = { workspace = true }
@@ -31,5 +31,5 @@ static-files = "0.2"
 
 [features]
 default = ["best-size"]
-best-size = ["zlib-searcher-core/best-size"]
-best-speed = ["zlib-searcher-core/best-speed"]
+best-size = ["book-searcher-core/best-size"]
+best-speed = ["book-searcher-core/best-speed"]

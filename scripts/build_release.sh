@@ -2,7 +2,7 @@
 
 CUR_DIR=$( cd $( dirname $0 ) && pwd )
 
-project=zlib-searcher
+project=book-searcher
 targets=()
 features=()
 
@@ -62,13 +62,13 @@ function build() {
         cross build --target "${TARGET}" \
                     --default-features=false
                     --features "${TARGET_FEATURES}" \
-                    -p zlib-searcher \
+                    -p book-searcher \
                     --release
     else
         echo "* Building ${project} package for ${TARGET} ..."
 
         cross build --target "${TARGET}" \
-                    -p zlib-searcher \
+                    -p book-searcher \
                     --release
     fi
 

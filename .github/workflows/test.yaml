@@ -53,5 +53,5 @@ jobs:
       - name: Archive App File
         uses: actions/upload-artifact@v3
         with:
-          name: zlib-searcher
-          path: target/release/zlib-searcher
+          name: book-searcher
+          path: target/release/book-searcher

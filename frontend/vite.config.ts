@@ -17,7 +17,7 @@ export default defineConfig(() => {
       react(),
       process.env.VITE_TAURI === '0'
         ? faviconsPlugin({
-            icons: { favicons: { source: '../crates/zlib-searcher-desktop/icons/icon.png' } }
+            icons: { favicons: { source: '../crates/book-searcher-desktop/icons/icon.png' } }
           })
         : null
     ],

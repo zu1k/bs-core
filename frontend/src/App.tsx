@@ -37,7 +37,7 @@ const App: React.FC = () => {
     <RootContext.Provider value={{ ipfsGateways, setIpfsGateways }}>
       <Flex direction="column" minH="100vh">
         <SkipNavLink>Skip to content</SkipNavLink>
-        <Header title="zLib Searcher">
+        <Header title="Book Searcher">
           <HStack spacing={{ base: 1, md: 2 }}>
             <LanguageSwitch />
             <ColorModeSwitch />
@@ -50,7 +50,7 @@ const App: React.FC = () => {
         <Main />
 
         <Spacer />
-        <Footer>zLib Searcher ©2022</Footer>
+        <Footer>Book Searcher ©2022</Footer>
       </Flex>
     </RootContext.Provider>
   );

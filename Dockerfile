@@ -7,10 +7,10 @@ FROM rust:1.65-buster as backend
 
 COPY . /source
 COPY --from=frontend /source/frontend/dist /source/frontend/dist
-RUN cd /source && cargo build --release -p zlib-searcher
+RUN cd /source && cargo build --release -p book-searcher
 
 FROM ubuntu:22.04
 
-COPY --from=backend /source/target/release/zlib-searcher /zlib-searcher
+COPY --from=backend /source/target/release/book-searcher /book-searcher
 
-CMD ["/zlib-searcher", "run", "-b", "0.0.0.0:7070"]
+CMD ["/book-searcher", "run", "-b", "0.0.0.0:7070"]

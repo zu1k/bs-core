@@ -57,18 +57,18 @@ jobs:
         run: |
           mkdir -p target/dist
           rustup target add x86_64-apple-darwin
-          cargo build --release --target x86_64-apple-darwin -p zlib-searcher
-          cd target/x86_64-apple-darwin/release && zip zlib-searcher-x86_64-apple-darwin.zip zlib-searcher && cp zlib-searcher-x86_64-apple-darwin.zip ../../dist/ && cd ../../../
+          cargo build --release --target x86_64-apple-darwin -p book-searcher
+          cd target/x86_64-apple-darwin/release && zip book-searcher-x86_64-apple-darwin.zip book-searcher && cp book-searcher-x86_64-apple-darwin.zip ../../dist/ && cd ../../../
           rustup target add aarch64-apple-darwin
-          cargo build --release --target aarch64-apple-darwin -p zlib-searcher
-          cd target/aarch64-apple-darwin/release && zip zlib-searcher-aarch64-apple-darwin.zip zlib-searcher && cp zlib-searcher-aarch64-apple-darwin.zip ../../dist/ && cd ../../../
+          cargo build --release --target aarch64-apple-darwin -p book-searcher
+          cd target/aarch64-apple-darwin/release && zip book-searcher-aarch64-apple-darwin.zip book-searcher && cp book-searcher-aarch64-apple-darwin.zip ../../dist/ && cd ../../../
       - name: Build on Windows
         if: matrix.platform == 'windows-latest'
         run: |
           mkdir -p target/dist
           rustup target add x86_64-pc-windows-msvc
-          cargo build --release --target x86_64-pc-windows-msvc -p zlib-searcher
-          cd target/x86_64-pc-windows-msvc/release && Compress-Archive -Path zlib-searcher.exe -DestinationPath zlib-searcher-x86_64-pc-windows-msvc.zip && cp zlib-searcher-x86_64-pc-windows-msvc.zip ../../dist/ && cd ../../../
+          cargo build --release --target x86_64-pc-windows-msvc -p book-searcher
+          cd target/x86_64-pc-windows-msvc/release && Compress-Archive -Path book-searcher.exe -DestinationPath book-searcher-x86_64-pc-windows-msvc.zip && cp book-searcher-x86_64-pc-windows-msvc.zip ../../dist/ && cd ../../../
       - name: Upload Github Assets
         uses: softprops/action-gh-release@v1
         env:

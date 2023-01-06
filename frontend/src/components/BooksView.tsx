@@ -219,7 +219,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
               <Divider />
               <CardBody>
                 <SimpleGrid columns={{ sm: 1, md: 3, lg: 4 }} spacing={{ base: 2, md: 4 }}>
-                  <Description name={`${t('book.id') ?? 'zlib/libgen id'}: `}>{id}</Description>
+                  <Description name={`${t('book.id') ?? 'ID'}: `}>{id}</Description>
                   <GridItem colSpan={{ sm: 1, md: 2, lg: 3 }}>
                     <Description name={`${t('book.ipfs_cid') ?? 'IPFS CID'}: `}>
                       {ipfs_cid}

@@ -3,9 +3,9 @@
     windows_subsystem = "windows"
 )]
 
+use book_searcher_core::{Book, Searcher};
 use log::info;
 use std::{error::Error, path::PathBuf};
-use zlib_searcher_core::{Book, Searcher};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -39,7 +39,7 @@ impl Default for AppConfig {
 }
 
 impl AppConfig {
-    const APP_NAME: &'static str = "zlib-searcher-desktop";
+    const APP_NAME: &'static str = "book-searcher-desktop";
 
     pub fn load() -> Result<Self, Box<dyn std::error::Error>> {
         let config = confy::load(Self::APP_NAME, None)?;
