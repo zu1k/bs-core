@@ -6,13 +6,19 @@
 [![GitHub issues](https://img.shields.io/github/issues/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/issues)
 [![GitHub license](https://img.shields.io/github/license/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/blob/master/LICENSE)
 
-Search books index, create your private local library.
+Create and search books index, create your private library.
 
 We don't save and provide files, we provide books searching.
 
-## Desktop Usage
+## Usage
 
-### 1. Download the pre-compiled desktop installer from [Release](https://github.com/book-searcher-org/book-searcher/releases).
+We currently offer both Desktop and Command-line versions.
+
+### Desktop
+
+**1. Download the pre-compiled desktop installer from [Release](https://github.com/book-searcher-org/book-searcher/releases)**
+
+Or you can compile by yourself. Refer to [Build from source](#build-desktop-version) section for instructions.
 
 - Windows: Book-Searcher-desktop_version_x64.msi
 - macOS: Book-Searcher-desktop_version_x64.dmg
@@ -20,48 +26,42 @@ We don't save and provide files, we provide books searching.
     - Deb: Book-Searcher-desktop_version_amd64.deb
     - AppImage: Book-Searcher-desktop_version_amd64.AppImage
 
-### 2. Prepare the `index`
+**2. Prepare the `index`**
 
-Download the `index` file, then extract it,  or you can make your own via `book-searcher index -f *.csv`.
+Refer to [Prepare the index](#prepare-the-index) section for instructions.
 
-### 3. Run book-searcher-desktop, and specify the decompressed `index` folder path in the settings menu.
+**3. Run book-searcher-desktop**
 
-## Deploy with Docker
+Specify the `index` folder path in the settings menu.
 
-```
+### Cli
+
+**1. Download the pre-compiled binary from [Release](https://github.com/book-searcher-org/book-searcher/releases)**
+
+Or you can compile by yourself. Refer to [Build from source](#build-cli-version) section for instructions.
+
+**2. Prepare the `index`**
+
+Refer to [Prepare the index](#prepare-the-index) section for instructions.
+
+**3. Run `book-searcher run`**
+
+It will listen to `127.0.0.1:7070`.
+
+Access http://127.0.0.1:7070/ to use webui, or you can use the [original search api](#original-search-api).
+
+### Deploy with Docker
+
+```bash
 mkdir book-searcher && cd book-searcher
-// Prepare the index, download or you can make your own via `book-searcher index -f *.csv`
+// Prepare the index
 wget https://raw.githubusercontent.com/book-searcher-org/book-searcher/master/docker-compose.yml
 docker-compose up -d
 ```
 
 Now `book-searcher` it will listen to `0.0.0.0:7070`.
 
-## Usage
-
-### 1. Download the pre-compiled binary from [Release](https://github.com/book-searcher-org/book-searcher/releases).
-
-Or you can compile by yourself. Refer to [Build from source](#build-from-source) for instructions.
-
-### 2. Prepare the `index`
-
-Download the `index` file, or you can make your own via `book-searcher index -f *.csv`.
-
-Extract the `index` folder to the same level as the program, it should look like the following:
-
-```
-book_searcher_dir
-├── index
-│   ├── some index files...
-│   └── meta.json
-└── book-searcher
-```
-
-### 3. Run `book-searcher run`, it will listen to `127.0.0.1:7070`.
-
-Access http://127.0.0.1:7070/ to use webui, or you can use the original api.
-
-#### original search api
+### Original Search Api
 
 You can search by the following fields:
 
@@ -82,15 +82,15 @@ Examples:
 
 ## Build from source
 
-### 1. Build `book-searcher`
+### Build Cli version
 
-First build frontend
+**1. Build frontend**
 
 ```bash
 make frontend_preinstall frontend
 ```
 
-Then build book-searcher
+**2. Build `book-searcher`**
 
 ```bash
 TARGET=release make
@@ -99,25 +99,49 @@ TARGET=release make
 mv target/release/book-searcher .
 ```
 
-### 2. Build `index`
+### Build Desktop version
 
-Prepare the raw books metadata and extract the `csv` files to the project root directory.
+**1. Install frontend dependences**
 
-Then run `book-searcher index -f *.csv`. You may need to `rm index/*` first.
+```bash
+make frontend_preinstall
+```
+
+**2. Build `book-searcher-desktop`**
+
+```bash
+cargo tauri build
+```
+
+### Prepare the `index`
+
+**1. Prepare the raw data**
+
+Prepare the raw books metadata and save the `csv` files to the project root directory.
+
+The raw data is used to generate the `index`, see [Raw data](#raw-data) section for details.
+
+**2. Create `index`**
+
+You may need to `rm -rf index` first.
+
+```bash
+book-searcher index -f *.csv
+```
 
 The finally folder structure should look like this:
 
 ```
-book_searcher_dir // in the example above, it is project root directory.
+book_searcher_dir
 ├── index
 │   ├── some index files...
 │   └── meta.json
 └── book-searcher
 ```
 
-## Raw metadata
+## Raw data
 
-This raw metadata is used to generate `index`, should be a `csv` file with the following fields:
+This raw data is used to generate `index`, should be a `csv` file with the following fields:
 
 ```
 id, title, author, publisher, extension, filesize, language, year, pages, isbn, ipfs_cid

@@ -10,7 +10,7 @@ members = [
 [workspace.package]
 edition = "2021"
 authors = ["The Book Searcher Authors"]
-description = "search z-library index."
+description = "Create and search books index, create your private library"
 homepage = "https://github.com/book-searcher-org/book-searcher"
 repository = "https://github.com/book-searcher-org/book-searcher"
 license = "BSD-3-Clause"
