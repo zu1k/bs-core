@@ -101,7 +101,7 @@ mv target/release/book-searcher .
 
 ### Build Desktop version
 
-**1. Install frontend dependences**
+**1. Install frontend dependencies**
 
 ```bash
 make frontend_preinstall
