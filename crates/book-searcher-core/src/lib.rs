@@ -71,6 +71,7 @@ impl From<(&Schema, Document)> for Book {
     }
 }
 
+#[derive(Clone)]
 pub struct Searcher {
     index: Index,
     schema: Schema,

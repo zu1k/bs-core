@@ -47,12 +47,14 @@ impl Searcher {
         let line_count = BufReader::new(File::open(&csv_file).unwrap())
             .lines()
             .count();
+
         let style = ProgressStyle::default_bar()
             .template("[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7} {msg}")
             .unwrap();
         let bar = ProgressBar::new(line_count as u64)
             .with_message(format!("Indexing {}", csv_file.as_ref().to_str().unwrap()))
             .with_style(style);
+
         for result in rdr.deserialize::<Book>().progress_with(bar) {
             match result {
                 Ok(item) => {
@@ -80,6 +82,63 @@ impl Searcher {
 
         writer.commit().unwrap();
         writer.wait_merging_threads().expect("merge complete");
+    }
+
+    pub fn index_background(&mut self, csv_file: impl AsRef<Path>) -> ProgressBar {
+        let searcher = self.to_owned();
+
+        let mut writer = self.index.writer(get_memory_arena_num_bytes()).unwrap();
+
+        let file = File::open(&csv_file).unwrap();
+        let reader = BufReader::new(file);
+
+        let mut rdr = csv::ReaderBuilder::new()
+            .has_headers(false)
+            .from_reader(reader);
+
+        let line_count = BufReader::new(File::open(&csv_file).unwrap())
+            .lines()
+            .count();
+
+        let style = ProgressStyle::default_bar()
+            .template("[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7} {msg}")
+            .unwrap();
+        let bar = ProgressBar::new(line_count as u64)
+            .with_message(format!("Indexing {}", csv_file.as_ref().to_str().unwrap()))
+            .with_style(style);
+
+        let bar_background = bar.clone();
+        std::thread::spawn(move || {
+            for result in rdr.deserialize::<Book>().progress_with(bar_background) {
+                match result {
+                    Ok(item) => {
+                        if let Err(err) = writer.add_document(doc!(
+                            searcher.id => item.id,
+                            searcher.title => item.title,
+                            searcher.author => item.author,
+                            searcher.publisher => item.publisher,
+                            searcher.extension => item.extension,
+                            searcher.filesize => item.filesize,
+                            searcher.language => item.language,
+                            searcher.year => item.year,
+                            searcher.pages => item.pages,
+                            searcher.isbn => item.isbn,
+                            searcher.ipfs_cid => item.ipfs_cid,
+                        )) {
+                            println!("{err}");
+                        }
+                    }
+                    Err(err) => {
+                        println!("{err}");
+                    }
+                }
+            }
+
+            writer.commit().unwrap();
+            writer.wait_merging_threads().expect("merge complete");
+        });
+
+        bar
     }
 }
 
