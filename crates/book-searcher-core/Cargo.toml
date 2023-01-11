@@ -1,6 +1,6 @@
 [package]
 name = "book-searcher-core"
-version = "0.8.0"
+version = "0.8.1"
 edition.workspace = true
 authors.workspace = true
 description.workspace = true
