@@ -1,3 +1,5 @@
+import { Book } from './searcher';
+
 interface TauriConfig {
   index_dir: string;
   ipfs_gateways: string[];
@@ -19,4 +21,11 @@ export default async function getIpfsGateways() {
 export function parseIpfsGateways(text: string) {
   const gateways = text.split('\n').filter((g) => g.length > 0);
   return gateways.filter((g, i) => gateways.indexOf(g) === i);
+}
+
+export function getDownloadLinkFromIPFS(gateway: string, book: Book) {
+  return (
+    `${gateway}/ipfs/${book.ipfs_cid}?filename=` +
+    encodeURIComponent(`${book.title}_${book.author}.${book.extension}`)
+  );
 }

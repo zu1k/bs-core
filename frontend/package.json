@@ -23,6 +23,7 @@
     "@tauri-apps/api": "^1.2.0",
     "ahooks": "^3.7.4",
     "axios": "^1.2.2",
+    "epubjs": "^0.3.93",
     "filesize": "^10.0.6",
     "framer-motion": "^7.10.3",
     "i18next": "^22.4.9",
