@@ -1,12 +1,10 @@
-import * as React from 'react';
-
+import React, { useEffect } from 'react';
 import {
   Collapse,
   Flex,
   Icon,
   IconButton,
   IconButtonProps,
-  Spacer,
   Table,
   TableProps,
   Tbody,
@@ -22,8 +20,7 @@ import {
   Portal,
   MenuOptionGroup,
   MenuItemOption,
-  useColorMode,
-  Box
+  useColorMode
 } from '@chakra-ui/react';
 import {
   type ColumnDef,
@@ -112,7 +109,7 @@ export default function DataTable<Data extends object>({
 
   const breakpoint = useBreakpoint();
 
-  React.useEffect(() => {
+  useEffect(() => {
     table.getAllColumns().forEach((column) => {
       const meta = column.columnDef.meta;
       if (meta && compareBreakpoints(breakpoint, meta.breakpoint ?? 'base'))

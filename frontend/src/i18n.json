@@ -35,7 +35,8 @@
         "next_page": "Next page",
         "previous_page": "Previous page",
         "page": "Page {{page}}",
-        "collapse": "Collapse"
+        "collapse": "Collapse",
+        "preview": "Preview"
       },
       "search": {
         "complex": "Complex search"
@@ -85,7 +86,8 @@
         "next_page": "下一页",
         "previous_page": "上一页",
         "page": "第 {{page}} 页",
-        "collapse": "收起"
+        "collapse": "收起",
+        "preview": "预览"
       },
       "search": {
         "complex": "复杂搜索"
@@ -135,7 +137,8 @@
         "next_page": "Page suivante",
         "previous_page": "Page précédente",
         "page": "Page {{page}}",
-        "collapse": "Replier"
+        "collapse": "Replier",
+        "preview": "Aperçu"
       },
       "search": {
         "complex": "Recherche complexe"
@@ -185,7 +188,8 @@
         "next_page": "Pagina seguente",
         "previous_page": "Pagina precedente",
         "page": "Pagina {{page}}",
-        "collapse": "Richiudi"
+        "collapse": "Richiudi",
+        "download": "Scarica"
       },
       "search": {
         "complex": "Ricerca dettagliata"
