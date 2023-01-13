@@ -39,7 +39,7 @@ const TocView: React.FC<TocViewProps> = ({
           </Heading>
         </DrawerHeader>
 
-        <DrawerBody>
+        <DrawerBody overflowY="scroll">
           {toc.map((item, index) => (
             <Box
               fontSize="md"
