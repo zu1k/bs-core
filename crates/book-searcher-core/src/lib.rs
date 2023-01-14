@@ -1,8 +1,8 @@
-use std::path::Path;
-
 use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DefaultOnError, DefaultOnNull};
-use tantivy::{schema::*, store::Compressor, Index, TantivyError};
+use std::path::Path;
+pub use tantivy::store::Compressor;
+use tantivy::{schema::*, store::ZstdCompressor, Index, TantivyError};
 use tantivy_meta_tokenizer::{get_tokenizer, META_TOKENIZER};
 
 pub mod index;
@@ -73,6 +73,8 @@ impl From<(&Schema, Document)> for Book {
 
 #[derive(Clone)]
 pub struct Searcher {
+    pub compressor: Compressor,
+
     index: Index,
     schema: Schema,
 
@@ -123,19 +125,13 @@ impl Searcher {
                 panic!("Error opening index: {err:?}")
             }
         });
-        #[cfg(feature = "best-size")]
-        {
-            index.settings_mut().docstore_compression = Compressor::Brotli; // size: 2.1G, size is best
-        }
-        #[cfg(feature = "best-speed")]
-        {
-            index.settings_mut().docstore_compression = Compressor::Lz4; // size: 3.1G, speed is best
-        }
 
         index.tokenizers().register(META_TOKENIZER, get_tokenizer());
         _ = index.set_default_multithread_executor();
 
         Self {
+            compressor: Compressor::Brotli,
+
             index,
             schema,
             id,
@@ -150,5 +146,27 @@ impl Searcher {
             isbn,
             ipfs_cid,
         }
+    }
+
+    pub fn set_compressor(&mut self, compressor: &str) {
+        let compressor = match compressor {
+            "none" => Compressor::None,
+            "lz4" => Compressor::Lz4,
+            "brotli" => Compressor::Brotli,
+            "snappy" => Compressor::Snappy,
+            _ => {
+                if compressor.starts_with("zstd") {
+                    Compressor::Zstd(ZstdCompressor::default())
+                } else {
+                    println!(
+                        "compressor not valid: {:#?}",
+                        ["none", "lz4", "brotli", "snappy", "zstd",]
+                    );
+                    std::process::exit(1);
+                }
+            }
+        };
+
+        self.index.settings_mut().docstore_compression = compressor;
     }
 }

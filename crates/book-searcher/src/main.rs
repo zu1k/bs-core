@@ -81,6 +81,14 @@ struct Run {
 struct Index {
     #[clap(short, long, num_args=1.., help = "specify csv file to be indexed")]
     file: Vec<PathBuf>,
+
+    #[clap(
+        short,
+        long,
+        default_value = "brotli",
+        help = "specify index compressor: none, lz4, brotli, snappy, zstd"
+    )]
+    compressor: String,
 }
 
 fn main() {
@@ -130,6 +138,7 @@ fn index(opts: Index) {
         .unwrap()
         .to_string();
     let mut searcher = Searcher::new(index_dir);
+    searcher.set_compressor(&opts.compressor);
 
     if opts.file.is_empty() {
         println!("csv file is missing!");

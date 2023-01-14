@@ -1,6 +1,6 @@
 [package]
 name = "book-searcher"
-version = "0.8.1"
+version = "0.8.3"
 edition.workspace = true
 authors.workspace = true
 description.workspace = true
@@ -28,8 +28,3 @@ clap = { version = "4", features = ["derive"] }
 
 [build-dependencies]
 static-files = "0.2"
-
-[features]
-default = ["best-size"]
-best-size = ["book-searcher-core/best-size"]
-best-speed = ["book-searcher-core/best-speed"]
