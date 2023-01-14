@@ -1,7 +1,7 @@
 FROM node:19-bullseye as frontend
 
 COPY . /source
-RUN cd /source/frontend && npm install && npm run build
+RUN cd /source/frontend && npm install --legacy-peer-deps && npm run build
 
 FROM rust:1.65-buster as backend
 
