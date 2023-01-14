@@ -277,16 +277,17 @@ const Preview: React.FC<PreviewProps> = ({ book, onClose }) => {
                 {item === 'prev' ? <TbChevronLeft /> : <TbChevronRight />}
               </Flex>
             ))}
+
+            <TocView
+              toc={toc}
+              isOpen={isOpen}
+              book={book}
+              onClose={onCloseTocView}
+              handleChangeToc={handleChangeToc}
+            />
           </ModalBody>
         </ModalContent>
       </Modal>
-      <TocView
-        toc={toc}
-        isOpen={isOpen}
-        book={book}
-        onClose={onCloseTocView}
-        handleChangeToc={handleChangeToc}
-      />
     </React.Fragment>
   );
 };
