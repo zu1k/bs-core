@@ -1,6 +1,7 @@
 pub fn is_chinese(text: &str) -> bool {
     let chinese_char_count = text.matches(is_chinese_char).count();
-    chinese_char_count as f32 / text.chars().count() as f32 > 0.3
+    // chinese_char_count as f32 / text.chars().count() as f32 > 0.3
+    chinese_char_count > 0
 }
 
 #[inline(always)]
