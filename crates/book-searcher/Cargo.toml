@@ -30,5 +30,5 @@ clap = { version = "4", features = ["derive"] }
 static-files = "0.2"
 
 [features]
-default = ["pinyin"]
+default = []
 pinyin = ["book-searcher-core/pinyin"]

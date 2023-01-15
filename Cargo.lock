@@ -3705,6 +3705,7 @@ name = "tantivy-meta-tokenizer"
 version = "0.2.0"
 dependencies = [
  "fast2s",
+ "itertools",
  "jieba-rs",
  "lazy_static",
  "pinyin",
