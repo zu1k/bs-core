@@ -21,3 +21,7 @@ tantivy-meta-tokenizer = { path = "../tantivy-meta-tokenizer" }
 csv = "1.1"
 indicatif = "0.17"
 sysinfo = { version = "0.27", default-features = false }
+
+[features]
+default = []
+pinyin = ["tantivy-meta-tokenizer/pinyin"]
