@@ -110,13 +110,15 @@ export default function DataTable<Data extends object>({
   const breakpoint = useBreakpoint();
 
   useEffect(() => {
+    table.resetExpanded();
+
     table.getAllColumns().forEach((column) => {
       const meta = column.columnDef.meta;
       if (meta && compareBreakpoints(breakpoint, meta.breakpoint ?? 'base'))
         column.toggleVisibility(true);
       else column.toggleVisibility(false);
     });
-  }, [breakpoint]);
+  }, [breakpoint, data]);
 
   return (
     <>
