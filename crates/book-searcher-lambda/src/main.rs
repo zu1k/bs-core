@@ -1,5 +1,4 @@
 use actix_web::{http::header, middleware::Logger, web, HttpResponse};
-use actix_web_static_files::ResourceFiles;
 use book_searcher_core::{Book, Searcher};
 use lambda_web::{
     actix_web::{self, get, App, HttpServer, Responder},
@@ -8,8 +7,6 @@ use lambda_web::{
 use log::{info, LevelFilter};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
-
-include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
 #[derive(Clone)]
 struct AppState {
@@ -60,12 +57,10 @@ async fn main() -> Result<(), LambdaError> {
     let app_state = AppState::init("/mnt/data/index");
 
     let factory = move || {
-        let generated = generate();
         App::new()
             .wrap(Logger::default())
             .app_data(web::Data::new(app_state.clone()))
             .service(search)
-            .service(ResourceFiles::new("/", generated))
     };
 
     if is_running_on_lambda() {

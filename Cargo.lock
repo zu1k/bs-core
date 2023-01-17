@@ -462,7 +462,6 @@ name = "book-searcher-lambda"
 version = "0.8.3"
 dependencies = [
  "actix-web",
- "actix-web-static-files",
  "anyhow",
  "book-searcher-core",
  "env_logger 0.10.0",
