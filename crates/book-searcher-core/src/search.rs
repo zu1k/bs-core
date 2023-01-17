@@ -3,7 +3,9 @@ use tantivy::{collector::TopDocs, query::QueryParser};
 
 impl Searcher {
     pub fn search(&self, query: &str, limit: usize) -> Vec<Book> {
-        let reader = self.index.reader().unwrap();
+        let Ok(reader) = self.index.reader() else {
+            return vec![]
+        };
         let searcher = reader.searcher();
 
         let mut query_parser = QueryParser::for_index(
@@ -15,9 +17,9 @@ impl Searcher {
             return vec![]
         };
 
-        let top_docs = searcher
-            .search(&query, &TopDocs::with_limit(limit))
-            .unwrap();
+        let Ok(top_docs) = searcher.search(&query, &TopDocs::with_limit(limit)) else {
+            return vec![];
+        };
 
         top_docs
             .iter()

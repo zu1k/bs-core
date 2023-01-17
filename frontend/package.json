@@ -13,8 +13,8 @@
     "fmt:check": "prettier --check ."
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.4.8",
-    "@chakra-ui/skip-nav": "^2.0.13",
+    "@chakra-ui/react": "^2.4.9",
+    "@chakra-ui/skip-nav": "^2.0.15",
     "@chakra-ui/system": "^2.3.8",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -31,7 +31,7 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.42.0",
+    "react-hook-form": "^7.42.1",
     "react-i18next": "^12.1.4",
     "react-icons": "^4.7.1",
     "react-intersection-observer": "^9.4.1"
