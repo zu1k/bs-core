@@ -198,8 +198,8 @@
         "title": "Impostazioni",
         "ipfs_gateways": "Gateway IPFS",
         "ipfs_gateways_help": "Elenco dei gateway IPFS, interruzione di riga",
-        "cancel": "Annullamento",
-        "save": "Risparmiare"
+        "cancel": "Annulla",
+        "save": "Salva"
       }
     }
   }
