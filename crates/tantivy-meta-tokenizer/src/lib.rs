@@ -1,12 +1,14 @@
 //! Tantivy Meta Tokenizer
 //! This is copied and modified from https://github.com/jiegec/tantivy-jieba/blob/master/src/lib.rs
 
+use stop_word::STOP_WORDS;
 use tantivy::tokenizer::{
-    AsciiFoldingFilter, BoxTokenStream, LowerCaser, RemoveLongFilter, TextAnalyzer, Token,
-    TokenStream, Tokenizer,
+    AsciiFoldingFilter, BoxTokenStream, LowerCaser, RemoveLongFilter, StopWordFilter, TextAnalyzer,
+    Token, TokenStream, Tokenizer,
 };
 mod chinese;
 mod latin;
+mod stop_word;
 pub mod utils;
 
 pub const META_TOKENIZER: &str = "meta_tokenizer";
@@ -15,6 +17,9 @@ pub fn get_tokenizer() -> TextAnalyzer {
     TextAnalyzer::from(MetaTokenizer)
         .filter(RemoveLongFilter::limit(20))
         .filter(AsciiFoldingFilter)
+        .filter(StopWordFilter::remove(
+            STOP_WORDS.iter().map(|&word| word.to_owned()),
+        ))
         .filter(LowerCaser)
 }
 
