@@ -21,10 +21,10 @@ function constructQuery(parts: Record<string, string>): string {
       parts[key]
         .split(' ')
         .filter((s) => s !== '')
-        .map((s) => `${key}:"${s}"`)
+        .map((s) => `${key}:"${s}"~30`)
     )
     .flat()
-    .join('');
+    .join(' ');
 }
 
 export interface SearchProps {
