@@ -1,6 +1,6 @@
 [package]
 name = "book-searcher-desktop"
-version = "0.8.4"
+version = "0.8.5"
 edition = "2021"
 authors = ["The Book Searcher Authors"]
 description = "Create and search books index, create your private library."

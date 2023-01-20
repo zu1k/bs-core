@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "private": true,
-  "version": "0.8.4",
+  "version": "0.8.5",
   "type": "module",
   "repository": "https://github.com/book-searcher-org/book-searcher",
   "scripts": {

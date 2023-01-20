@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "Book Searcher",
-    "version": "0.8.4"
+    "version": "0.8.5"
   },
   "tauri": {
     "allowlist": {
@@ -63,6 +63,7 @@
     },
     "windows": [
       {
+        "center": true,
         "fullscreen": false,
         "height": 900,
         "resizable": true,
