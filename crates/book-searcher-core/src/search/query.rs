@@ -7,6 +7,19 @@ use tantivy::{
     Term,
 };
 
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum SearchMode {
+    Filter,
+    Explore,
+}
+
+impl Default for SearchMode {
+    fn default() -> Self {
+        Self::Filter
+    }
+}
+
 #[derive(Debug, Default, Deserialize)]
 pub struct SearchQuery {
     pub title: Option<String>,
@@ -19,7 +32,7 @@ pub struct SearchQuery {
 
     pub query: Option<String>,
     #[serde(default)]
-    pub explore_mode: bool,
+    pub mode: SearchMode,
 }
 
 impl SearchQuery {
@@ -33,13 +46,14 @@ impl SearchQuery {
     pub fn parse(&self, searcher: &Searcher) -> Result<Box<dyn Query>, QueryParserError> {
         // If query is specified, use QueryParser to parse
         if let Some(ref raw_query) = self.query {
-            if self.explore_mode {
-                return searcher.query_parser.parse_query(raw_query);
-            } else {
-                let mut query_parser = searcher.query_parser.clone();
-                query_parser.set_conjunction_by_default();
-                return query_parser.parse_query(raw_query);
-            }
+            return match self.mode {
+                SearchMode::Filter => {
+                    let mut query_parser = searcher.query_parser.clone();
+                    query_parser.set_conjunction_by_default();
+                    query_parser.parse_query(raw_query)
+                }
+                SearchMode::Explore => searcher.query_parser.parse_query(raw_query),
+            };
         }
 
         // else construct Query
@@ -94,10 +108,13 @@ impl SearchQuery {
             queries.push(Box::new(query));
         }
 
-        let query = if self.explore_mode {
-            BooleanQuery::new(queries.into_iter().map(|q| (Occur::Should, q)).collect())
-        } else {
-            BooleanQuery::new(queries.into_iter().map(|q| (Occur::Must, q)).collect())
+        let query = match self.mode {
+            SearchMode::Filter => {
+                BooleanQuery::new(queries.into_iter().map(|q| (Occur::Must, q)).collect())
+            }
+            SearchMode::Explore => {
+                BooleanQuery::new(queries.into_iter().map(|q| (Occur::Should, q)).collect())
+            }
         };
 
         Ok(Box::new(query))
