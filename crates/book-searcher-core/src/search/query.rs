@@ -18,6 +18,7 @@ pub struct SearchQuery {
     pub id: Option<u64>,
 
     pub query: Option<String>,
+    #[serde(default)]
     pub explore_mode: bool,
 }
 
@@ -46,29 +47,31 @@ impl SearchQuery {
 
         if let Some(ref title) = self.title {
             let terms = get_positions_and_terms(searcher.title, title, &searcher.tokenizer);
-            let query = PhraseQuery::new_with_offset_and_slop(terms, 30);
-            let query = BoostQuery::new(Box::new(query), 3.0);
-            queries.push(Box::new(query));
+            if let Some(query) = phrase_or_term_query(terms) {
+                let query = BoostQuery::new(Box::new(query), 3.0);
+                queries.push(Box::new(query));
+            }
         }
 
         if let Some(ref author) = self.author {
-            // ignore term offset, so just need to include the term
-            let terms = get_terms(searcher.author, author, &searcher.tokenizer);
-            let query = PhraseQuery::new(terms);
-            let query = BoostQuery::new(Box::new(query), 2.0);
-            queries.push(Box::new(query));
+            let terms = get_positions_and_terms(searcher.author, author, &searcher.tokenizer);
+            println!("{terms:?}");
+            if let Some(query) = phrase_or_term_query(terms) {
+                let query = BoostQuery::new(Box::new(query), 2.0);
+                queries.push(Box::new(query));
+            }
         }
 
         if let Some(ref publisher) = self.publisher {
-            // ignore term offset, so just need to include the term
-            let terms = get_terms(searcher.publisher, publisher, &searcher.tokenizer);
-            let query = PhraseQuery::new(terms);
-            queries.push(Box::new(query));
+            let terms = get_positions_and_terms(searcher.publisher, publisher, &searcher.tokenizer);
+            if let Some(query) = phrase_or_term_query(terms) {
+                queries.push(Box::new(query));
+            }
         }
 
         if let Some(ref extension) = self.extension {
             let term =
-                Term::from_field_text(searcher.publisher, extension.to_ascii_lowercase().trim());
+                Term::from_field_text(searcher.extension, extension.to_ascii_lowercase().trim());
             let query = TermQuery::new(term, IndexRecordOption::Basic);
             queries.push(Box::new(query));
         }
@@ -116,6 +119,7 @@ pub(crate) fn get_positions_and_terms(
     positions_and_terms
 }
 
+#[allow(dead_code)]
 pub(crate) fn get_terms(field: Field, value: &str, text_analyzer: &TextAnalyzer) -> Vec<Term> {
     let mut terms = Vec::new();
     let mut token_stream = text_analyzer.token_stream(value);
@@ -124,4 +128,19 @@ pub(crate) fn get_terms(field: Field, value: &str, text_analyzer: &TextAnalyzer)
         terms.push(term);
     });
     terms
+}
+
+pub(crate) fn phrase_or_term_query(terms: Vec<(usize, Term)>) -> Option<Box<dyn Query>> {
+    if terms.is_empty() {
+        return None;
+    }
+
+    Some(if terms.len() > 1 {
+        Box::new(PhraseQuery::new_with_offset_and_slop(terms, 30))
+    } else {
+        Box::new(TermQuery::new(
+            terms[0].1.clone(),
+            IndexRecordOption::WithFreqsAndPositions,
+        ))
+    })
 }
