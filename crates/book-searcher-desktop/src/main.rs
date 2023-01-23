@@ -86,11 +86,10 @@ async fn set_config(
 #[tauri::command]
 async fn search(
     searcher: tauri::State<'_, Mutex<Searcher>>,
-    query: String,
+    query: SearchQuery,
     limit: usize,
 ) -> Result<Vec<Book>, ()> {
-    info!("Search: {}", query);
-    let query = SearchQuery::new_query(query);
+    info!("Search: {query:?}");
     Ok(searcher.lock().await.search(&query, limit))
 }
 

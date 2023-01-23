@@ -55,7 +55,6 @@ impl SearchQuery {
 
         if let Some(ref author) = self.author {
             let terms = get_positions_and_terms(searcher.author, author, &searcher.tokenizer);
-            println!("{terms:?}");
             if let Some(query) = phrase_or_term_query(terms) {
                 let query = BoostQuery::new(Box::new(query), 2.0);
                 queries.push(Box::new(query));
