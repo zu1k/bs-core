@@ -28,7 +28,8 @@ fn default_limit() -> usize {
 
 #[derive(Deserialize)]
 struct SearchQuery {
-    query: String,
+    #[serde(flatten)]
+    query: book_searcher_core::search::SearchQuery,
     #[serde(default = "default_limit")]
     limit: usize,
 }

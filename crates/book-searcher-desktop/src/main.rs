@@ -3,7 +3,7 @@
     windows_subsystem = "windows"
 )]
 
-use book_searcher_core::{Book, Searcher};
+use book_searcher_core::{search::SearchQuery, Book, Searcher};
 use log::info;
 use std::{error::Error, path::PathBuf};
 
@@ -90,6 +90,7 @@ async fn search(
     limit: usize,
 ) -> Result<Vec<Book>, ()> {
     info!("Search: {}", query);
+    let query = SearchQuery::new_query(query);
     Ok(searcher.lock().await.search(&query, limit))
 }
 

@@ -2,7 +2,10 @@ use serde::{Deserialize, Serialize};
 use serde_with::{serde_as, DefaultOnError, DefaultOnNull};
 use std::path::Path;
 pub use tantivy::store::Compressor;
-use tantivy::{schema::*, store::ZstdCompressor, Index, TantivyError};
+use tantivy::{
+    query::QueryParser, schema::*, store::ZstdCompressor, tokenizer::TextAnalyzer, Index,
+    TantivyError,
+};
 use tantivy_meta_tokenizer::{get_tokenizer, META_TOKENIZER};
 
 pub mod index;
@@ -77,6 +80,8 @@ pub struct Searcher {
 
     index: Index,
     schema: Schema,
+    query_parser: QueryParser,
+    tokenizer: TextAnalyzer,
 
     // fields
     id: Field,
@@ -126,14 +131,23 @@ impl Searcher {
             }
         });
 
-        index.tokenizers().register(META_TOKENIZER, get_tokenizer());
+        let tokenizer = get_tokenizer();
+        index
+            .tokenizers()
+            .register(META_TOKENIZER, tokenizer.clone());
         _ = index.set_default_multithread_executor();
+
+        let mut query_parser = QueryParser::for_index(&index, vec![title, author, publisher, isbn]);
+        query_parser.set_conjunction_by_default();
 
         Self {
             compressor: Compressor::Brotli,
 
             index,
             schema,
+            query_parser,
+            tokenizer,
+
             id,
             title,
             author,
