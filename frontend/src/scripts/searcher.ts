@@ -12,10 +12,23 @@ export interface Book {
   ipfs_cid: string;
 }
 
-export default async function search(query: string, limit: number) {
+export interface SearchQuery {
+  id?: number;
+  title?: string;
+  author?: string;
+  publisher?: string;
+  extension?: string;
+  language?: string;
+  isbn?: string;
+
+  query?: string;
+  limit: number;
+}
+
+export default async function search(query: SearchQuery) {
   if (import.meta.env.VITE_TAURI === '1') {
-    return await import('./searcher-tauri').then(({ default: search }) => search(query, limit));
+    return await import('./searcher-tauri').then(({ default: search }) => search(query));
   } else {
-    return await import('./searcher-browser').then(({ default: search }) => search(query, limit));
+    return await import('./searcher-browser').then(({ default: search }) => search(query));
   }
 }

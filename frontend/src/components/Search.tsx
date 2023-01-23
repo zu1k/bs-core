@@ -8,24 +8,12 @@ import {
   TbReportSearch,
   TbUserCircle
 } from 'react-icons/tb';
-import search, { Book } from '../scripts/searcher';
+import search, { Book, SearchQuery } from '../scripts/searcher';
 
 import { IoLanguage } from 'react-icons/io5';
 import SearchInput from './SearchInput';
 import { useDebounceEffect } from 'ahooks';
 import { useTranslation } from 'react-i18next';
-
-function constructQuery(parts: Record<string, string>): string {
-  return Object.keys(parts)
-    .map((key) =>
-      parts[key]
-        .split(' ')
-        .filter((s) => s !== '')
-        .map((s) => `${key}:"${s}"~30`)
-    )
-    .flat()
-    .join(' ');
-}
 
 export interface SearchProps {
   setBooks: (books: Book[]) => void;
@@ -42,13 +30,24 @@ const Search: React.FC<SearchProps> = ({ setBooks }) => {
   const [isbn, setISBN] = useState<string>('');
   const [complexQuery, setComplexQuery] = useState<string>('');
 
+  function rmEmptyString(query: SearchQuery) {
+    return Object.fromEntries(Object.entries(query).filter(([_, v]) => v != '')) as SearchQuery;
+  }
+
   useDebounceEffect(
     () => {
-      const query = complexQuery
-        ? complexQuery
-        : constructQuery({ title, author, publisher, extension, language, isbn });
+      const query = {
+        title,
+        author,
+        publisher,
+        extension,
+        language,
+        isbn,
+        query: complexQuery,
+        limit: 100
+      };
 
-      search(query, 100).then((books) => {
+      search(rmEmptyString(query)).then((books) => {
         setBooks(books);
       });
     },

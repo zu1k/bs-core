@@ -1,4 +1,4 @@
-import type { Book } from './searcher';
+import type { Book, SearchQuery } from './searcher';
 import axios from 'axios';
 
 const http = axios.create({
@@ -6,7 +6,7 @@ const http = axios.create({
   timeout: 30000
 });
 
-export default async function search(query: string, limit: number) {
-  const response = await http.get(`search?limit=${limit}&query=${query}`);
+export default async function search(query: SearchQuery) {
+  const response = await http.get('search', { params: query });
   return response.data.books as Book[];
 }
