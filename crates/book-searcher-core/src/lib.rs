@@ -88,6 +88,7 @@ pub struct Searcher {
     title: Field,
     author: Field,
     publisher: Field,
+    publisher_exist: Field,
     extension: Field,
     filesize: Field,
     language: Field,
@@ -111,11 +112,13 @@ impl Searcher {
         let title = schema_builder.add_text_field("title", text_options.clone());
         let author = schema_builder.add_text_field("author", text_options.clone());
         let publisher = schema_builder.add_text_field("publisher", text_options);
+        // publisher_exist is for score tweaking
+        let publisher_exist = schema_builder.add_bool_field("publisher_exist", FAST);
         let extension = schema_builder.add_text_field("extension", STRING | STORED);
         let filesize = schema_builder.add_u64_field("filesize", STORED);
         let language = schema_builder.add_text_field("language", TEXT | STORED);
         let year = schema_builder.add_u64_field("year", STORED);
-        let pages = schema_builder.add_u64_field("pages", STORED);
+        let pages = schema_builder.add_u64_field("pages", STORED | FAST);
         let isbn = schema_builder.add_text_field("isbn", TEXT | STORED);
         let ipfs_cid = schema_builder.add_text_field("ipfs_cid", STORED);
         let schema = schema_builder.build();
@@ -152,6 +155,7 @@ impl Searcher {
             title,
             author,
             publisher,
+            publisher_exist,
             extension,
             filesize,
             language,
