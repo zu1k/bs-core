@@ -6,13 +6,14 @@
 [![GitHub issues](https://img.shields.io/github/issues/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/issues)
 [![GitHub license](https://img.shields.io/github/license/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/blob/master/LICENSE)
 
-Create and search books index, create your private library.
+Easy and fast book searcher, create and search your private library.
 
-We don't save and provide files, we provide books searching.
+This project does not provide any book files, but only provides searching based on the user's data.
 
 ## Usage
 
 We currently offer both Desktop and Command-line versions.
+For individual users we recommend using the desktop version.
 
 ### Desktop
 
@@ -77,10 +78,15 @@ You can search by the following fields:
 
 Examples:
 
-- `http://127.0.0.1:7070/search?limit=30&query=余华`
-- `http://127.0.0.1:7070/search?limit=30&query=title:机器学习 extension:azw3 publisher:清华`
-- `http://127.0.0.1:7070/search?limit=30&query=id:18557063`
-- `http://127.0.0.1:7070/search?limit=30&query=isbn:9787302423287`
+- `/search?limit=30&title=TITLE`
+- `/search?limit=30&title=TITLE&author=AUTHOR`
+- `/search?limit=30&isbn=ISBN`
+- `/search?limit=30&query=title:TITLE extension:epub publisher:PUBLISHER`
+
+We now have two search modes, `/search?limit=30&mode=explore&title=TITLE&author=AUTHOR`
+
+- filter: the results need to meet all restrictions, default mode
+- explore: the results only need to meet certain restrictions
 
 ## Build from source
 
@@ -148,6 +154,8 @@ This raw data is used to generate `index`, should be a `csv` file with the follo
 ```
 id, title, author, publisher, extension, filesize, language, year, pages, isbn, ipfs_cid
 ```
+
+You will need to export and maintain your own meta information for the books you have purchased, as this project only provides fast searching.
 
 ## License
 
