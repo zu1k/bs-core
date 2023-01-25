@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
   Button,
   Card,
@@ -22,8 +22,9 @@ import { filesize as formatFileSize } from 'filesize';
 import RootContext from '../store';
 import ExternalLink from './ExternalLink';
 import { Book } from '../scripts/searcher';
-import Preview from './Preview';
 import { getDownloadLinkFromIPFS } from '../scripts/ipfs';
+
+const Preview = React.lazy(() => import('./Preview'));
 
 interface DescriptionProps {
   name: string;
@@ -137,7 +138,11 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ row }) => {
           </Flex>
         </CardFooter>
       </Card>
-      {isOpen ? <Preview onClose={onClose} book={row.original} /> : null}
+      {isOpen ? (
+        <Suspense>
+          <Preview onClose={onClose} book={row.original} />
+        </Suspense>
+      ) : null}
     </React.Fragment>
   );
 };
