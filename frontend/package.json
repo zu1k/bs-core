@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "book-searcher-frontend",
   "private": true,
   "version": "0.9.0",
   "type": "module",
@@ -47,6 +47,7 @@
     "prettier": "^2.8.3",
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
+    "vite-plugin-pwa": "^0.14.1",
     "vite-plugin-top-level-await": "^1.2.2"
   }
 }
