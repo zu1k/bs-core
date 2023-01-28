@@ -8,6 +8,7 @@ members = [
 ]
 
 [workspace.package]
+version = "0.9.1"
 edition = "2021"
 authors = ["The Book Searcher Authors"]
 description = "Easy and fast book searcher, create and search your private library."

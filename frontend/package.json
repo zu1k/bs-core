@@ -1,7 +1,7 @@
 {
   "name": "book-searcher-frontend",
   "private": true,
-  "version": "0.9.0",
+  "version": "0.9.1",
   "type": "module",
   "repository": "https://github.com/book-searcher-org/book-searcher",
   "scripts": {
@@ -18,14 +18,14 @@
     "@chakra-ui/system": "^2.3.8",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@tanstack/react-table": "^8.7.6",
-    "@tanstack/table-core": "^8.7.6",
+    "@tanstack/react-table": "^8.7.8",
+    "@tanstack/table-core": "^8.7.8",
     "@tauri-apps/api": "^1.2.0",
     "ahooks": "^3.7.4",
-    "axios": "^1.2.3",
+    "axios": "^1.2.5",
     "epubjs": "^0.3.93",
     "filesize": "^10.0.6",
-    "framer-motion": "^8.5.0",
+    "framer-motion": "^8.5.4",
     "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",
     "lodash": "^4.17.21",
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
-    "@darkobits/vite-plugin-favicons": "^0.1.8",
+    "@darkobits/vite-plugin-favicons": "^0.3.0",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
@@ -48,6 +48,6 @@
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
     "vite-plugin-pwa": "^0.14.1",
-    "vite-plugin-top-level-await": "^1.2.2"
+    "vite-plugin-top-level-await": "^1.2.3"
   }
 }
