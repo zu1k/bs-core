@@ -59,6 +59,3 @@ jobs:
         with:
           name: book-searcher
           path: target/release/book-searcher
-      - name: Run sccache stat for check
-        shell: bash
-        run: ${SCCACHE_PATH} --show-stats
