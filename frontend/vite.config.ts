@@ -4,10 +4,13 @@ import react from '@vitejs/plugin-react';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const appName = 'Book Searcher';
+const description = 'Easy and fast book searcher, create and search your private library.';
+
 const websiteManifest = {
-  name: 'Book Searcher',
-  short_name: 'Book Searcher',
-  description: 'Easy and fast book searcher, create and search your private library.',
+  name: appName,
+  short_name: appName,
+  description: description,
   theme_color: '#ffffff',
   icons: [
     {
@@ -71,6 +74,9 @@ export default defineConfig(() => {
       react(),
       process.env.VITE_TAURI === '0'
         ? faviconsPlugin({
+            appName: appName,
+            appShortName: appName,
+            appDescription: description,
             icons: {
               favicons: {
                 source: '../crates/book-searcher-desktop/icons/icon.png'
@@ -79,6 +85,9 @@ export default defineConfig(() => {
                 source: '../crates/book-searcher-desktop/icons/icon.png'
               },
               appleStartup: {
+                source: '../crates/book-searcher-desktop/icons/icon.png'
+              },
+              appleIcon: {
                 source: '../crates/book-searcher-desktop/icons/icon.png'
               }
             }
