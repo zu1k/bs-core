@@ -6,6 +6,9 @@ jobs:
   build:
     name: Build Test
     runs-on: ubuntu-latest
+    env:
+      SCCACHE_GHA_ENABLED: "true"
+      RUSTC_WRAPPER: "sccache"
     steps:
       - uses: actions/checkout@v3
 
@@ -48,6 +51,10 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: Run sccache-cache
+        uses: mozilla/sccache-action@v0.0.1
+        with:
+          version: "v0.4.0-pre.6"
       - name: Build Debug App
         run: TARGET=release make build
       - name: Archive App File
@@ -55,3 +62,6 @@ jobs:
         with:
           name: book-searcher
           path: target/release/book-searcher
+      - name: Run sccache stat for check
+        shell: bash
+        run: ${SCCACHE_PATH} --show-stats
