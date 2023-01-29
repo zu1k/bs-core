@@ -7,53 +7,42 @@ import { VitePWA } from 'vite-plugin-pwa';
 const appName = 'Book Searcher';
 const description = 'Easy and fast book searcher, create and search your private library.';
 
-const websiteManifest = {
-  name: appName,
-  short_name: appName,
-  description: description,
-  theme_color: '#ffffff',
-  icons: [
-    {
-      src: 'icon.png',
-      sizes: '512x512',
-      type: 'image/png'
-    },
-    {
-      src: 'icon.png',
-      sizes: '512x512',
-      type: 'image/png',
-      purpose: 'any maskable'
-    }
-  ]
-};
-
 const vitePWAPlugin = VitePWA({
   injectRegister: 'auto',
   registerType: 'autoUpdate',
-  manifest: websiteManifest,
+  manifest: false,
   workbox: {
     clientsClaim: true,
     skipWaiting: true,
     runtimeCaching: [
       {
         urlPattern: /search/,
-        handler: 'NetworkFirst',
+        handler: 'StaleWhileRevalidate',
         options: {
-          cacheName: 'search-cache'
+          cacheName: 'search-cache',
+          expiration: {
+            maxAgeSeconds: 60 * 60
+          }
         }
       },
       {
         urlPattern: /(.*?)\.(js|css)/,
         handler: 'StaleWhileRevalidate',
         options: {
-          cacheName: 'js-css-cache'
+          cacheName: 'js-css-cache',
+          expiration: {
+            maxAgeSeconds: 60 * 60 * 24
+          }
         }
       },
       {
         urlPattern: /(.*?)\.(png|jpe?g|svg|gif|ico|bmp|psd|tiff|tga|eps)/,
         handler: 'StaleWhileRevalidate',
         options: {
-          cacheName: 'image-cache'
+          cacheName: 'image-cache',
+          expiration: {
+            maxAgeSeconds: 60 * 60 * 24 * 7
+          }
         }
       }
     ]
