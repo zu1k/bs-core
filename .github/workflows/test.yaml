@@ -52,7 +52,7 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Run sccache-cache
-        uses: mozilla/sccache-action@v0.0.1
+        uses: Xuanwo/sccache-action@c94e27bef21ab3fb4a5152c8a878c53262b4abb0 # mozilla/sccache-action@v0.0.1
         with:
           version: "v0.4.0-pre.6"
       - name: Build Debug App
