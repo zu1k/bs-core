@@ -37,9 +37,6 @@ jobs:
       - name: Install dependencies
         run: |
           make frontend_preinstall
-      - name: Build dist
-        run: |
-          make frontend
 
       - uses: dtolnay/rust-toolchain@stable
       - uses: actions/cache@v3
@@ -55,7 +52,7 @@ jobs:
         uses: Xuanwo/sccache-action@c94e27bef21ab3fb4a5152c8a878c53262b4abb0 # mozilla/sccache-action@v0.0.1
         with:
           version: "v0.4.0-pre.6"
-      - name: Build Debug App
+      - name: Build Release App
         run: TARGET=release make build
       - name: Archive App File
         uses: actions/upload-artifact@v3
