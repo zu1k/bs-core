@@ -8,6 +8,7 @@ use tantivy::{
 };
 use tantivy_meta_tokenizer::{get_tokenizer, META_TOKENIZER};
 
+mod always_merge_policy;
 pub mod index;
 pub mod search;
 

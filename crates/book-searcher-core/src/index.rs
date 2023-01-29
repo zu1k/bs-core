@@ -1,4 +1,4 @@
-use crate::{Book, Searcher};
+use crate::{always_merge_policy::AlwaysMergePolicy, Book, Searcher};
 use indicatif::{ProgressBar, ProgressIterator, ProgressStyle};
 use log::info;
 use std::{
@@ -36,6 +36,7 @@ fn get_memory_arena_num_bytes() -> usize {
 impl Searcher {
     pub fn index(&mut self, csv_file: impl AsRef<Path>) {
         let mut writer = self.index.writer(get_memory_arena_num_bytes()).unwrap();
+        writer.set_merge_policy(Box::new(AlwaysMergePolicy));
 
         let file = File::open(&csv_file).unwrap();
         let reader = BufReader::new(file);
