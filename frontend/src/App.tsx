@@ -1,4 +1,4 @@
-import { Flex, HStack, Icon, IconButton, Spacer } from '@chakra-ui/react';
+import { Flex, HStack, Spacer } from '@chakra-ui/react';
 import React, { Suspense, useState } from 'react';
 import { SkipNavContent, SkipNavLink } from '@chakra-ui/skip-nav';
 
@@ -10,7 +10,7 @@ import Header from './components/Header';
 import LanguageSwitch from './components/LanguageSwitch';
 import RootContext from './store';
 import Search from './components/Search';
-import { repository } from '../package.json';
+import { version } from '../package.json';
 import { useTranslation } from 'react-i18next';
 
 const Main: React.FC = () => {
@@ -50,7 +50,7 @@ const App: React.FC = () => {
         <Main />
 
         <Spacer />
-        <Footer>Book Searcher ©2023</Footer>
+        <Footer>Book Searcher v{version} ©2023</Footer>
       </Flex>
     </RootContext.Provider>
   );

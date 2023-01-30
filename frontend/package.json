@@ -22,7 +22,7 @@
     "@tanstack/table-core": "^8.7.8",
     "@tauri-apps/api": "^1.2.0",
     "ahooks": "^3.7.4",
-    "axios": "^1.2.5",
+    "axios": "^1.2.6",
     "epubjs": "^0.3.93",
     "filesize": "^10.0.6",
     "framer-motion": "^8.5.4",
@@ -31,7 +31,7 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.42.1",
+    "react-hook-form": "^7.43.0",
     "react-i18next": "^12.1.4",
     "react-icons": "^4.7.1",
     "react-intersection-observer": "^9.4.1"
