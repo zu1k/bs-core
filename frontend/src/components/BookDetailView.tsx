@@ -67,7 +67,12 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ row }) => {
   } = row.original;
   return (
     <React.Fragment>
-      <Card mt={{ base: 1, md: 2 }} mb={{ base: 2, md: 4 }} mx={{ base: 4, md: 8 }}>
+      <Card
+        mt={{ base: 1, md: 2 }}
+        mb={{ base: 2, md: 4 }}
+        mx={{ base: 4, md: 8 }}
+        variant="outline"
+      >
         <CardHeader>
           <Flex align="center" justify="space-between" gap="2">
             <Heading as="h3" fontSize={['xl', '2xl', '2xl']} flexShrink={0} flex={1} minW="0">
