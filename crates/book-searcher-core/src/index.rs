@@ -59,11 +59,11 @@ impl Searcher {
         for result in rdr.deserialize::<Book>().progress_with(bar) {
             match result {
                 Ok(item) => {
+                    let score_boost = get_book_score_boost(&item);
                     if let Err(err) = writer.add_document(doc!(
                         self.id => item.id,
                         self.title => item.title,
                         self.author => item.author,
-                        self.publisher_exist => !item.publisher.is_empty(),
                         self.publisher => item.publisher,
                         self.extension => item.extension,
                         self.filesize => item.filesize,
@@ -72,6 +72,7 @@ impl Searcher {
                         self.pages => item.pages,
                         self.isbn => item.isbn,
                         self.ipfs_cid => item.ipfs_cid,
+                        self.score_boost => score_boost,
                     )) {
                         println!("{err}");
                     }
@@ -114,11 +115,11 @@ impl Searcher {
             for result in rdr.deserialize::<Book>().progress_with(bar_background) {
                 match result {
                     Ok(item) => {
+                        let score_boost = get_book_score_boost(&item);
                         if let Err(err) = writer.add_document(doc!(
                             searcher.id => item.id,
                             searcher.title => item.title,
                             searcher.author => item.author,
-                            searcher.publisher_exist => !item.publisher.is_empty(),
                             searcher.publisher => item.publisher,
                             searcher.extension => item.extension,
                             searcher.filesize => item.filesize,
@@ -127,6 +128,7 @@ impl Searcher {
                             searcher.pages => item.pages,
                             searcher.isbn => item.isbn,
                             searcher.ipfs_cid => item.ipfs_cid,
+                            searcher.score_boost => score_boost,
                         )) {
                             println!("{err}");
                         }
@@ -143,6 +145,31 @@ impl Searcher {
 
         bar
     }
+}
+
+// score = origin_score * (10 + score_boost).log10()
+// so score_boost should less than 90
+fn get_book_score_boost(book: &Book) -> u64 {
+    let mut score_boost: u64 = 0;
+    if !book.author.is_empty() {
+        score_boost += 10;
+    }
+    if !book.publisher.is_empty() {
+        score_boost += 10;
+        if book.publisher.contains("出版") {
+            score_boost += 20;
+        }
+    }
+    if book.year > 0 {
+        score_boost += 10;
+    }
+    if book.pages > 0 {
+        score_boost += 10;
+    }
+    if book.language.to_lowercase().trim() != "other" {
+        score_boost += 10;
+    }
+    score_boost
 }
 
 #[test]

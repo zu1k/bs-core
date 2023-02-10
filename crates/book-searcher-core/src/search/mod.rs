@@ -16,27 +16,15 @@ impl Searcher {
 
         let searcher = reader.searcher();
 
-        let publisher_exist = self.publisher_exist;
-        let pages = self.pages;
+        let score_boost = self.score_boost;
         let top_docs_by_custom_score =
             TopDocs::with_limit(limit).tweak_score(move |segment_reader: &SegmentReader| {
-                let pages_reader = segment_reader.fast_fields().u64(pages).unwrap();
-                let publisher_exist_reader =
-                    segment_reader.fast_fields().bool(publisher_exist).unwrap();
+                let score_boost = segment_reader.fast_fields().u64(score_boost).unwrap();
 
                 move |doc: DocId, original_score: Score| {
-                    let mut score = original_score;
-                    let pages: u64 = pages_reader.get_val(doc);
-                    if pages > 0 {
-                        score += 1.0;
-                    }
-
-                    let publisher_exist: bool = publisher_exist_reader.get_val(doc);
-                    if publisher_exist {
-                        score += 1.0;
-                    }
-
-                    score
+                    let score_boost: u64 = score_boost.get_val(doc);
+                    let score_boost = ((10 + score_boost) as Score).log10();
+                    original_score * score_boost
                 }
             });
 

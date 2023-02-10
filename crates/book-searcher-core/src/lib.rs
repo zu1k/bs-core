@@ -89,7 +89,6 @@ pub struct Searcher {
     title: Field,
     author: Field,
     publisher: Field,
-    publisher_exist: Field,
     extension: Field,
     filesize: Field,
     language: Field,
@@ -97,6 +96,7 @@ pub struct Searcher {
     pages: Field,
     isbn: Field,
     ipfs_cid: Field,
+    score_boost: Field,
 }
 
 impl Searcher {
@@ -113,8 +113,6 @@ impl Searcher {
         let title = schema_builder.add_text_field("title", text_options.clone());
         let author = schema_builder.add_text_field("author", text_options.clone());
         let publisher = schema_builder.add_text_field("publisher", text_options);
-        // publisher_exist is for score tweaking
-        let publisher_exist = schema_builder.add_bool_field("publisher_exist", FAST);
         let extension = schema_builder.add_text_field("extension", STRING | STORED);
         let filesize = schema_builder.add_u64_field("filesize", STORED);
         let language = schema_builder.add_text_field("language", TEXT | STORED);
@@ -122,6 +120,7 @@ impl Searcher {
         let pages = schema_builder.add_u64_field("pages", STORED | FAST);
         let isbn = schema_builder.add_text_field("isbn", TEXT | STORED);
         let ipfs_cid = schema_builder.add_text_field("ipfs_cid", STORED);
+        let score_boost = schema_builder.add_u64_field("score_boost", FAST);
         let schema = schema_builder.build();
 
         // open or create index
@@ -156,7 +155,6 @@ impl Searcher {
             title,
             author,
             publisher,
-            publisher_exist,
             extension,
             filesize,
             language,
@@ -164,6 +162,7 @@ impl Searcher {
             pages,
             isbn,
             ipfs_cid,
+            score_boost,
         }
     }
 
