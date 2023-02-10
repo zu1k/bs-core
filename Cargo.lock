@@ -3888,7 +3888,7 @@ dependencies = [
 
 [[package]]
 name = "tantivy-meta-tokenizer"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
  "fast2s",
  "itertools",

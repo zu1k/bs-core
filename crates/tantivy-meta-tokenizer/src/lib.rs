@@ -3,8 +3,8 @@
 
 use stop_word::STOP_WORDS;
 use tantivy::tokenizer::{
-    AsciiFoldingFilter, BoxTokenStream, LowerCaser, RemoveLongFilter, StopWordFilter, TextAnalyzer,
-    Token, TokenStream, Tokenizer,
+    BoxTokenStream, LowerCaser, RemoveLongFilter, StopWordFilter, TextAnalyzer, Token, TokenStream,
+    Tokenizer,
 };
 mod chinese;
 mod latin;
@@ -16,7 +16,7 @@ pub const META_TOKENIZER: &str = "meta_tokenizer";
 pub fn get_tokenizer() -> TextAnalyzer {
     TextAnalyzer::from(MetaTokenizer)
         .filter(RemoveLongFilter::limit(20))
-        .filter(AsciiFoldingFilter)
+        // .filter(AsciiFoldingFilter) // spammy search results
         .filter(StopWordFilter::remove(
             STOP_WORDS.iter().map(|&word| word.to_owned()),
         ))
