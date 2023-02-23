@@ -221,7 +221,7 @@ export default function DataTable<Data extends object>({
                       isNumeric={meta?.isNumeric ?? false}
                       borderBottom="none"
                       overflow="hidden"
-                      textOverflow="ellipsis"
+                      textOverflow="hidden"
                       title={(cell.getValue() as any)?.toString()}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

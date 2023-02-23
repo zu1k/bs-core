@@ -100,7 +100,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
             const language = value.toLocaleLowerCase().trim();
             const colorScheme = colorSchemes[language.length % colorSchemes.length];
             return (
-              <Tag colorScheme={colorScheme} textTransform="capitalize">
+              <Tag colorScheme={colorScheme} textTransform="capitalize" minW="fit-content">
                 {language}
               </Tag>
             );
@@ -110,7 +110,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
             cell: (cell) => renderer(cell.getValue()),
             enableSorting: false,
             filterFn: arrFilter,
-            meta: { breakpoint: 'lg', filterRenderer: renderer }
+            meta: { width: 'max-content', breakpoint: 'lg', filterRenderer: renderer }
           };
         })()
       ),

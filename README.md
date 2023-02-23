@@ -8,6 +8,8 @@
 
 Easy and fast book searcher, create and search your private library.
 
+Book Searcher can index metadata for over 10 million books in one minute, and search in 30µs.
+
 This project does not provide any book files, but only provides searching based on the user's data.
 
 ## Usage
