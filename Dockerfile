@@ -1,15 +1,15 @@
-FROM node:19-bullseye as frontend
+FROM --platform=$BUILDPLATFORM node:20-bullseye as frontend
 
 COPY . /source
 RUN cd /source/frontend && npm install --legacy-peer-deps && npm run build
 
-FROM rust:1.65-buster as backend
+FROM rust:1.69.0-bullseye as backend
 
 COPY . /source
 COPY --from=frontend /source/frontend/dist /source/frontend/dist
 RUN cd /source && cargo build --release -p book-searcher
 
-FROM ubuntu:22.04
+FROM debian:bullseye
 
 COPY --from=backend /source/target/release/book-searcher /book-searcher
 
