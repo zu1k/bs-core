@@ -22,6 +22,7 @@
         "pages": "Pages",
         "isbn": "ISBN",
         "ipfs_cid": "IPFS CID",
+        "md5": "MD5",
         "unknown": "Unknown"
       },
       "table": {
@@ -47,7 +48,12 @@
         "ipfs_gateways_help": "IPFS Gateways List, line break",
         "cancel": "Cancel",
         "save": "Save"
-      }
+      },
+      "auto_download": "Racing Download",
+      "download_success": "downloaded successfully",
+      "download_failed": "download failed",
+      "download_start": "start download",
+      "copied": "Copied"
     }
   },
   "zh-CN": {
@@ -73,6 +79,7 @@
         "pages": "页数",
         "isbn": "ISBN",
         "ipfs_cid": "IPFS CID",
+        "md5": "MD5",
         "unknown": "未知"
       },
       "table": {
@@ -98,7 +105,12 @@
         "ipfs_gateways_help": "IPFS 网关列表，一行一个",
         "cancel": "取消",
         "save": "保存"
-      }
+      },
+      "auto_download": "竞速下载",
+      "download_success": "下载成功",
+      "download_failed": "下载失败",
+      "download_start": "开始下载",
+      "copied": "已复制"
     }
   },
   "fr": {
@@ -124,6 +136,7 @@
         "pages": "Pages",
         "isbn": "ISBN",
         "ipfs_cid": "CID IPFS",
+        "md5": "MD5",
         "unknown": "Inconnu"
       },
       "table": {
@@ -149,7 +162,12 @@
         "ipfs_gateways_help": "Liste des passerelles IPFS, saut de ligne",
         "cancel": "Annuler",
         "save": "Enregistrer"
-      }
+      },
+      "auto_download": "Racing Télécharger",
+      "download_success": "téléchargé avec succès",
+      "download_failed": "Échec du téléchargement",
+      "download_start": "Commencer Le Téléchargement",
+      "copied": "Copié"
     }
   },
   "it": {
@@ -175,6 +193,7 @@
         "pages": "Pagina",
         "isbn": "ISBN",
         "ipfs_cid": "CID IPFS",
+        "md5": "MD5",
         "unknown": "Sconosciuto"
       },
       "table": {
@@ -200,7 +219,12 @@
         "ipfs_gateways_help": "Elenco dei gateway IPFS, interruzione di riga",
         "cancel": "Annulla",
         "save": "Salva"
-      }
+      },
+      "auto_download": "DCorsa Download",
+      "download_success": "scaricato con successo",
+      "download_failed": "scaricamento fallito",
+      "download_start": "Inizia il download",
+      "copied": "Copiato"
     }
   }
 }

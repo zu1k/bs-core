@@ -54,12 +54,13 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
 
   const columns = React.useMemo(
     () => [
-      columnHelper.accessor('cover', {
+      columnHelper.accessor('cover_url', {
         header: '',
         cell: (cell) => {
           const cover = cell.getValue();
           return (
             <Image
+              referrerPolicy="no-referrer"
               htmlWidth="70%"
               src={getCoverImageUrl(cover)}
               onError={(event) => {

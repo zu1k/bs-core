@@ -129,7 +129,7 @@ const downloadBookData = async function (book: Book, signal: AbortSignal) {
     });
 };
 
-export { downloadBookData };
+export { downloadBookData, ipfsGateways };
 
 function anySignal(signals: AbortSignal[]) {
   const controller = new AbortController();

@@ -4,6 +4,6 @@ export default function getCoverImageUrl(cover: string | undefined) {
   } else if (cover.startsWith('http://') || cover.startsWith('https://')) {
     return cover;
   } else {
-    return import.meta.env.COVER_BASE_URL + cover;
+    return import.meta.env.VITE_COVER_BASE_URL + cover;
   }
 }

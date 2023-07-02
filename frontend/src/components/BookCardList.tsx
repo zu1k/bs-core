@@ -125,10 +125,11 @@ export default function BookCardList<Data extends object>({
             overflow="hidden"
           >
             <Image
+              referrerPolicy="no-referrer"
               width="auto"
               maxW="min(24%, 100px)"
               objectFit="cover"
-              src={getCoverImageUrl(book.cover)}
+              src={getCoverImageUrl(book.cover_url)}
               onError={(event) => {
                 (event.target as HTMLImageElement).style.display = 'none';
               }}

@@ -222,7 +222,9 @@ export default function DataTable<Data extends object>({
                       borderBottom="none"
                       overflow="hidden"
                       padding={
-                        cell.column.id == 'cover' || cell.column.id == 'ipfs_cid' ? '0' : undefined
+                        cell.column.id == 'cover_url' || cell.column.id == 'ipfs_cid'
+                          ? '0'
+                          : undefined
                       }
                       textOverflow="hidden"
                       title={(cell.getValue() as any)?.toString()}

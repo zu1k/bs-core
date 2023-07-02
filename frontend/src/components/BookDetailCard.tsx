@@ -17,7 +17,7 @@ import {
   useToast,
   TextProps
 } from '@chakra-ui/react';
-import { CopyIcon } from '@chakra-ui/icons';
+import { CopyIcon, LinkIcon } from '@chakra-ui/icons';
 import { useTranslation } from 'react-i18next';
 import { filesize as formatFileSize } from 'filesize';
 
@@ -67,7 +67,9 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
     year,
     pages,
     isbn,
-    ipfs_cid
+    ipfs_cid,
+    cover_url,
+    md5
   } = book;
   return (
     <React.Fragment>
@@ -93,11 +95,12 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
         <CardBody>
           <Flex direction={{ base: 'column', md: 'row' }}>
             <Image
+              referrerPolicy="no-referrer"
               borderRadius="lg"
               width="auto"
               maxWidth="150px"
               objectFit="contain"
-              src={getCoverImageUrl(book.cover)}
+              src={getCoverImageUrl(book.cover_url)}
               onError={(event) => {
                 (event.target as HTMLImageElement).style.display = 'none';
               }}
@@ -155,9 +158,30 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
                 <Description name={`${t('book.pages') ?? 'Pages'}: `}>
                   {pages || t('book.unknown') || 'Unknown'}
                 </Description>
-                <GridItem colSpan={{ sm: 1, md: 2, lg: 3 }}>
-                  <Description name={`${t('book.isbn') ?? 'ISBN'}: `}>
-                    {isbn || t('book.unknown') || 'Unknown'}
+                <Description name={`${t('book.isbn') ?? 'ISBN'}: `}>
+                  {isbn || t('book.unknown') || 'Unknown'}
+                </Description>
+                <GridItem colSpan={{ sm: 1, md: 2, lg: 2 }}>
+                  <Description name={`${t('book.md5') ?? 'MD5'}: `}>
+                    {(
+                      <Button
+                        colorScheme="gray"
+                        variant="ghost"
+                        size="xs"
+                        leftIcon={<LinkIcon />}
+                        onClick={() => {
+                          window.open(
+                            'https://libgen.rs/book/index.php?md5=' + md5,
+                            '_blank',
+                            'noreferrer'
+                          );
+                        }}
+                      >
+                        {md5}
+                      </Button>
+                    ) ||
+                      t('book.unknown') ||
+                      'Unknown'}
                   </Description>
                 </GridItem>
               </SimpleGrid>
@@ -165,20 +189,24 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
           </Flex>
         </CardBody>
         <CardFooter flexDirection="column">
-          {ipfs_cid != undefined && rootContext.ipfsGateways.length > 0 ? (
+          {ipfs_cid != undefined ? (
             <SimpleGrid columns={{ sm: 2, md: 3, lg: 4, xl: 5 }} spacing={{ base: 2, md: 4 }}>
               <IpfsDownloadButton book={book} onlyIcon={false}></IpfsDownloadButton>
 
-              {rootContext.ipfsGateways.map((gateway) => (
-                <Button
-                  as={ExternalLink}
-                  href={getDownloadLinkFromIPFS(gateway, book)}
-                  key={gateway}
-                  variant="outline"
-                >
-                  {gateway}
-                </Button>
-              ))}
+              {rootContext.ipfsGateways.length > 0 ? (
+                <>
+                  {rootContext.ipfsGateways.map((gateway) => (
+                    <Button
+                      as={ExternalLink}
+                      href={getDownloadLinkFromIPFS(gateway, book)}
+                      key={gateway}
+                      variant="outline"
+                    >
+                      {gateway}
+                    </Button>
+                  ))}
+                </>
+              ) : null}
             </SimpleGrid>
           ) : null}
         </CardFooter>
