@@ -35,11 +35,11 @@ pub struct Book {
     #[serde_as(deserialize_as = "DefaultOnNull")]
     pub isbn: String,
     #[serde_as(deserialize_as = "DefaultOnNull")]
-    pub md5: String,
-    #[serde_as(deserialize_as = "DefaultOnNull")]
     pub ipfs_cid: String,
     #[serde_as(deserialize_as = "DefaultOnNull")]
     pub cover_url: String,
+    #[serde_as(deserialize_as = "DefaultOnNull")]
+    pub md5: String,
 }
 
 impl From<(&Schema, Document)> for Book {

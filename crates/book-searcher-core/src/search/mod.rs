@@ -18,7 +18,11 @@ impl Searcher {
 
         let top_docs_by_custom_score =
             TopDocs::with_limit(limit).tweak_score(move |segment_reader: &SegmentReader| {
-                let score_boost = segment_reader.fast_fields().u64("score_boost").unwrap().first_or_default_col(1);
+                let score_boost = segment_reader
+                    .fast_fields()
+                    .u64("score_boost")
+                    .unwrap()
+                    .first_or_default_col(1);
 
                 move |doc: DocId, original_score: Score| {
                     let score_boost: u64 = score_boost.get_val(doc);

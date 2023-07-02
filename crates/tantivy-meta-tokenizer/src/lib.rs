@@ -3,8 +3,8 @@
 
 use stop_word::STOP_WORDS;
 use tantivy::tokenizer::{
-    LowerCaser, RemoveLongFilter, StopWordFilter, TextAnalyzer, Token, TokenStream,
-    Tokenizer, BoxTokenStream, SimpleTokenizer,
+    BoxTokenStream, LowerCaser, RemoveLongFilter, SimpleTokenizer, StopWordFilter, TextAnalyzer,
+    Token, TokenStream, Tokenizer,
 };
 mod chinese;
 mod stop_word;
@@ -13,19 +13,21 @@ pub mod utils;
 pub const META_TOKENIZER: &str = "meta_tokenizer";
 
 pub fn get_tokenizer() -> TextAnalyzer {
-    TextAnalyzer::builder(MetaTokenizer{latin: SimpleTokenizer::default()})
-        .filter(RemoveLongFilter::limit(20))
-        // .filter(AsciiFoldingFilter) // spammy search results
-        .filter(StopWordFilter::remove(
-            STOP_WORDS.iter().map(|&word| word.to_owned()),
-        ))
-        .filter(LowerCaser)
-        .build()
+    TextAnalyzer::builder(MetaTokenizer {
+        latin: SimpleTokenizer::default(),
+    })
+    .filter(RemoveLongFilter::limit(20))
+    // .filter(AsciiFoldingFilter) // spammy search results
+    .filter(StopWordFilter::remove(
+        STOP_WORDS.iter().map(|&word| word.to_owned()),
+    ))
+    .filter(LowerCaser)
+    .build()
 }
 
 #[derive(Clone)]
 pub struct MetaTokenizer {
-    latin: SimpleTokenizer
+    latin: SimpleTokenizer,
 }
 
 pub struct MetaTokenStream {
@@ -60,14 +62,14 @@ impl Tokenizer for MetaTokenizer {
             return BoxTokenStream::from(MetaTokenStream {
                 tokens: vec![],
                 index: 0,
-            }).into();
+            })
+            .into();
         }
 
         if utils::is_chinese(text) {
             return BoxTokenStream::from(chinese::token_stream(text)).into();
         }
 
-        return  BoxTokenStream::from(self.latin.token_stream(text)).into();
+        return BoxTokenStream::from(self.latin.token_stream(text)).into();
     }
-
 }

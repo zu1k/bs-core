@@ -59,6 +59,10 @@ impl Searcher {
         for result in rdr.deserialize::<Book>().progress_with(bar) {
             match result {
                 Ok(item) => {
+                    if skip_this_book(&item) {
+                        continue;
+                    }
+
                     let score_boost = get_book_score_boost(&item);
                     if let Err(err) = writer.add_document(doc!(
                         self.id => item.id,
@@ -117,6 +121,10 @@ impl Searcher {
             for result in rdr.deserialize::<Book>().progress_with(bar_background) {
                 match result {
                     Ok(item) => {
+                        if skip_this_book(&item) {
+                            continue;
+                        }
+
                         let score_boost = get_book_score_boost(&item);
                         if let Err(err) = writer.add_document(doc!(
                             searcher.id => item.id,
@@ -157,23 +165,47 @@ fn get_book_score_boost(book: &Book) -> u64 {
     let mut score_boost: u64 = 0;
     if !book.author.is_empty() {
         score_boost += 10;
-    }
-    if !book.publisher.is_empty() {
-        score_boost += 10;
-        if book.publisher.contains("出版") {
-            score_boost += 20;
+        if book.author.contains("ePUBw") || book.author.contains("chenjin5") {
+            score_boost -= 10;
         }
     }
-    if book.year > 0 {
-        score_boost += 10;
-    }
-    if book.pages > 0 {
-        score_boost += 10;
+    if !book.publisher.is_empty() {
+        score_boost += 5;
+        if book.publisher.contains("出版") {
+            score_boost += 30;
+            if book.publisher.contains("_") {
+                score_boost -= 10;
+            }
+        } else if book.publisher.contains("cj5")
+            || book.publisher.contains("chenjin5")
+            || book.publisher.contains("epub")
+            || book.publisher.contains("电子书")
+            || book.publisher.contains("微信")
+        {
+            score_boost -= 10;
+        }
     }
     if book.language.to_lowercase().trim() != "other" {
         score_boost += 10;
     }
+    if book.year > 0 {
+        score_boost += 5;
+    }
+    if book.pages > 0 {
+        score_boost += 15;
+    }
+
+    if !book.cover_url.is_empty() {
+        score_boost += 30;
+    }
+
     score_boost
+}
+
+fn skip_this_book(book: &Book) -> bool {
+    book.ipfs_cid.is_empty()
+        || book.title.contains("b~c@x！%b……x￥b")
+        || book.author.contains("b~c@x！%b……x￥b")
 }
 
 #[test]
