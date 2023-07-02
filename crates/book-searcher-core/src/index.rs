@@ -71,7 +71,9 @@ impl Searcher {
                         self.year => item.year,
                         self.pages => item.pages,
                         self.isbn => item.isbn,
+                        self.md5 => item.md5,
                         self.ipfs_cid => item.ipfs_cid,
+                        self.cover_url => item.cover_url,
                         self.score_boost => score_boost,
                     )) {
                         println!("{err}");
@@ -127,7 +129,9 @@ impl Searcher {
                             searcher.year => item.year,
                             searcher.pages => item.pages,
                             searcher.isbn => item.isbn,
+                            searcher.md5 => item.md5,
                             searcher.ipfs_cid => item.ipfs_cid,
+                            searcher.cover_url => item.cover_url,
                             searcher.score_boost => score_boost,
                         )) {
                             println!("{err}");

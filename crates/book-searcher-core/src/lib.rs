@@ -35,7 +35,11 @@ pub struct Book {
     #[serde_as(deserialize_as = "DefaultOnNull")]
     pub isbn: String,
     #[serde_as(deserialize_as = "DefaultOnNull")]
+    pub md5: String,
+    #[serde_as(deserialize_as = "DefaultOnNull")]
     pub ipfs_cid: String,
+    #[serde_as(deserialize_as = "DefaultOnNull")]
+    pub cover_url: String,
 }
 
 impl From<(&Schema, Document)> for Book {
@@ -70,7 +74,9 @@ impl From<(&Schema, Document)> for Book {
             year: get_field_u64!("year"),
             pages: get_field_u64!("pages"),
             isbn: get_field_text!("isbn"),
+            md5: get_field_text!("md5"),
             ipfs_cid: get_field_text!("ipfs_cid"),
+            cover_url: get_field_text!("cover_url"),
         }
     }
 }
@@ -95,7 +101,9 @@ pub struct Searcher {
     year: Field,
     pages: Field,
     isbn: Field,
+    md5: Field,
     ipfs_cid: Field,
+    cover_url: Field,
     score_boost: Field,
 }
 
@@ -119,7 +127,9 @@ impl Searcher {
         let year = schema_builder.add_u64_field("year", STORED);
         let pages = schema_builder.add_u64_field("pages", STORED | FAST);
         let isbn = schema_builder.add_text_field("isbn", TEXT | STORED);
+        let md5 = schema_builder.add_text_field("md5", STRING | STORED);
         let ipfs_cid = schema_builder.add_text_field("ipfs_cid", STORED);
+        let cover_url = schema_builder.add_text_field("cover_url", STORED);
         let score_boost = schema_builder.add_u64_field("score_boost", FAST);
         let schema = schema_builder.build();
 
@@ -161,7 +171,9 @@ impl Searcher {
             year,
             pages,
             isbn,
+            md5,
             ipfs_cid,
+            cover_url,
             score_boost,
         }
     }

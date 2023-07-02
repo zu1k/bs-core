@@ -76,6 +76,7 @@ You can search by the following fields:
 - extension
 - language
 - isbn
+- md5
 - id
 
 Examples:
@@ -154,7 +155,7 @@ book_searcher_dir
 This raw data is used to generate `index`, should be a `csv` file with the following fields:
 
 ```
-id, title, author, publisher, extension, filesize, language, year, pages, isbn, ipfs_cid
+id, title, author, publisher, extension, filesize, language, year, pages, isbn, md5, ipfs_cid, cover_url
 ```
 
 You will need to export and maintain your own meta information for the books you have purchased, as this project only provides fast searching.

@@ -1,12 +1,12 @@
 use crate::MetaTokenStream;
 use jieba_rs::{Jieba, TokenizeMode};
-use tantivy::tokenizer::{BoxTokenStream, Token};
+use tantivy::tokenizer::Token;
 
 lazy_static::lazy_static! {
     static ref JIEBA: Jieba = jieba_rs::Jieba::new();
 }
 
-pub fn token_stream(text: &str) -> BoxTokenStream {
+pub fn token_stream(text: &str) -> MetaTokenStream {
     let text = fast2s::convert(text);
 
     let mut indices = text.char_indices().collect::<Vec<_>>();
@@ -85,5 +85,5 @@ pub fn token_stream(text: &str) -> BoxTokenStream {
         });
     }
 
-    BoxTokenStream::from(MetaTokenStream { tokens, index: 0 })
+    MetaTokenStream { tokens, index: 0 }
 }
