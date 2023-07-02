@@ -13,7 +13,7 @@
     "fmt:check": "prettier --check ."
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.18",
+    "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.7.1",
     "@chakra-ui/skip-nav": "^2.0.15",
     "@chakra-ui/system": "^2.5.8",

@@ -173,7 +173,7 @@ fn get_book_score_boost(book: &Book) -> u64 {
         score_boost += 5;
         if book.publisher.contains("出版") {
             score_boost += 30;
-            if book.publisher.contains("_") {
+            if book.publisher.contains('_') {
                 score_boost -= 10;
             }
         } else if book.publisher.contains("cj5")

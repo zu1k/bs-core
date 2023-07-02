@@ -10,15 +10,6 @@
     "version": "0.9.1"
   },
   "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "open": true
-      },
-      "dialog": {
-        "open": true
-      }
-    },
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
@@ -57,9 +48,6 @@
     },
     "security": {
       "csp": null
-    },
-    "updater": {
-      "active": false
     },
     "windows": [
       {

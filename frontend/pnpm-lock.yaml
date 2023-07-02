@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@chakra-ui/icons':
-    specifier: ^2.0.18
-    version: 2.0.18(@chakra-ui/system@2.5.8)(react@18.2.0)
+    specifier: ^2.0.19
+    version: 2.0.19(@chakra-ui/system@2.5.8)(react@18.2.0)
   '@chakra-ui/react':
     specifier: ^2.7.1
     version: 2.7.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.14)(framer-motion@10.12.18)(react-dom@18.2.0)(react@18.2.0)
@@ -1624,8 +1624,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@chakra-ui/icons@2.0.18(@chakra-ui/system@2.5.8)(react@18.2.0):
-    resolution: {integrity: sha512-E/+DF/jw7kdN4/XxCZRnr4FdMXhkl50Q34MVwN9rADWMwPK9uSZPGyC7HOx6rilo7q4bFjYDH3yRj9g+VfbVkg==}
+  /@chakra-ui/icons@2.0.19(@chakra-ui/system@2.5.8)(react@18.2.0):
+    resolution: {integrity: sha512-0A6U1ZBZhLIxh3QgdjuvIEhAZi3B9v8g6Qvlfa3mu6vSnXQn2CHBZXmJwxpXxO40NK/2gj/gKXrLeUaFR6H/Qw==}
     peerDependencies:
       '@chakra-ui/system': '>=2.0.0'
       react: '>=18'
