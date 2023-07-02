@@ -29,7 +29,7 @@ pub struct SearchQuery {
     pub language: Option<String>,
     pub isbn: Option<String>,
     pub md5: Option<String>,
-    pub id: Option<u64>,
+    pub id: Option<String>,
 
     pub query: Option<String>,
     #[serde(default)]
@@ -111,10 +111,12 @@ impl SearchQuery {
             queries.push(Box::new(query));
         }
 
-        if let Some(id) = self.id {
-            let term = Term::from_field_u64(searcher.id, id);
-            let query = TermQuery::new(term, IndexRecordOption::Basic);
-            queries.push(Box::new(query));
+        if let Some(ref id) = self.id {
+            if let Ok(id) = id.parse() {
+                let term = Term::from_field_u64(searcher.id, id);
+                let query = TermQuery::new(term, IndexRecordOption::Basic);
+                queries.push(Box::new(query));
+            }
         }
 
         let query = match self.mode {
