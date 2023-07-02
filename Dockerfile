@@ -3,7 +3,7 @@ FROM --platform=$BUILDPLATFORM node:20-bullseye as frontend
 COPY . /source
 RUN cd /source/frontend && npm install --legacy-peer-deps && npm run build
 
-FROM rust:1.69.0-bullseye as backend
+FROM rust:1.70.0-bullseye as backend
 
 COPY . /source
 COPY --from=frontend /source/frontend/dist /source/frontend/dist
