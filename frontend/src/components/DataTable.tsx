@@ -221,6 +221,9 @@ export default function DataTable<Data extends object>({
                       isNumeric={meta?.isNumeric ?? false}
                       borderBottom="none"
                       overflow="hidden"
+                      padding={
+                        cell.column.id == 'cover' || cell.column.id == 'ipfs_cid' ? '0' : undefined
+                      }
                       textOverflow="hidden"
                       title={(cell.getValue() as any)?.toString()}
                     >
@@ -241,7 +244,7 @@ export default function DataTable<Data extends object>({
         </Tbody>
       </Table>
       {data.length === 0 && (
-        <Flex mt={16} mb={12} justifyContent="center">
+        <Flex mt={16} mb={12} justifyContent="center" minH="200px">
           <Text color={colorMode === 'light' ? 'gray.400' : 'gray.600'}>{t('table.no_data')}</Text>
         </Flex>
       )}

@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ title, children }) => {
       <Flex
         px={{ base: 4, md: 8 }}
         py={3}
-        mb={2}
+        mb={import.meta.env.VITE_TAURI === '1' ? 0 : 2}
         w="full"
         position="sticky"
         top={0}
@@ -35,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({ title, children }) => {
         bgColor={bgColor}
         boxShadow={!inView ? 'sm' : 'none'}
       >
-        <Heading as="h1" fontSize="xl" my={2}>
+        <Heading as="h1" fontSize="xl" my={import.meta.env.VITE_TAURI === '1' ? 0 : 2}>
           {title}
         </Heading>
         <Spacer />

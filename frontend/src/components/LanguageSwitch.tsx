@@ -3,7 +3,6 @@ import {
   IconButton,
   Menu,
   MenuButton,
-  MenuItem,
   MenuItemOption,
   MenuList,
   MenuOptionGroup

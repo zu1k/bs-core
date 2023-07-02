@@ -26,6 +26,7 @@ import TocView from './TocView';
 import ExternalLink from './ExternalLink';
 import { Book } from '../scripts/searcher';
 import { getDownloadLinkFromIPFS } from '../scripts/ipfs';
+import { downloadBookData } from '../scripts/download';
 
 export interface PreviewProps {
   book: Book;
@@ -40,7 +41,7 @@ export interface Toc {
   subitems: Toc[];
 }
 
-const Preview: React.FC<PreviewProps> = ({ book, onClose }) => {
+const Preview: React.FC<PreviewProps> = ({ book, onClose }: PreviewProps) => {
   const { ipfsGateways } = useContext(RootContext);
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose: onCloseTocView } = useDisclosure();
@@ -49,7 +50,8 @@ const Preview: React.FC<PreviewProps> = ({ book, onClose }) => {
   const renditionRef = useRef<Rendition | undefined>();
   const [toc, setToc] = useState<Toc[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [gateway, setGateway] = useState(ipfsGateways[0]);
+  const [gateway, setGateway] = useState('竞速下载');
+  const abortController = useRef<AbortController>(new AbortController());
 
   const handleChangeGateWay = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setIsLoaded(false);
@@ -102,10 +104,13 @@ const Preview: React.FC<PreviewProps> = ({ book, onClose }) => {
     document.addEventListener('keyup', keyListener, false);
   };
 
-  const initBook = useCallback((gateway = ipfsGateways[0]) => {
+  const initBook = useCallback(async (gateway: string) => {
     bookRef?.current?.destroy();
 
-    const ePubBook: any = ePub(getDownloadLinkFromIPFS(gateway, book));
+    const ePubBook: any =
+      gateway == '竞速下载'
+        ? ePub(await downloadBookData(book, abortController.current.signal))
+        : ePub(getDownloadLinkFromIPFS(gateway, book));
     const rendition = ePubBook.renderTo('viewer', {
       width: '100%',
       height: '100%',
@@ -126,6 +131,7 @@ const Preview: React.FC<PreviewProps> = ({ book, onClose }) => {
     });
 
     return () => {
+      abortController.current.abort();
       renditionRef?.current?.destroy();
       bookRef?.current?.destroy();
     };
@@ -167,8 +173,13 @@ const Preview: React.FC<PreviewProps> = ({ book, onClose }) => {
   };
 
   useEffect(() => {
-    initBook();
-  }, []);
+    abortController.current.abort();
+    abortController.current = new AbortController();
+    initBook(gateway);
+    return () => {
+      abortController.current.abort();
+    };
+  }, [gateway, book]);
 
   useEffect(() => {
     if (renditionRef?.current) {
@@ -198,7 +209,7 @@ const Preview: React.FC<PreviewProps> = ({ book, onClose }) => {
               </Heading>
               <Flex flex="1" justifyContent="flex-end" pr="2rem">
                 <Select value={gateway} maxW={256} onChange={handleChangeGateWay}>
-                  {ipfsGateways.map((item, index) => (
+                  {['竞速下载'].concat(ipfsGateways).map((item, index) => (
                     <option key={index} value={item}>
                       {item}
                     </option>
@@ -207,7 +218,10 @@ const Preview: React.FC<PreviewProps> = ({ book, onClose }) => {
                 <Button
                   ml="1rem"
                   as={ExternalLink}
-                  href={getDownloadLinkFromIPFS(gateway, book)}
+                  href={getDownloadLinkFromIPFS(
+                    gateway == '竞速下载' ? ipfsGateways[0] : gateway,
+                    book
+                  )}
                   variant="outline"
                   fontSize={['3xl', '3xl', 'md']}
                 >
