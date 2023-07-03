@@ -171,7 +171,7 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
                         leftIcon={<LinkIcon />}
                         onClick={() => {
                           window.open(
-                            'https://libgen.rs/book/index.php?md5=' + md5,
+                            import.meta.env.VITE_MD5_BASE_URL + md5,
                             '_blank',
                             'noreferrer'
                           );
@@ -189,24 +189,20 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
           </Flex>
         </CardBody>
         <CardFooter flexDirection="column">
-          {ipfs_cid != undefined ? (
+          {ipfs_cid != undefined && rootContext.ipfsGateways.length > 0 ? (
             <SimpleGrid columns={{ sm: 2, md: 3, lg: 4, xl: 5 }} spacing={{ base: 2, md: 4 }}>
               <IpfsDownloadButton book={book} onlyIcon={false}></IpfsDownloadButton>
 
-              {rootContext.ipfsGateways.length > 0 ? (
-                <>
-                  {rootContext.ipfsGateways.map((gateway) => (
-                    <Button
-                      as={ExternalLink}
-                      href={getDownloadLinkFromIPFS(gateway, book)}
-                      key={gateway}
-                      variant="outline"
-                    >
-                      {gateway}
-                    </Button>
-                  ))}
-                </>
-              ) : null}
+              {rootContext.ipfsGateways.map((gateway) => (
+                <Button
+                  as={ExternalLink}
+                  href={getDownloadLinkFromIPFS(gateway, book)}
+                  key={gateway}
+                  variant="outline"
+                >
+                  {gateway}
+                </Button>
+              ))}
             </SimpleGrid>
           ) : null}
         </CardFooter>

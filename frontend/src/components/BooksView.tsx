@@ -171,7 +171,9 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
         'ipfs_cid',
         (() => {
           const renderer = (book: Book) => {
-            return <IpfsDownloadButton book={book} onlyIcon></IpfsDownloadButton>;
+            return book.ipfs_cid != undefined && rootContext.ipfsGateways.length > 0 ? (
+              <IpfsDownloadButton book={book} onlyIcon></IpfsDownloadButton>
+            ) : null;
           };
           return {
             header: '',
