@@ -470,7 +470,7 @@ dependencies = [
 
 [[package]]
 name = "book-searcher"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "actix-web",
  "actix-web-static-files",
@@ -488,7 +488,7 @@ dependencies = [
 
 [[package]]
 name = "book-searcher-core"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "anyhow",
  "csv",
@@ -504,7 +504,7 @@ dependencies = [
 
 [[package]]
 name = "book-searcher-desktop"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "anyhow",
  "book-searcher-core",
@@ -521,7 +521,7 @@ dependencies = [
 
 [[package]]
 name = "book-searcher-lambda"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "actix-web",
  "anyhow",
