@@ -48,7 +48,7 @@ const Search: React.FC<SearchProps> = ({ setBooks }) => {
       };
 
       search(rmEmptyString(query)).then((books) => {
-        setBooks(books);
+        books != undefined && books.length > 0 && setBooks(books);
       });
     },
     [title, author, publisher, extension, language, isbn, complexQuery],

@@ -14,7 +14,6 @@ import {
   useDisclosure,
   Image,
   Stack,
-  useToast,
   TextProps
 } from '@chakra-ui/react';
 import { CopyIcon, LinkIcon } from '@chakra-ui/icons';
@@ -100,7 +99,7 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
               width="auto"
               maxWidth="150px"
               objectFit="contain"
-              src={getCoverImageUrl(book.cover_url)}
+              src={getCoverImageUrl(cover_url)}
               onError={(event) => {
                 (event.target as HTMLImageElement).style.display = 'none';
               }}
@@ -189,7 +188,7 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
           </Flex>
         </CardBody>
         <CardFooter flexDirection="column">
-          {ipfs_cid != undefined && rootContext.ipfsGateways.length > 0 ? (
+          {ipfs_cid != undefined && ipfs_cid.length > 0 && rootContext.ipfsGateways.length > 0 ? (
             <SimpleGrid columns={{ sm: 2, md: 3, lg: 4, xl: 5 }} spacing={{ base: 2, md: 4 }}>
               <IpfsDownloadButton book={book} onlyIcon={false}></IpfsDownloadButton>
 
