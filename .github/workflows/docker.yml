@@ -1,8 +1,6 @@
 name: Build/release docker images
 on:
   push:
-    branches:
-      - 'master'
     paths-ignore:
       - '**.md'
     tags:
