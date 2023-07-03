@@ -41,8 +41,8 @@
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
         "timestampUrl": "",
-        "wix": {
-          "template": "main.wxs"
+        "nsis": {
+          "installMode": "currentUser"
         }
       }
     },
@@ -53,6 +53,7 @@
       {
         "center": true,
         "fullscreen": false,
+        "maximized": true,
         "height": 900,
         "resizable": true,
         "title": "Book Searcher",
