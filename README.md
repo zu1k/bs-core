@@ -6,11 +6,9 @@
 [![GitHub issues](https://img.shields.io/github/issues/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/issues)
 [![GitHub license](https://img.shields.io/github/license/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/blob/master/LICENSE)
 
-Easy and fast book searcher, create and search your private library.
+Easy and blazing-fast book searcher, create and search your private library.
 
 Book Searcher can index metadata for over 10 million books in one minute, and search in 30µs.
-
-This project does not provide any book files, but only provides searching based on the user's data.
 
 ## Usage
 
