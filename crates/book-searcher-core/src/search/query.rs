@@ -28,7 +28,6 @@ pub struct SearchQuery {
     pub extension: Option<String>,
     pub language: Option<String>,
     pub isbn: Option<String>,
-    pub md5: Option<String>,
     pub id: Option<String>,
 
     pub query: Option<String>,
@@ -101,12 +100,6 @@ impl SearchQuery {
 
         if let Some(ref isbn) = self.isbn {
             let term = Term::from_field_text(searcher.isbn, isbn.to_ascii_lowercase().trim());
-            let query = TermQuery::new(term, IndexRecordOption::WithFreqsAndPositions);
-            queries.push(Box::new(query));
-        }
-
-        if let Some(ref md5) = self.md5 {
-            let term = Term::from_field_text(searcher.md5, md5.to_ascii_lowercase().trim());
             let query = TermQuery::new(term, IndexRecordOption::WithFreqsAndPositions);
             queries.push(Box::new(query));
         }

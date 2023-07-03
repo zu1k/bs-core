@@ -127,7 +127,7 @@ impl Searcher {
         let year = schema_builder.add_u64_field("year", STORED);
         let pages = schema_builder.add_u64_field("pages", STORED | FAST);
         let isbn = schema_builder.add_text_field("isbn", TEXT | STORED);
-        let md5 = schema_builder.add_text_field("md5", STRING | STORED);
+        let md5 = schema_builder.add_text_field("md5", STORED);
         let ipfs_cid = schema_builder.add_text_field("ipfs_cid", STORED);
         let cover_url = schema_builder.add_text_field("cover_url", STORED);
         let score_boost = schema_builder.add_u64_field("score_boost", FAST);

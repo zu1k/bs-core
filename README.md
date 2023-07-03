@@ -74,7 +74,6 @@ You can search by the following fields:
 - extension
 - language
 - isbn
-- md5
 - id
 
 Examples:
