@@ -46,12 +46,6 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
   const { t } = useTranslation();
   const rootContext = useContext(RootContext);
 
-  React.useEffect(() => {
-    getIpfsGateways().then((gateways) => {
-      rootContext.setIpfsGateways(gateways);
-    });
-  }, []);
-
   const columns = React.useMemo(
     () => [
       columnHelper.accessor('cover_url', {

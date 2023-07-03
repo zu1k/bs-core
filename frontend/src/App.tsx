@@ -12,6 +12,7 @@ import RootContext from './store';
 import Search from './components/Search';
 import { version } from '../package.json';
 import { useTranslation } from 'react-i18next';
+import getIpfsGateways from './scripts/ipfs';
 
 const Main: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -32,6 +33,12 @@ const Settings =
 const App: React.FC = () => {
   const { t } = useTranslation();
   const [ipfsGateways, setIpfsGateways] = useState<string[]>([]);
+
+  React.useEffect(() => {
+    getIpfsGateways().then((gateways) => {
+      setIpfsGateways(gateways);
+    });
+  }, []);
 
   return (
     <RootContext.Provider value={{ ipfsGateways, setIpfsGateways }}>
