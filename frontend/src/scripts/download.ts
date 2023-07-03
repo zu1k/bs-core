@@ -4,22 +4,6 @@ import axios, { AxiosProgressEvent, AxiosResponse } from 'axios';
 import fileDownload from 'js-file-download';
 import { t } from 'i18next';
 
-const ipfsGateways = [
-  'https://gateway.pinata.cloud',
-  'https://cloudflare-ipfs.com',
-  'https://cf-ipfs.com',
-  'https://ipfs-gateway.cloud',
-  'https://4everland.io',
-  'https://ipfs.io',
-  'https://w3s.link',
-  'https://gateway.ipfs.io',
-  'https://ipfs.eth.aragon.network',
-  'https://ipfs.joaoleitao.org',
-  'https://nftstorage.link',
-  'https://dweb.link',
-  'https://ipfs.best-practice.se'
-];
-
 export default async function autoDownload(book: Book, toast: any, setDownloadProgress: any) {
   const filename = `${book.title}_${book.author}.${book.extension}`;
   toast({
@@ -31,7 +15,7 @@ export default async function autoDownload(book: Book, toast: any, setDownloadPr
   });
 
   console.log('Download: ', book);
-  var gateways = ipfsGateways.concat(await getIpfsGateways());
+  var gateways = await getIpfsGateways();
   gateways = gateways.filter(function (item, pos) {
     return gateways.indexOf(item) == pos;
   });
@@ -90,7 +74,7 @@ export default async function autoDownload(book: Book, toast: any, setDownloadPr
 }
 
 const downloadBookData = async function (book: Book, signal: AbortSignal) {
-  var gateways = ipfsGateways.concat(await getIpfsGateways());
+  var gateways = await getIpfsGateways();
   gateways = gateways.filter(function (item, pos) {
     return gateways.indexOf(item) == pos;
   });
@@ -129,7 +113,7 @@ const downloadBookData = async function (book: Book, signal: AbortSignal) {
     });
 };
 
-export { downloadBookData, ipfsGateways };
+export { downloadBookData };
 
 function anySignal(signals: AbortSignal[]) {
   const controller = new AbortController();
