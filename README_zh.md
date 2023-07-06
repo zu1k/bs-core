@@ -6,6 +6,8 @@
 [![GitHub issues](https://img.shields.io/github/issues/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/issues)
 [![GitHub license](https://img.shields.io/github/license/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/blob/master/LICENSE)
 
+#### [English](https://github.com/book-searcher-org/book-searcher/blob/master/README.md)
+
 简单而超快的图书搜索器，创建并搜索您的私人图书馆。
 
 Book Searcher可以在一分钟内索引超过1000万本书的元数据，并以30微秒的速度进行搜索。
