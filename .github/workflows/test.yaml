@@ -1,6 +1,13 @@
 name: Build Test
 
-on: [push, pull_request_target, workflow_dispatch]
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+    branches:
+      - master
+  pull_request_target:
+  workflow_dispatch:
 
 jobs:
   build:

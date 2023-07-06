@@ -1,10 +1,13 @@
 name: Build/release docker images
+
 on:
   push:
     paths-ignore:
       - '**.md'
     tags:
       - "*"
+  workflow_dispatch:
+
 jobs:
   docker:
     runs-on: ubuntu-latest
