@@ -6,7 +6,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/issues)
 [![GitHub license](https://img.shields.io/github/license/book-searcher-org/book-searcher)](https://github.com/book-searcher-org/book-searcher/blob/master/LICENSE)
 
-#### [中文版](https://github.com/DateBro/book-searcher/blob/master/README_zh.md)
+#### [中文版](https://github.com/book-searcher-org/book-searcher/blob/master/README_zh.md)
 
 Easy and blazing-fast book searcher, create and search your private library.
 

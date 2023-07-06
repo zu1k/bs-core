@@ -19,7 +19,7 @@ Book Searcher可以在一分钟内索引超过1000万本书的元数据，并以
 
 **1. 从[Release页面](https://github.com/book-searcher-org/book-searcher/releases)下载预编译的桌面版安装程序**
 
-或者您也可以自行编译。请参考下面的[从源代码构建](#从源代码构建)部分的说明。
+或者您也可以自行编译。请参考下面的[从源代码构建](#构建桌面版)部分的说明。
 
 - Windows: Book-Searcher-desktop_version_x64.msi
 - macOS: Book-Searcher-desktop_version_x64.dmg
