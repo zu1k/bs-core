@@ -13,15 +13,17 @@ import {
   InputRightElement,
   Stack,
   Textarea,
-  useDisclosure
+  useDisclosure,
+  useToast
 } from '@chakra-ui/react';
 import { TbFolder, TbSettings } from 'react-icons/tb';
 
 import React from 'react';
 import RootContext from '../store';
 import { SettingsItem } from './SettingsItem';
+import CreateIndex from './CreateIndex';
 import { invoke } from '@tauri-apps/api';
-import { open } from '@tauri-apps/api/dialog';
+import { open } from '@tauri-apps/plugin-dialog';
 import { parseIpfsGateways } from '../scripts/ipfs';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -59,7 +61,7 @@ const Settings: React.FC = () => {
         rootContext.setIpfsGateways(config.ipfs_gateways);
       });
   }, [isOpen]);
-
+  const toast = useToast();
   const onSubmit = async (newConfig: Config) => {
     setSubmitting(true);
 
@@ -70,7 +72,13 @@ const Settings: React.FC = () => {
     };
     await invoke('set_config', { newConfig: tauriConfig });
     rootContext.setIpfsGateways(ipfsGateways);
-    onClose();
+    toast({
+      title: t('settings.success'),
+      status: 'success',
+      duration: 2000,
+      position: 'top',
+      isClosable: true
+    });
     setSubmitting(false);
   };
 
@@ -145,9 +153,16 @@ const Settings: React.FC = () => {
             <Button variant="outline" mr={3} onClick={onClose}>
               {t('settings.cancel')}
             </Button>
-            <Button colorScheme="blue" type="submit" form="settings-form" isLoading={submitting}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              type="submit"
+              form="settings-form"
+              isLoading={submitting}
+            >
               {t('settings.save')}
             </Button>
+            <CreateIndex />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
