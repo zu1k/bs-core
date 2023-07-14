@@ -58,7 +58,7 @@ const CreateIndex: React.FC = () => {
         position: 'top',
         isClosable: true
       });
-    } catch (e) { }
+    } catch (e) {}
     setSubmitting(false);
   });
 
