@@ -1,7 +1,7 @@
 import { Link, LinkProps } from '@chakra-ui/react';
 
 import React from 'react';
-import { open } from '@tauri-apps/api/shell';
+import { open } from '@tauri-apps/plugin-shell';
 
 const ExternalLink = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   return (

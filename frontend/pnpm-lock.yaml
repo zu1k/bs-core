@@ -35,6 +35,9 @@ dependencies:
   '@tauri-apps/plugin-dialog':
     specifier: 2.0.0-alpha.0
     version: registry.npmmirror.com/@tauri-apps/plugin-dialog@2.0.0-alpha.0
+  '@tauri-apps/plugin-shell':
+    specifier: 2.0.0-alpha.0
+    version: registry.npmmirror.com/@tauri-apps/plugin-shell@2.0.0-alpha.0
   ahooks:
     specifier: ^3.7.8
     version: 3.7.8(react@18.2.0)
@@ -6090,6 +6093,14 @@ packages:
   registry.npmmirror.com/@tauri-apps/plugin-dialog@2.0.0-alpha.0:
     resolution: {integrity: sha512-dJ3LDrnvTW0y5Ff4rxY158DQaZG2P4zm0NgJQVU1tSZ/kBah7/X8PmHS8bFD7EOohh5vAol5dLqvPmdogBGajw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@tauri-apps/plugin-dialog/-/plugin-dialog-2.0.0-alpha.0.tgz}
     name: '@tauri-apps/plugin-dialog'
+    version: 2.0.0-alpha.0
+    dependencies:
+      '@tauri-apps/api': registry.npmmirror.com/@tauri-apps/api@2.0.0-alpha.4
+    dev: false
+
+  registry.npmmirror.com/@tauri-apps/plugin-shell@2.0.0-alpha.0:
+    resolution: {integrity: sha512-Tyl6lsM/S+v5n/cJpIErCGq5CJwGV1xVLB+xyG364wA/y1MpYTVrk5acCSB5sF+OSOtR84ZeazkL4tjCM6EIUA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@tauri-apps/plugin-shell/-/plugin-shell-2.0.0-alpha.0.tgz}
+    name: '@tauri-apps/plugin-shell'
     version: 2.0.0-alpha.0
     dependencies:
       '@tauri-apps/api': registry.npmmirror.com/@tauri-apps/api@2.0.0-alpha.4

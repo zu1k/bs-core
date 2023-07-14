@@ -141,6 +141,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_shell::init())
         .manage(config)
         .manage(searcher)
         .invoke_handler(tauri::generate_handler![
