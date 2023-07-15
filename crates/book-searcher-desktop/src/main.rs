@@ -124,7 +124,7 @@ async fn create_index(
             .iter()
             .for_each(|file| searcher.index(file));
     }
-    return Ok(());
+    Ok(())
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
