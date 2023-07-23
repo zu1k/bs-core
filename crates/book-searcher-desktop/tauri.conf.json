@@ -47,6 +47,18 @@
       }
     },
     "security": {
+      "dangerousRemoteDomainIpcAccess": [
+        {
+          "domain": "tauri.localhost",
+          "windows": [
+            "main"
+          ],
+          "plugins": [
+            "dialog",
+            "shell"
+          ]
+        }
+      ],
       "csp": null
     },
     "windows": [
