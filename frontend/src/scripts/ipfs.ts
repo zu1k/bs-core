@@ -13,7 +13,10 @@ export default async function getIpfsGateways() {
       return config.ipfs_gateways;
     });
   } else {
-    const ipfsGateways: string[] = JSON.parse(localStorage.getItem('ipfs_gateways') || '[]');
+    const ipfsGateways: string[] = JSON.parse(
+      localStorage.getItem('ipfs_gateways') ||
+        '["https://cloudflare-ipfs.com","https://dweb.link","https://ipfs.io","https://gateway.pinata.cloud"]'
+    );
     return ipfsGateways;
   }
 }
