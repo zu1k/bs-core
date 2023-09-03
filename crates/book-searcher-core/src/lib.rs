@@ -154,7 +154,7 @@ impl Searcher {
         query_parser.set_conjunction_by_default();
 
         Self {
-            compressor: Compressor::Brotli,
+            compressor: Compressor::None,
 
             index,
             schema,
@@ -182,16 +182,11 @@ impl Searcher {
         let compressor = match compressor {
             "none" => Compressor::None,
             "lz4" => Compressor::Lz4,
-            "brotli" => Compressor::Brotli,
-            "snappy" => Compressor::Snappy,
             _ => {
                 if compressor.starts_with("zstd") {
                     Compressor::Zstd(ZstdCompressor::default())
                 } else {
-                    println!(
-                        "compressor not valid: {:#?}",
-                        ["none", "lz4", "brotli", "snappy", "zstd",]
-                    );
+                    println!("compressor not valid: {:#?}", ["none", "lz4", "zstd",]);
                     std::process::exit(1);
                 }
             }

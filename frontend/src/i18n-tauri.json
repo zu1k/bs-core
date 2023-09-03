@@ -19,7 +19,7 @@
           "raw_files_required": "The CSV files are required.",
           "raw_files_browse": "Browse",
           "compressor": "Compresser",
-          "compresser_help": "Specify index compressor: none, lz4, brotli, snappy, zstd. Default: brotli.",
+          "compresser_help": "Specify index compressor: none, lz4, zstd. Default: none.",
           "cancel": "Cancel",
           "create": "Create",
           "success": "Index Created"
@@ -47,7 +47,7 @@
           "raw_files_required": "CSV文件不能为空。",
           "raw_files_browse": "浏览",
           "compressor": "压缩格式",
-          "compresser_help": "选择一个压缩格式: none, lz4, brotli, snappy, zstd。默认: brotli。",
+          "compresser_help": "选择一个压缩格式: none, lz4, zstd。默认: none。",
           "cancel": "取消",
           "create": "创建",
           "success": "索引创建成功"
@@ -75,7 +75,7 @@
           "raw_files_required": "Les fichiers CSV sont requis.",
           "raw_files_browse": "Parcourir",
           "compressor": "Compresser",
-          "compresser_help": "Spécifiez le compresseur d'index : aucun, lz4, brotli, snappy, zstd. Par défaut : brotli.",
+          "compresser_help": "Spécifiez le compresseur d'index : none, lz4, zstd. Par défaut : none.",
           "cancel": "Annuler",
           "create": "Créer",
           "success": "Index Créé"
@@ -103,7 +103,7 @@
           "raw_files_required": "I file CSV sono obbligatori.",
           "raw_files_browse": "Sfoglia",
           "compressor": "Comprimi",
-          "compresser_help": "Specifica il compressore dell'indice: nessuno, lz4, brotli, snappy, zstd. Predefinito: brotli.",
+          "compresser_help": "Specifica il compressore dell'indice: none, lz4, zstd. Predefinito: none.",
           "cancel": "Annulla",
           "create": "Crea",
           "success": "Indice creato"

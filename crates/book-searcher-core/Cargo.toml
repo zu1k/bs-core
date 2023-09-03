@@ -15,7 +15,7 @@ log = { workspace = true }
 serde = { workspace = true }
 serde_with = { workspace = true }
 
-tantivy = { workspace = true, features = ["mmap", "lz4-compression", "brotli-compression", "snappy-compression", "zstd-compression"] }
+tantivy = { workspace = true, features = ["mmap", "lz4-compression", "zstd-compression"] }
 tantivy-meta-tokenizer = { path = "../tantivy-meta-tokenizer" }
 
 csv = "1.1"

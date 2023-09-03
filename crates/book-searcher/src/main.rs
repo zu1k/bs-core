@@ -86,8 +86,8 @@ struct Index {
     #[clap(
         short,
         long,
-        default_value = "brotli",
-        help = "specify index compressor: none, lz4, brotli, snappy, zstd"
+        default_value = "none",
+        help = "specify index compressor: none, lz4, zstd"
     )]
     compressor: String,
 }

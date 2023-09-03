@@ -120,10 +120,8 @@ const CreateIndex: React.FC = () => {
                     {...register('compressor')}
                     aria-invalid={errors.compressor ? 'true' : 'false'}
                   >
-                    <option>none</option>
+                    <option selected>none</option>
                     <option>lz4</option>
-                    <option selected>brotli</option>
-                    <option>snappy</option>
                     <option>zstd</option>
                   </Select>
                 }

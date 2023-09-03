@@ -55,21 +55,20 @@ impl TokenStream for MetaTokenStream {
 }
 
 impl Tokenizer for MetaTokenizer {
-    type TokenStream<'a> = Box<dyn TokenStream + 'a>;
+    type TokenStream<'a> = BoxTokenStream<'a>;
 
-    fn token_stream<'a>(&'a mut self, text: &'a str) -> Box<dyn TokenStream + 'a> {
+    fn token_stream<'a>(&'a mut self, text: &'a str) -> BoxTokenStream<'a> {
         if text.is_empty() {
-            return BoxTokenStream::from(MetaTokenStream {
+            return BoxTokenStream::new(MetaTokenStream {
                 tokens: vec![],
                 index: 0,
-            })
-            .into();
+            });
         }
 
         if utils::is_chinese(text) {
-            return BoxTokenStream::from(chinese::token_stream(text)).into();
+            return BoxTokenStream::new(chinese::token_stream(text));
         }
 
-        return BoxTokenStream::from(self.latin.token_stream(text)).into();
+        return BoxTokenStream::new(self.latin.token_stream(text));
     }
 }

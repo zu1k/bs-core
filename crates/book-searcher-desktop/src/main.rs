@@ -110,7 +110,7 @@ async fn create_index(
 ) -> Result<(), String> {
     let mut searcher = searcher.lock().await;
     let compressor = if create_index_config.compressor.is_empty() {
-        "brotli"
+        "none"
     } else {
         &create_index_config.compressor
     };
