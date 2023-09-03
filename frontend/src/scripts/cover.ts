@@ -9,6 +9,6 @@ export default function getCoverImageUrl(cover: string | undefined) {
     if (cover.startsWith(zlib_cover_prefix)) {
       return cover.replace(zlib_cover_prefix, import.meta.env.VITE_COVER_ZLIBRARY_URL);
     }
-    return import.meta.env.VITE_COVER_BASE_URL + cover;
+    return import.meta.env.VITE_COVER_LIBGEN_URL + cover;
   }
 }
