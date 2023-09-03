@@ -7,11 +7,11 @@ mod query;
 impl Searcher {
     pub fn search(&self, query: &SearchQuery, limit: usize) -> Vec<Book> {
         let Ok(reader) = self.index.reader() else {
-            return vec![]
+            return vec![];
         };
 
         let Ok(query) = query.parse(self) else {
-            return vec![]
+            return vec![];
         };
 
         let searcher = reader.searcher();

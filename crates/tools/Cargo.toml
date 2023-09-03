@@ -1,0 +1,22 @@
+[package]
+name = "tools"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+book-searcher-core = { workspace = true }
+tantivy-meta-tokenizer = { workspace = true }
+
+anyhow = { workspace = true }
+env_logger = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }
+serde_with = { workspace = true }
+
+csv = "1.1"
+url = "2.4"
