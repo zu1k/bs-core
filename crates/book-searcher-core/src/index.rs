@@ -203,9 +203,7 @@ fn get_book_score_boost(book: &Book) -> u64 {
 }
 
 fn skip_this_book(book: &Book) -> bool {
-    book.ipfs_cid.is_empty()
-        || book.title.contains("b~c@x！%b……x￥b")
-        || book.author.contains("b~c@x！%b……x￥b")
+    book.title.contains("b~c@x！%b……x￥b") || book.author.contains("b~c@x！%b……x￥b")
 }
 
 #[test]
