@@ -16,8 +16,7 @@ fn main() {
                 Ok(ref mut book) => {
                     if book.cover_url.starts_with("http") {
                         let u = url::Url::parse(&book.cover_url).unwrap();
-                        book.cover_url =
-                            format!("zlib://{}?{}", u.path(), u.query().unwrap_or_default());
+                        book.cover_url = format!("zlib://{}", u.path());
                     }
 
                     if let Err(err) = writer.serialize(book) {

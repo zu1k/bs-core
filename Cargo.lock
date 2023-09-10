@@ -3828,6 +3828,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde-jsonlines"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4684abdec99c1de7e507a3516c82385ff74d54c385973846b079bfd9f5920d35"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "serde_derive"
 version = "1.0.188"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4889,6 +4899,8 @@ dependencies = [
  "env_logger",
  "log",
  "serde",
+ "serde-jsonlines",
+ "serde_json",
  "serde_with",
  "tantivy-meta-tokenizer",
  "url",
