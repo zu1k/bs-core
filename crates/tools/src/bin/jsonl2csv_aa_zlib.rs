@@ -32,26 +32,26 @@ pub struct ZlibMetadata {
     pub category_id: String,
 }
 
-impl Into<Book> for ZlibMetadata {
-    fn into(self) -> Book {
-        let mut cover = self.cover_path;
+impl From<ZlibMetadata> for Book {
+    fn from(val: ZlibMetadata) -> Self {
+        let mut cover = val.cover_path;
         if !cover.is_empty() {
             cover = format!("zlib://{cover}");
         }
         Book {
-            id: self.zlibrary_id,
-            title: self.title,
-            author: self.author,
-            publisher: self.publisher,
-            extension: self.extension,
-            filesize: self.filesize_reported,
-            language: self.language,
-            year: self.year.parse().unwrap_or_default(),
-            pages: self.pages.parse().unwrap_or_default(),
-            isbn: self.isbns.join(","),
+            id: val.zlibrary_id,
+            title: val.title,
+            author: val.author,
+            publisher: val.publisher,
+            extension: val.extension,
+            filesize: val.filesize_reported,
+            language: val.language,
+            year: val.year.parse().unwrap_or_default(),
+            pages: val.pages.parse().unwrap_or_default(),
+            isbn: val.isbns.join(","),
             ipfs_cid: String::default(),
             cover_url: cover,
-            md5: self.md5_reported,
+            md5: val.md5_reported,
         }
     }
 }
@@ -67,11 +67,9 @@ fn main() {
     let input = json_lines::<AABook, _>(args[1].as_str()).unwrap();
     let mut writer = csv::Writer::from_path(args[2].as_str()).unwrap();
 
-    for book in input {
-        if let Ok(book) = book {
-            if let Err(err) = writer.serialize::<Book>(book.metadata.into()) {
-                println!("err: {err}");
-            }
+    for book in input.flatten() {
+        if let Err(err) = writer.serialize::<Book>(book.metadata.into()) {
+            println!("err: {err}");
         }
     }
 }
