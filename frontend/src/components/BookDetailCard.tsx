@@ -85,6 +85,7 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
             </Heading>
             {extension === 'epub' &&
             ipfs_cid != undefined &&
+            ipfs_cid.length > 0 &&
             rootContext.ipfsGateways.length > 0 ? (
               <Button onClick={onOpen}>{t('table.preview')}</Button>
             ) : null}
@@ -113,7 +114,7 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
                     isTruncated
                     textOverflow="hidden"
                   >
-                    {ipfs_cid != undefined ? (
+                    {ipfs_cid != undefined && ipfs_cid.length > 0 ? (
                       <Button
                         colorScheme="gray"
                         variant="ghost"
