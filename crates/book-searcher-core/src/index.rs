@@ -163,6 +163,10 @@ impl Searcher {
 // so score_boost should less than 90
 fn get_book_score_boost(book: &Book) -> u64 {
     let mut score_boost: u64 = 0;
+    if !book.ipfs_cid.is_empty() {
+        score_boost += 20;
+    }
+
     if !book.author.is_empty() {
         score_boost += 10;
         if book.author.contains("ePUBw") || book.author.contains("chenjin5") {
