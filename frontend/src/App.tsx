@@ -1,4 +1,4 @@
-import { Flex, HStack, Spacer } from '@chakra-ui/react';
+import { Flex, HStack, Icon, IconButton, Spacer } from '@chakra-ui/react';
 import React, { Suspense, useState } from 'react';
 import { SkipNavContent, SkipNavLink } from '@chakra-ui/skip-nav';
 
@@ -10,9 +10,11 @@ import Header from './components/Header';
 import LanguageSwitch from './components/LanguageSwitch';
 import RootContext from './store';
 import Search from './components/Search';
-import { version } from '../package.json';
+import { version, repository } from '../package.json';
 import { useTranslation } from 'react-i18next';
 import getIpfsGateways from './scripts/ipfs';
+import ExternalLink from './components/ExternalLink';
+import { FaGithub } from 'react-icons/fa';
 
 const Main: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -46,6 +48,14 @@ const App: React.FC = () => {
         <SkipNavLink>Skip to content</SkipNavLink>
         <Header title="Book Searcher">
           <HStack spacing={{ base: 1, md: 2 }}>
+            <IconButton
+              as={ExternalLink}
+              aria-label={t('nav.repository')}
+              title={t('nav.repository') ?? ''}
+              href={repository}
+              variant="ghost"
+              icon={<Icon as={FaGithub} boxSize={5} />}
+            />
             <LanguageSwitch />
             <ColorModeSwitch />
             <Suspense>
@@ -57,7 +67,9 @@ const App: React.FC = () => {
         <Main />
 
         <Spacer />
-        <Footer>Book Searcher v{version} ©2023</Footer>
+        <Footer>
+          <ExternalLink href={repository}>Book Searcher</ExternalLink> v{version} ©2023
+        </Footer>
       </Flex>
     </RootContext.Provider>
   );
