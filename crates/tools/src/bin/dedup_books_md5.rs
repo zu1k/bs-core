@@ -15,7 +15,7 @@ fn main() {
         for book in rdr.deserialize::<Book>().flatten() {
             map.entry(book.md5.clone())
                 .and_modify(|e| {
-                    e.push_str(",");
+                    e.push(',');
                     e.push_str(&book.isbn);
                 })
                 .or_insert(book.isbn);
