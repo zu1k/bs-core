@@ -37,7 +37,8 @@
         "previous_page": "Previous page",
         "page": "Page {{page}}",
         "collapse": "Collapse",
-        "preview": "Preview"
+        "preview": "Preview",
+        "redirect2aa": "Anna's Archive"
       },
       "search": {
         "complex": "Complex search"
@@ -94,7 +95,8 @@
         "previous_page": "上一页",
         "page": "第 {{page}} 页",
         "collapse": "收起",
-        "preview": "预览"
+        "preview": "预览",
+        "redirect2aa": "Anna's Archive"
       },
       "search": {
         "complex": "复杂搜索"
@@ -151,7 +153,8 @@
         "previous_page": "Page précédente",
         "page": "Page {{page}}",
         "collapse": "Replier",
-        "preview": "Aperçu"
+        "preview": "Aperçu",
+        "redirect2aa": "Anna's Archive"
       },
       "search": {
         "complex": "Recherche complexe"
@@ -208,7 +211,8 @@
         "previous_page": "Pagina precedente",
         "page": "Pagina {{page}}",
         "collapse": "Richiudi",
-        "download": "Scarica"
+        "preview": "Anteprima",
+        "redirect2aa": "Anna's Archive"
       },
       "search": {
         "complex": "Ricerca dettagliata"

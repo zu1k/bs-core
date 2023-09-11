@@ -54,6 +54,7 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ipfsCidCopied, setIpfsCidCopied] = useState(false);
+  const [md5Copied, setMd5Copied] = useState(false);
 
   const {
     id,
@@ -83,6 +84,15 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
             <Heading as="h3" fontSize={['xl', '2xl', '2xl']} flexShrink={0} flex={1} minW="0">
               <Text>{title}</Text>
             </Heading>
+            {md5 != undefined && md5.length > 0 ? (
+              <Button
+                onClick={() => {
+                  window.open(import.meta.env.VITE_MD5_BASE_URL + md5, '_blank', 'noreferrer');
+                }}
+              >
+                {t('table.redirect2aa')}
+              </Button>
+            ) : null}
             {extension === 'epub' &&
             ipfs_cid != undefined &&
             ipfs_cid.length > 0 &&
@@ -170,14 +180,14 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
                         size="xs"
                         leftIcon={<LinkIcon />}
                         onClick={() => {
-                          window.open(
-                            import.meta.env.VITE_MD5_BASE_URL + md5,
-                            '_blank',
-                            'noreferrer'
-                          );
+                          navigator.clipboard.writeText(md5?.toLowerCase() ?? 'Unknown');
+                          setMd5Copied(true);
+                          setTimeout(() => {
+                            setMd5Copied(false);
+                          }, 2000);
                         }}
                       >
-                        {md5}
+                        {md5Copied ? t('copied') : md5}
                       </Button>
                     ) ||
                       t('book.unknown') ||
