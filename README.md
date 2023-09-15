@@ -80,12 +80,12 @@ You can search by the following fields:
 
 Examples:
 
-- `/search?limit=30&title=TITLE`
-- `/search?limit=30&title=TITLE&author=AUTHOR`
-- `/search?limit=30&isbn=ISBN`
-- `/search?limit=30&query=title:TITLE extension:epub publisher:PUBLISHER`
+- `/search?limit=30&offset=0&title=TITLE`
+- `/search?limit=30&offset=0&title=TITLE&author=AUTHOR`
+- `/search?limit=30&offset=0&isbn=ISBN`
+- `/search?limit=30&offset=0&query=title:TITLE extension:epub publisher:PUBLISHER`
 
-We now have two search modes, `/search?limit=30&mode=explore&title=TITLE&author=AUTHOR`
+We now have two search modes, `/search?limit=30&offset=0&mode=explore&title=TITLE&author=AUTHOR`
 
 - filter: the results need to meet all restrictions, default mode
 - explore: the results only need to meet certain restrictions
