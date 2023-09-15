@@ -34,17 +34,29 @@ struct SearchQuery {
     query: book_searcher_core::search::SearchQuery,
     #[serde(default = "default_limit")]
     limit: usize,
+    #[serde(default)]
+    offset: usize,
 }
 
 #[derive(Serialize)]
 struct SearchResult {
+    total: usize,
+    offset: usize,
+    limit: usize,
     books: Vec<Book>,
 }
 
 #[get("/search")]
 async fn search(query: web::Query<SearchQuery>, state: web::Data<AppState>) -> impl Responder {
-    let books = state.searcher.search(&query.query, query.limit);
-    let result = SearchResult { books };
+    let (books, count) = state
+        .searcher
+        .search(&query.query, query.limit, query.offset);
+    let result = SearchResult {
+        total: count,
+        offset: query.offset,
+        limit: query.limit,
+        books,
+    };
 
     return HttpResponse::Ok()
         .insert_header(header::ContentType::json())
