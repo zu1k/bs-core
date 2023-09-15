@@ -2,7 +2,6 @@
 members = [
     "crates/book-searcher",
     "crates/book-searcher-core",
-    "crates/book-searcher-lambda",
     "crates/book-searcher-desktop",
     "crates/tantivy-meta-tokenizer",
     "crates/tools",
