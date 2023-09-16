@@ -85,11 +85,7 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
               <Text>{title}</Text>
             </Heading>
             {md5 != undefined && md5.length > 0 ? (
-              <Button
-                onClick={() => {
-                  window.open(import.meta.env.VITE_MD5_BASE_URL + md5, '_blank', 'noreferrer');
-                }}
-              >
+              <Button as={ExternalLink} href={import.meta.env.VITE_MD5_BASE_URL + md5}>
                 {t('table.redirect2aa')}
               </Button>
             ) : null}
