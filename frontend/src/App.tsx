@@ -17,12 +17,22 @@ import ExternalLink from './components/ExternalLink';
 import { FaGithub } from 'react-icons/fa';
 
 const Main: React.FC = () => {
+  const [pagination, setPagination] = React.useState({
+    pageSize: 20,
+    pageIndex: 0
+  });
+  const [pageCount, setPageCount] = useState<number>(1);
   const [books, setBooks] = useState<Book[]>([]);
   return (
     <>
       <SkipNavContent />
-      <Search setBooks={setBooks} />
-      <BooksView books={books} />
+      <Search setBooks={setBooks} pagination={pagination} setPageCount={setPageCount} />
+      <BooksView
+        books={books}
+        pagination={pagination}
+        setPagination={setPagination}
+        pageCount={pageCount}
+      />
     </>
   );
 };

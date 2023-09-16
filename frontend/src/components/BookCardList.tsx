@@ -33,6 +33,8 @@ import { useTranslation } from 'react-i18next';
 import { Book } from '../scripts/searcher';
 import { filesize as formatFileSize } from 'filesize';
 import getCoverImageUrl from '../scripts/cover';
+import { OnPaginationChange } from './DataTable';
+import Pagination from './Pagination';
 
 const colorSchemes = [
   'red',
@@ -60,7 +62,9 @@ const rendererLanguage = (value: string) => {
 export interface BookCardListProps<Data extends object> extends TableProps {
   data: Data[];
   columns: ColumnDef<Data, any>[];
-  pageSize?: number;
+  pagination: PaginationState;
+  setPagination: OnPaginationChange;
+  pageCount: number;
   filterSchema?: { [K in keyof Data]?: Data[K][] };
   renderSubComponent: (row: Row<Data>) => React.ReactNode;
 }
@@ -68,17 +72,15 @@ export interface BookCardListProps<Data extends object> extends TableProps {
 export default function BookCardList<Data extends object>({
   data,
   columns,
-  pageSize = 20,
+  pagination,
+  setPagination,
+  pageCount,
   filterSchema = {},
   renderSubComponent,
   ...props
 }: BookCardListProps<Data>) {
   const { t } = useTranslation();
   const { colorMode } = useColorMode();
-  const [pagination, setPagination] = React.useState<PaginationState>({
-    pageSize,
-    pageIndex: 0
-  });
 
   const table = useReactTable({
     columns,
@@ -87,6 +89,7 @@ export default function BookCardList<Data extends object>({
     state: {
       pagination
     },
+    pageCount,
 
     enableHiding: true,
 
@@ -97,7 +100,8 @@ export default function BookCardList<Data extends object>({
     getRowCanExpand: () => true,
     getExpandedRowModel: getExpandedRowModel(),
 
-    getPaginationRowModel: getPaginationRowModel(),
+    manualPagination: true,
+    // getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination
   });
 
@@ -163,58 +167,18 @@ export default function BookCardList<Data extends object>({
           <Text color={colorMode === 'light' ? 'gray.400' : 'gray.600'}>{t('table.no_data')}</Text>
         </Flex>
       )}
-      <Flex w="full" mt={4} mr={2} justify="flex-end" wrap="wrap">
-        <IconButton
-          aria-label={t('table.first_page')}
-          title={t('table.first_page') ?? ''}
-          icon={<Icon as={TbChevronsLeft} />}
-          mr={1}
-          display={{ base: 'none', md: 'inline-flex' }}
-          onClick={() => table.setPageIndex(0)}
-          disabled={!table.getCanPreviousPage()}
-        />
-        <IconButton
-          aria-label={t('table.previous_page')}
-          title={t('table.previous_page') ?? ''}
-          icon={<Icon as={TbChevronLeft} />}
-          mr={1}
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        />
-        {Array.from({ length: table.getPageCount() }, (_, i) => i).map((pageIndex) => {
-          const title = t('table.page', { page: pageIndex + 1 });
-          const disabled = pagination.pageIndex === pageIndex;
-          const style: Partial<IconButtonProps> = disabled ? { colorScheme: 'blue' } : {};
-          return (
-            <IconButton
-              aria-label={title}
-              title={title}
-              key={pageIndex}
-              icon={<Text>{pageIndex + 1}</Text>}
-              mr={1}
-              onClick={() => table.setPageIndex(pageIndex)}
-              disabled={disabled}
-              {...style}
-            />
-          );
-        })}
-        <IconButton
-          aria-label={t('table.next_page')}
-          title={t('table.next_page') ?? ''}
-          icon={<Icon as={TbChevronRight} />}
-          mr={{ base: 0, md: 1 }}
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        />
-        <IconButton
-          aria-label={t('table.last_page')}
-          title={t('table.last_page') ?? ''}
-          icon={<Icon as={TbChevronsRight} />}
-          display={{ base: 'none', md: 'inline-flex' }}
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          disabled={!table.getCanNextPage()}
-        />
-      </Flex>
+      <Pagination
+        w="full"
+        mt={4}
+        mr={2}
+        pageCount={table.getPageCount()}
+        pageIndex={pagination.pageIndex}
+        setPageIndex={table.setPageIndex}
+        canPreviousPage={table.getCanPreviousPage()}
+        previousPage={table.previousPage}
+        canNextPage={table.getCanNextPage()}
+        nextPage={table.nextPage}
+      />
     </Box>
   );
 }
