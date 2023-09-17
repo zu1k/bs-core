@@ -2,10 +2,15 @@ name: Build Releases
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release Tag'
+        required: true
+        type: string
 
 env:
   CARGO_TERM_COLOR: always
-  AUTH_SERVER_IP: ${{ secrets.AUTH_SERVER_IP }}
 
 jobs:
   make_dist:
@@ -13,7 +18,24 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, ubuntu-20.04, windows-latest]
+        platform:
+          - macos-latest
+          - ubuntu-20.04
+          - windows-latest
+        target:
+          - i686-unknown-linux-musl
+          - x86_64-pc-windows-gnu
+          - x86_64-unknown-linux-gnu
+          - x86_64-unknown-linux-musl
+          - armv7-unknown-linux-musleabihf
+          - armv7-unknown-linux-gnueabihf
+          - arm-unknown-linux-gnueabi
+          - arm-unknown-linux-gnueabihf
+          - arm-unknown-linux-musleabi
+          - arm-unknown-linux-musleabihf
+          - aarch64-unknown-linux-gnu
+          - aarch64-unknown-linux-musl
+
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v3
@@ -46,11 +68,15 @@ jobs:
       - name: Build dist
         run: |
           make frontend
-      - name: Build on Linux
+
+      - name: Build on Linux for ${{ matrix.target }}
         if: matrix.platform == 'ubuntu-20.04'
+        timeout-minutes: 120
         run: |
           cargo install cross
-          make releases
+          cd script
+          ./build-release -t ${{ matrix.target }}
+
       - name: Build on MacOS
         if: matrix.platform == 'macos-latest'
         run: |
@@ -61,6 +87,7 @@ jobs:
           rustup target add aarch64-apple-darwin
           cargo build --release --target aarch64-apple-darwin -p book-searcher
           cd target/aarch64-apple-darwin/release && zip book-searcher-aarch64-apple-darwin.zip book-searcher && cp book-searcher-aarch64-apple-darwin.zip ../../dist/ && cd ../../../
+
       - name: Build on Windows
         if: matrix.platform == 'windows-latest'
         run: |
@@ -68,6 +95,7 @@ jobs:
           rustup target add x86_64-pc-windows-msvc
           cargo build --release --target x86_64-pc-windows-msvc -p book-searcher
           cd target/x86_64-pc-windows-msvc/release && Compress-Archive -Path book-searcher.exe -DestinationPath book-searcher-x86_64-pc-windows-msvc.zip && cp book-searcher-x86_64-pc-windows-msvc.zip ../../dist/ && cd ../../../
+
       - name: Upload Github Assets
         uses: softprops/action-gh-release@v1
         env:
@@ -77,3 +105,4 @@ jobs:
             target/dist/*
             release/*
           prerelease: ${{ contains(github.ref, '-') }}
+          tag_name: ${{ inputs.tag || github.ref_name }}
