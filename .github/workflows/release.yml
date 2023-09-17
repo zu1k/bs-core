@@ -13,15 +13,13 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  make_dist:
-    name: Build Release on (${{ matrix.platform }})
+  build-cross:
+    name: Build Release on (${{ matrix.platform }}) for (${{ matrix.target }})
     strategy:
       fail-fast: false
       matrix:
         platform:
-          - macos-latest
-          - ubuntu-20.04
-          - windows-latest
+          - ubuntu-latest
         target:
           - i686-unknown-linux-musl
           - x86_64-pc-windows-gnu
@@ -69,27 +67,131 @@ jobs:
         run: |
           make frontend
 
+      - name: Install cross-compilation tools
+        run: |
+          curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+          cargo binstall -y cross
+
       - name: Build on Linux for ${{ matrix.target }}
-        if: matrix.platform == 'ubuntu-20.04'
         timeout-minutes: 120
         run: |
-          cargo install cross
-          cd script
-          ./build-release -t ${{ matrix.target }}
+          cd scripts && ./build_release.sh -t ${{ matrix.target }}
+
+      - name: Upload Github Assets
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            target/dist/*
+            release/*
+          prerelease: ${{ contains(github.ref, '-') }}
+          tag_name: ${{ inputs.tag || github.ref_name }}
+
+  build-unix:
+    name: Build Release on (${{ matrix.platform }}) for (${{ matrix.target }})
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest]
+        target:
+          - x86_64-apple-darwin
+          - aarch64-apple-darwin
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: |
+          make frontend_preinstall
+      - name: Build dist
+        run: |
+          make frontend
 
       - name: Build on MacOS
-        if: matrix.platform == 'macos-latest'
         run: |
           mkdir -p target/dist
-          rustup target add x86_64-apple-darwin
-          cargo build --release --target x86_64-apple-darwin -p book-searcher
-          cd target/x86_64-apple-darwin/release && zip book-searcher-x86_64-apple-darwin.zip book-searcher && cp book-searcher-x86_64-apple-darwin.zip ../../dist/ && cd ../../../
-          rustup target add aarch64-apple-darwin
-          cargo build --release --target aarch64-apple-darwin -p book-searcher
-          cd target/aarch64-apple-darwin/release && zip book-searcher-aarch64-apple-darwin.zip book-searcher && cp book-searcher-aarch64-apple-darwin.zip ../../dist/ && cd ../../../
+          rustup target add ${{ matrix.target }}
+          cargo build --release --target ${{ matrix.target }} -p book-searcher
+          cd target/${{ matrix.target }}/release && zip book-searcher-${{ matrix.target }}.zip book-searcher && cp book-searcher-${{ matrix.target }}.zip ../../dist/ && cd ../../../
+
+      - name: Upload Github Assets
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            target/dist/*
+            release/*
+          prerelease: ${{ contains(github.ref, '-') }}
+          tag_name: ${{ inputs.tag || github.ref_name }}
+
+
+  build-windows:
+    name: Build Release on (${{ matrix.platform }})
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - windows-latest
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: |
+          make frontend_preinstall
+      - name: Build dist
+        run: |
+          make frontend
 
       - name: Build on Windows
-        if: matrix.platform == 'windows-latest'
         run: |
           mkdir -p target/dist
           rustup target add x86_64-pc-windows-msvc
