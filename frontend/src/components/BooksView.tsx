@@ -11,7 +11,7 @@ import RootContext from '../store';
 import { Book } from '../scripts/searcher';
 
 import BookDetailView from './BookDetailCard';
-import getCoverImageUrl from '../scripts/cover';
+import { getCoverImageUrl, getMd5CoverImageUrl } from '../scripts/cover';
 import IpfsDownloadButton from './IpfsDownloadButton';
 
 const columnHelper = createColumnHelper<Book>();
@@ -53,9 +53,12 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
             referrerPolicy="no-referrer"
             htmlWidth="70%"
             src={getCoverImageUrl(cover)}
-            onError={(event) => {
-              (event.target as HTMLImageElement).src =
-                'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+            onError={({ currentTarget }) => {
+              currentTarget.src = getMd5CoverImageUrl(cell.row.original.md5);
+              currentTarget.onerror = () => {
+                currentTarget.src =
+                  'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+              };
             }}
           />
         );

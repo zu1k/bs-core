@@ -32,7 +32,7 @@ import { TbChevronLeft, TbChevronRight, TbChevronsLeft, TbChevronsRight } from '
 import { useTranslation } from 'react-i18next';
 import { Book } from '../scripts/searcher';
 import { filesize as formatFileSize } from 'filesize';
-import getCoverImageUrl from '../scripts/cover';
+import { getCoverImageUrl, getMd5CoverImageUrl } from '../scripts/cover';
 
 const colorSchemes = [
   'red',
@@ -130,8 +130,11 @@ export default function BookCardList<Data extends object>({
               maxW="min(24%, 100px)"
               objectFit="cover"
               src={getCoverImageUrl(book.cover_url)}
-              onError={(event) => {
-                (event.target as HTMLImageElement).style.display = 'none';
+              onError={({ currentTarget }) => {
+                currentTarget.src = getMd5CoverImageUrl(book.md5);
+                currentTarget.onerror = () => {
+                  currentTarget.style.display = 'none';
+                };
               }}
             />
 
