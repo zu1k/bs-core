@@ -1,4 +1,14 @@
-import { Box, TableContainer, Tag, Image, Button } from '@chakra-ui/react';
+import {
+  Box,
+  TableContainer,
+  Tag,
+  Image,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverBody
+} from '@chakra-ui/react';
 import { FilterFn, createColumnHelper } from '@tanstack/react-table';
 import React, { useContext, useState } from 'react';
 import { filesize as formatFileSize } from 'filesize';
@@ -49,18 +59,46 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
       cell: (cell) => {
         const cover = cell.getValue();
         return (
-          <Image
-            referrerPolicy="no-referrer"
-            htmlWidth="70%"
-            src={getCoverImageUrl(cover)}
-            onError={({ currentTarget }) => {
-              currentTarget.src = getMd5CoverImageUrl(cell.row.original.md5);
-              currentTarget.onerror = () => {
-                currentTarget.src =
-                  'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
-              };
-            }}
-          />
+          <Popover
+            trigger="hover"
+            closeDelay={0}
+            openDelay={0}
+            placement="right"
+            autoFocus={false}
+            matchWidth={true}
+          >
+            <PopoverTrigger>
+              <Image
+                referrerPolicy="no-referrer"
+                htmlWidth="70%"
+                src={getCoverImageUrl(cover)}
+                onError={({ currentTarget }) => {
+                  currentTarget.src = getMd5CoverImageUrl(cell.row.original.md5);
+                  currentTarget.onerror = () => {
+                    currentTarget.src =
+                      'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+                  };
+                }}
+              />
+            </PopoverTrigger>
+            <PopoverContent width="fit-content">
+              <PopoverArrow />
+              <PopoverBody width="200px" padding={[0, 0]}>
+                <Image
+                  htmlWidth="200px"
+                  referrerPolicy="no-referrer"
+                  src={getCoverImageUrl(cover)}
+                  onError={({ currentTarget }) => {
+                    currentTarget.src = getMd5CoverImageUrl(cell.row.original.md5);
+                    currentTarget.onerror = () => {
+                      currentTarget.src =
+                        'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+                    };
+                  }}
+                />
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
         );
       },
       enableColumnFilter: false,
