@@ -116,4 +116,8 @@ function build() {
 for target in "${targets[@]}"; do
     cargo clean;
     build "$target";
+
+    echo "* Cleaning for target ${target}..."
+    cargo clean;
+    docker rmi -f "ghcr.io/cross-rs/${target}:main" 2>/dev/null;
 done

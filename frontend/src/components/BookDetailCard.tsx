@@ -24,7 +24,7 @@ import RootContext from '../store';
 import ExternalLink from './ExternalLink';
 import { Book } from '../scripts/searcher';
 import { getDownloadLinkFromIPFS } from '../scripts/ipfs';
-import getCoverImageUrl from '../scripts/cover';
+import { getCoverImageUrl, getMd5CoverImageUrl } from '../scripts/cover';
 import IpfsDownloadButton from './IpfsDownloadButton';
 
 const Preview = React.lazy(() => import('./Preview'));
@@ -85,11 +85,7 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
               <Text>{title}</Text>
             </Heading>
             {md5 != undefined && md5.length > 0 ? (
-              <Button
-                onClick={() => {
-                  window.open(import.meta.env.VITE_MD5_BASE_URL + md5, '_blank', 'noreferrer');
-                }}
-              >
+              <Button as={ExternalLink} href={import.meta.env.VITE_MD5_BASE_URL + md5}>
                 {t('table.redirect2aa')}
               </Button>
             ) : null}
@@ -111,8 +107,11 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
               maxWidth="150px"
               objectFit="contain"
               src={getCoverImageUrl(cover_url)}
-              onError={(event) => {
-                (event.target as HTMLImageElement).style.display = 'none';
+              onError={({ currentTarget }) => {
+                currentTarget.src = getMd5CoverImageUrl(book.md5);
+                currentTarget.onerror = () => {
+                  currentTarget.style.display = 'none';
+                };
               }}
             />
             <Stack pl={{ base: undefined, md: '20px' }} pt="10px" flex="1">
