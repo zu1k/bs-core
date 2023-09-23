@@ -1,5 +1,5 @@
 import { GridItem, Icon, SimpleGrid } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TbBook2,
   TbBuilding,
@@ -12,14 +12,24 @@ import search, { Book, SearchQuery } from '../scripts/searcher';
 
 import { IoLanguage } from 'react-icons/io5';
 import SearchInput from './SearchInput';
-import { useDebounceEffect } from 'ahooks';
+import { useDebounce, useDebounceEffect } from 'ahooks';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@tanstack/react-query';
+
+function rmEmptyString<T extends { [s: string]: unknown }>(query: T) {
+  return Object.fromEntries(Object.entries(query).filter(([_, v]) => v != '')) as T;
+}
 
 export interface SearchProps {
+  pagination: {
+    pageSize: number;
+    pageIndex: number;
+  };
+  setPageCount: (pageCount: number) => void;
   setBooks: (books: Book[]) => void;
 }
 
-const Search: React.FC<SearchProps> = ({ setBooks }) => {
+const Search: React.FC<SearchProps> = ({ setBooks, pagination, setPageCount }) => {
   const { t } = useTranslation();
 
   const [title, setTitle] = useState<string>('');
@@ -30,30 +40,37 @@ const Search: React.FC<SearchProps> = ({ setBooks }) => {
   const [isbn, setISBN] = useState<string>('');
   const [complexQuery, setComplexQuery] = useState<string>('');
 
-  function rmEmptyString(query: SearchQuery) {
-    return Object.fromEntries(Object.entries(query).filter(([_, v]) => v != '')) as SearchQuery;
-  }
-
-  useDebounceEffect(
-    () => {
-      const query = {
-        title,
-        author,
-        publisher,
-        extension,
-        language,
-        isbn,
-        query: complexQuery,
-        limit: 100
-      };
-
-      search(rmEmptyString(query)).then((books) => {
-        books != undefined && setBooks(books);
-      });
-    },
-    [title, author, publisher, extension, language, isbn, complexQuery],
+  const queryKey = useDebounce(
+    rmEmptyString({
+      title,
+      author,
+      publisher,
+      extension,
+      language,
+      isbn,
+      query: complexQuery
+    }),
     { wait: 300 }
   );
+
+  const result = useQuery({
+    queryKey: ['search', { queryKey, pagination }],
+    queryFn: () =>
+      search({
+        ...queryKey,
+        limit: pagination.pageSize,
+        offset: pagination.pageIndex * pagination.pageSize
+      }),
+    keepPreviousData: true
+  });
+
+  useEffect(() => {
+    if (result.data) {
+      const { books, total } = result.data;
+      if (books != undefined) setBooks(books);
+      setPageCount(Math.ceil(total / pagination.pageSize));
+    }
+  }, [result.data]);
 
   return (
     <SimpleGrid

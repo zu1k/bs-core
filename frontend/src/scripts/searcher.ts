@@ -26,6 +26,7 @@ export interface SearchQuery {
 
   query?: string;
   limit: number;
+  offset: number;
 }
 
 export default async function search(query: SearchQuery) {

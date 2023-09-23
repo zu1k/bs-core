@@ -15,7 +15,7 @@ import { filesize as formatFileSize } from 'filesize';
 import { useTranslation } from 'react-i18next';
 import MediaQuery from 'react-responsive';
 
-import DataTable from './DataTable';
+import DataTable, { type OnPaginationChange, type PaginationState } from './DataTable';
 import BookCardList from './BookCardList';
 import RootContext from '../store';
 import { Book } from '../scripts/searcher';
@@ -47,9 +47,12 @@ const arrFilter: FilterFn<Book> = (row, columnId, filterValue: string[]) => {
 
 export interface BooksViewProps {
   books: Book[];
+  pagination: PaginationState;
+  setPagination: OnPaginationChange;
+  pageCount: number;
 }
 
-const BooksView: React.FC<BooksViewProps> = ({ books }) => {
+const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination, pageCount }) => {
   const { t } = useTranslation();
   const rootContext = useContext(RootContext);
 
@@ -239,7 +242,9 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
           <DataTable
             data={data}
             columns={columns}
-            pageSize={20}
+            pagination={pagination}
+            setPagination={setPagination}
+            pageCount={pageCount}
             filterSchema={{ extension: extensions, language: languages }}
             sx={{ tableLayout: 'fixed' }}
             renderSubComponent={(row) => <BookDetailView book={row.original} />}
@@ -252,7 +257,9 @@ const BooksView: React.FC<BooksViewProps> = ({ books }) => {
           my={{ base: 2, md: 4 }}
           data={data}
           columns={columns}
-          pageSize={20}
+          pagination={pagination}
+          setPagination={setPagination}
+          pageCount={pageCount}
           filterSchema={{ extension: extensions, language: languages }}
           renderSubComponent={(row) => <BookDetailView book={row.original} />}
         />

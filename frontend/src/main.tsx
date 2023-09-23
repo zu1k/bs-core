@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom/client';
 
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import React from 'react';
 import i18n from 'i18next';
@@ -28,11 +29,15 @@ i18n
     interpolation: { escapeValue: false }
   });
 
+const queryClient = new QueryClient();
+
 const rootElement = document.getElementById('app')!;
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

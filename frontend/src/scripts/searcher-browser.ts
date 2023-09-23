@@ -8,5 +8,7 @@ const http = axios.create({
 
 export default async function search(query: SearchQuery) {
   const response = await http.get('search', { params: query });
-  return response.data.books as Book[];
+  const books = response.data.books as Book[] | undefined;
+  const total = response.data.total as number;
+  return { books, total };
 }
