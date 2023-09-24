@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "vercel-build": "vite build -m vercel",
     "preview": "vite preview",
     "check": "tsc --noEmit --skipLibCheck",
     "fmt": "prettier --write .",

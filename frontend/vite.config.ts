@@ -68,16 +68,16 @@ export default defineConfig(() => {
             appDescription: description,
             icons: {
               favicons: {
-                source: '../crates/book-searcher-desktop/icons/icon.png'
+                source: 'icon.png'
               },
               android: {
-                source: '../crates/book-searcher-desktop/icons/icon.png'
+                source: 'icon.png'
               },
               appleStartup: {
-                source: '../crates/book-searcher-desktop/icons/icon.png'
+                source: 'icon.png'
               },
               appleIcon: {
-                source: '../crates/book-searcher-desktop/icons/icon.png'
+                source: 'icon.png'
               }
             }
           })
