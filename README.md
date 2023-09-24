@@ -66,6 +66,12 @@ docker-compose up -d
 
 Now `book-searcher` it will listen to `0.0.0.0:7070`.
 
+### Deploy with Vercel
+
+Deploying the frontend to Vercel to speed up loading of static resources and provide a reverse proxy to the image service.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbook-searcher-org%2Fbook-searcher%2Ftree%2Fmaster%2Ffrontend&project-name=book-searcher&repository-name=book-searcher)
+
 ### Original Search Api
 
 You can search by the following fields:
