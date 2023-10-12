@@ -1,4 +1,14 @@
-import { Flex, IconButton, Icon, IconButtonProps, Text, FlexProps, Input, NumberInput, NumberInputField } from '@chakra-ui/react';
+import {
+  Flex,
+  IconButton,
+  Icon,
+  IconButtonProps,
+  Text,
+  FlexProps,
+  Input,
+  NumberInput,
+  NumberInputField
+} from '@chakra-ui/react';
 import isInteger from 'lodash/isInteger';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -85,7 +95,7 @@ export default function Pagination({
       <NumberInput
         defaultValue={pageIndex + 1}
         key={`${pageIndex + 1}`}
-        inputMode='text'
+        inputMode="text"
         max={pageCount}
         min={1}
         maxW={16}
