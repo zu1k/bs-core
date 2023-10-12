@@ -45,11 +45,12 @@ export default function Pagination({
       <IconButton
         aria-label={t('table.first_page')}
         title={t('table.first_page') ?? ''}
-        icon={<Icon as={TbChevronsLeft} />}
+        icon={<Text>{1}</Text>}
         display={{ base: 'none', md: 'inline-flex' }}
         onClick={() => setPageIndex(0)}
         disabled={!canPreviousPage}
       />
+
       <IconButton
         aria-label={t('table.previous_page')}
         title={t('table.previous_page') ?? ''}
@@ -85,7 +86,7 @@ export default function Pagination({
       <IconButton
         aria-label={t('table.last_page')}
         title={t('table.last_page') ?? ''}
-        icon={<Icon as={TbChevronsRight} />}
+        icon={<Text>{pageCount}</Text>}
         display={{ base: 'none', md: 'inline-flex' }}
         onClick={() => setPageIndex(pageCount - 1)}
         disabled={!canNextPage}
