@@ -17,14 +17,19 @@ import ExternalLink from './components/ExternalLink';
 import { FaGithub } from 'react-icons/fa';
 
 const Main: React.FC = () => {
-  const initialPagination = { pageSize: 20, pageIndex: 0 }
+  const initialPagination = { pageSize: 20, pageIndex: 0 };
   const [pagination, setPagination] = React.useState(initialPagination);
   const [pageCount, setPageCount] = useState<number>(1);
   const [books, setBooks] = useState<Book[]>([]);
   return (
     <>
       <SkipNavContent />
-      <Search setBooks={setBooks} pagination={pagination} setPageCount={setPageCount} resetPageIndex={() => setPagination(initialPagination)} />
+      <Search
+        setBooks={setBooks}
+        pagination={pagination}
+        setPageCount={setPageCount}
+        resetPageIndex={() => setPagination(initialPagination)}
+      />
       <BooksView
         books={books}
         pagination={pagination}

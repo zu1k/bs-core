@@ -54,13 +54,13 @@ const Search: React.FC<SearchProps> = ({ setBooks, pagination, setPageCount, res
     }),
     { wait: 300 }
   );
-  
-  const prevQueryKey = usePrevious(queryKey)
+
+  const prevQueryKey = usePrevious(queryKey);
   useUpdateEffect(() => {
-    if (isEqual(queryKey, prevQueryKey)) return
-    if (pagination.pageIndex === 0) return
-    resetPageIndex()
-  }, [queryKey])
+    if (isEqual(queryKey, prevQueryKey)) return;
+    if (pagination.pageIndex === 0) return;
+    resetPageIndex();
+  }, [queryKey]);
 
   const result = useQuery({
     queryKey: ['search', { queryKey, pagination }],
