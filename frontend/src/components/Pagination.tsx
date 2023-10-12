@@ -5,11 +5,9 @@ import {
   IconButtonProps,
   Text,
   FlexProps,
-  Input,
   NumberInput,
   NumberInputField
 } from '@chakra-ui/react';
-import isInteger from 'lodash/isInteger';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TbChevronsLeft, TbChevronLeft, TbChevronRight, TbChevronsRight } from 'react-icons/tb';
