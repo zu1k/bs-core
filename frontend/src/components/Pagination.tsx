@@ -92,19 +92,19 @@ export default function Pagination({
         onClick={() => setPageIndex(pageCount - 1)}
         disabled={!canNextPage}
       />
-      <HStack>
-        <NumberInput max={pageCount} min={1} maxW={16} allowMouseWheel onKeyUp={(e) => {}}>
-          <NumberInputField ref={jumpToPageInput} px={2} textAlign="center" />
-        </NumberInput>
-        <Button
-          onClick={() => {
-            if (jumpToPageInput.current?.value == null) return;
-            setPageIndex(+jumpToPageInput.current?.value - 1);
-          }}
-        >
-          Go
-        </Button>
-      </HStack>
+      <NumberInput
+        max={pageCount}
+        min={1}
+        maxW={16}
+        allowMouseWheel
+        onKeyUp={(e) => {
+          if (e.key !== 'Enter') return;
+          if (jumpToPageInput.current?.value == null) return;
+          setPageIndex(+jumpToPageInput.current?.value - 1);
+        }}
+      >
+        <NumberInputField ref={jumpToPageInput} px={2} textAlign="center" />
+      </NumberInput>
     </Flex>
   );
 }
