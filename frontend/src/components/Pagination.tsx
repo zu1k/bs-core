@@ -1,15 +1,5 @@
-import {
-  Flex,
-  IconButton,
-  Icon,
-  IconButtonProps,
-  Text,
-  FlexProps,
-  Button,
-  NumberInput,
-  NumberInputField,
-  HStack
-} from '@chakra-ui/react';
+import { Flex, IconButton, Icon, IconButtonProps, Text, FlexProps, Input } from '@chakra-ui/react';
+import isInteger from 'lodash/isInteger';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TbChevronsLeft, TbChevronLeft, TbChevronRight, TbChevronsRight } from 'react-icons/tb';
@@ -92,19 +82,20 @@ export default function Pagination({
         onClick={() => setPageIndex(pageCount - 1)}
         disabled={!canNextPage}
       />
-      <NumberInput
-        max={pageCount}
-        min={1}
+      <Input
         maxW={16}
-        allowMouseWheel
+        ref={jumpToPageInput}
+        px={2}
+        textAlign="center"
         onKeyUp={(e) => {
           if (e.key !== 'Enter') return;
-          if (jumpToPageInput.current?.value == null) return;
-          setPageIndex(+jumpToPageInput.current?.value - 1);
+          const inputValue = jumpToPageInput.current?.value;
+          if (inputValue == null) return;
+          if (!isInteger(+inputValue)) return;
+          const pageIndex = +inputValue - 1;
+          setPageIndex(Math.min(pageIndex, pageCount - 1));
         }}
-      >
-        <NumberInputField ref={jumpToPageInput} px={2} textAlign="center" />
-      </NumberInput>
+      />
     </Flex>
   );
 }
