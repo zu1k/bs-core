@@ -1,4 +1,15 @@
-import { Flex, IconButton, Icon, IconButtonProps, Text, FlexProps, Button, NumberInput, NumberInputField, HStack } from '@chakra-ui/react';
+import {
+  Flex,
+  IconButton,
+  Icon,
+  IconButtonProps,
+  Text,
+  FlexProps,
+  Button,
+  NumberInput,
+  NumberInputField,
+  HStack
+} from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TbChevronsLeft, TbChevronLeft, TbChevronRight, TbChevronsRight } from 'react-icons/tb';
@@ -27,7 +38,7 @@ export default function Pagination({
   ...props
 }: PaginationProps) {
   const { t } = useTranslation();
-  const jumpToPageInput = useRef<HTMLInputElement>(null)
+  const jumpToPageInput = useRef<HTMLInputElement>(null);
 
   if (pageCount === 0) return <Flex {...props} gap={1} justify="flex-end" wrap="wrap" />;
 
@@ -82,13 +93,7 @@ export default function Pagination({
         disabled={!canNextPage}
       />
       <HStack>
-        <NumberInput
-          max={pageCount}
-          min={1}
-          maxW={16}
-          allowMouseWheel
-          onKeyUp={(e) => {}}
-        >
+        <NumberInput max={pageCount} min={1} maxW={16} allowMouseWheel onKeyUp={(e) => {}}>
           <NumberInputField ref={jumpToPageInput} px={2} textAlign="center" />
         </NumberInput>
         <Button
