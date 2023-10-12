@@ -1,4 +1,4 @@
-import { GridItem, Icon, SimpleGrid } from '@chakra-ui/react';
+import { GridItem, Icon, SimpleGrid, useUpdateEffect } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import {
   TbBook2,
@@ -8,13 +8,14 @@ import {
   TbReportSearch,
   TbUserCircle
 } from 'react-icons/tb';
-import search, { Book, SearchQuery } from '../scripts/searcher';
+import search, { Book } from '../scripts/searcher';
 
 import { IoLanguage } from 'react-icons/io5';
 import SearchInput from './SearchInput';
-import { useDebounce, useDebounceEffect } from 'ahooks';
+import { useDebounce, usePrevious } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
+import { isEqual } from 'lodash';
 
 function rmEmptyString<T extends { [s: string]: unknown }>(query: T) {
   return Object.fromEntries(Object.entries(query).filter(([_, v]) => v != '')) as T;
@@ -26,10 +27,11 @@ export interface SearchProps {
     pageIndex: number;
   };
   setPageCount: (pageCount: number) => void;
+  resetPageIndex: () => void;
   setBooks: (books: Book[]) => void;
 }
 
-const Search: React.FC<SearchProps> = ({ setBooks, pagination, setPageCount }) => {
+const Search: React.FC<SearchProps> = ({ setBooks, pagination, setPageCount, resetPageIndex }) => {
   const { t } = useTranslation();
 
   const [title, setTitle] = useState<string>('');
@@ -52,6 +54,13 @@ const Search: React.FC<SearchProps> = ({ setBooks, pagination, setPageCount }) =
     }),
     { wait: 300 }
   );
+
+  const prevQueryKey = usePrevious(queryKey);
+  useUpdateEffect(() => {
+    if (isEqual(queryKey, prevQueryKey)) return;
+    if (pagination.pageIndex === 0) return;
+    resetPageIndex();
+  }, [queryKey]);
 
   const result = useQuery({
     queryKey: ['search', { queryKey, pagination }],
