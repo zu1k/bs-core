@@ -1,4 +1,4 @@
-import { Flex, IconButton, Icon, IconButtonProps, Text, FlexProps, Input } from '@chakra-ui/react';
+import { Flex, IconButton, Icon, IconButtonProps, Text, FlexProps, Input, NumberInput, NumberInputField } from '@chakra-ui/react';
 import isInteger from 'lodash/isInteger';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -82,22 +82,22 @@ export default function Pagination({
         onClick={() => setPageIndex(pageCount - 1)}
         disabled={!canNextPage}
       />
-      <Input
-        maxW={16}
-        ref={jumpToPageInput}
-        px={2}
-        textAlign="center"
+      <NumberInput
         defaultValue={pageIndex + 1}
         key={`${pageIndex + 1}`}
+        inputMode='text'
+        max={pageCount}
+        min={1}
+        maxW={16}
+        allowMouseWheel
         onKeyUp={(e) => {
           if (e.key !== 'Enter') return;
-          const inputValue = jumpToPageInput.current?.value;
-          if (inputValue == null) return;
-          if (!isInteger(+inputValue)) return;
-          const pageIndex = +inputValue - 1;
-          setPageIndex(Math.min(pageIndex, pageCount - 1));
+          if (jumpToPageInput.current?.value == null) return;
+          setPageIndex(+jumpToPageInput.current?.value - 1);
         }}
-      />
+      >
+        <NumberInputField ref={jumpToPageInput} px={2} textAlign="center" />
+      </NumberInput>
     </Flex>
   );
 }
