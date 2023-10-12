@@ -6,6 +6,7 @@
   "repository": "https://github.com/book-searcher-org/book-searcher",
   "scripts": {
     "dev": "vite",
+    "dev2": "vite -m development.lite",
     "build": "vite build",
     "vercel-build": "vite build -m vercel",
     "preview": "vite preview",
