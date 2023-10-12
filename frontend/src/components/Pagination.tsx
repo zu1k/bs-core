@@ -87,6 +87,8 @@ export default function Pagination({
         ref={jumpToPageInput}
         px={2}
         textAlign="center"
+        defaultValue={pageIndex+1}
+        key={`${pageIndex+1}`}
         onKeyUp={(e) => {
           if (e.key !== 'Enter') return;
           const inputValue = jumpToPageInput.current?.value;
