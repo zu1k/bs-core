@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   Collapse,
   Flex,
   Icon,
   IconButton,
-  IconButtonProps,
   Table,
   TableProps,
   Tbody,
@@ -35,16 +34,7 @@ import {
   getFilteredRowModel,
   OnChangeFn
 } from '@tanstack/react-table';
-import {
-  TbArrowNarrowDown,
-  TbArrowNarrowUp,
-  TbArrowsSort,
-  TbChevronLeft,
-  TbChevronRight,
-  TbChevronsLeft,
-  TbChevronsRight,
-  TbFilter
-} from 'react-icons/tb';
+import { TbArrowNarrowDown, TbArrowNarrowUp, TbArrowsSort, TbFilter } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
 import Pagination from './Pagination';
 

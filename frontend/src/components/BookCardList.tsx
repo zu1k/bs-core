@@ -2,33 +2,25 @@ import React, { useEffect } from 'react';
 import {
   Collapse,
   Flex,
-  Icon,
-  IconButton,
-  IconButtonProps,
   TableProps,
   Text,
   useColorMode,
   Card,
-  CardHeader,
   Image,
   Box,
   CardBody,
-  Stack,
   Tag
 } from '@chakra-ui/react';
 import {
   type ColumnDef,
   type PaginationState,
   type Row,
-  flexRender,
   getCoreRowModel,
   getExpandedRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
   getFilteredRowModel
 } from '@tanstack/react-table';
-import { TbChevronLeft, TbChevronRight, TbChevronsLeft, TbChevronsRight } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
 import { Book } from '../scripts/searcher';
 import { filesize as formatFileSize } from 'filesize';
