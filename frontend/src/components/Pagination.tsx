@@ -54,6 +54,7 @@ export default function Pagination({
       <Button
         display={pageIndex < pageButtonSidecount + 1 ? 'none' : 'inline-flex'}
         title={t('table.first_page') ?? ''}
+        size="sm"
         onClick={() => setPageIndex(0)}
         disabled={!canPreviousPage}
       >
@@ -71,6 +72,7 @@ export default function Pagination({
             onClick={() => setPageIndex(idx)}
             disabled={disabled}
             spacing="0"
+            size="sm"
             {...style}
           >
             {idx + 1}
@@ -80,6 +82,7 @@ export default function Pagination({
       <Button
         display={pageIndex > pageCount - pageButtonSidecount - 2 ? 'none' : 'inline-flex'}
         title={t('table.last_page') ?? ''}
+        size="sm"
         onClick={() => setPageIndex(pageCount - 1)}
         disabled={!canNextPage}
       >
@@ -91,7 +94,8 @@ export default function Pagination({
         inputMode="text"
         max={pageCount}
         min={1}
-        maxW={16}
+        maxW={14}
+        size="sm"
         allowMouseWheel
         onKeyUp={(e) => {
           if (e.key !== 'Enter') return;
