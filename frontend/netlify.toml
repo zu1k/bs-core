@@ -1,0 +1,26 @@
+[build]
+base = "/frontend"
+publish = "dist/"
+command = "vite build -m netlify"
+
+[[redirects]]
+from = "/search"
+to = "https://book-searcher.eu.org/search"
+status = 200
+
+[[redirects]]
+from = "/libgen/*"
+to = "https://library.lol/:splat"
+status = 200
+
+[[redirects]]
+from = "/zlibrary/*"
+to = "https://static.1lib.sk/:splat"
+status = 200
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+Cache-Control = "public, max-age=3600"
+CDN-Cache-Control = "public, max-age=2592000"
