@@ -1,5 +1,5 @@
 [build]
-  base = "/"
+  base = "/frontend"
   publish = "dist/"
   command = "vite build -m netlify"
 
