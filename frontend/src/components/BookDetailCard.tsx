@@ -24,7 +24,7 @@ import RootContext from '../store';
 import ExternalLink from './ExternalLink';
 import { Book } from '../scripts/searcher';
 import { getDownloadLinkFromIPFS } from '../scripts/ipfs';
-import { getCoverImageUrl, getMd5CoverImageUrl } from '../scripts/cover';
+import { getCoverImageUrl, getMd5CoverImageUrl, white_pic } from '../scripts/cover';
 import IpfsDownloadButton from './IpfsDownloadButton';
 
 const Preview = React.lazy(() => import('./Preview'));
@@ -111,6 +111,7 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
                 currentTarget.src = getMd5CoverImageUrl(book.md5);
                 currentTarget.onerror = () => {
                   currentTarget.style.display = 'none';
+                  currentTarget.src = white_pic;
                 };
               }}
             />

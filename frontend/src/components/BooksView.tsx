@@ -21,7 +21,7 @@ import RootContext from '../store';
 import { Book } from '../scripts/searcher';
 
 import BookDetailView from './BookDetailCard';
-import { getCoverImageUrl, getMd5CoverImageUrl } from '../scripts/cover';
+import { getCoverImageUrl, getMd5CoverImageUrl, white_pic } from '../scripts/cover';
 import IpfsDownloadButton from './IpfsDownloadButton';
 
 const columnHelper = createColumnHelper<Book>();
@@ -61,6 +61,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
       header: '',
       cell: (cell) => {
         const cover = cell.getValue();
+        const md5 = cell.row.original.md5;
         return (
           <Popover
             trigger="hover"
@@ -76,10 +77,10 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
                 htmlWidth="70%"
                 src={getCoverImageUrl(cover)}
                 onError={({ currentTarget }) => {
-                  currentTarget.src = getMd5CoverImageUrl(cell.row.original.md5);
+                  currentTarget.src = getMd5CoverImageUrl(md5);
                   currentTarget.onerror = () => {
-                    currentTarget.src =
-                      'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+                    currentTarget.style.display = 'none';
+                    currentTarget.src = white_pic;
                   };
                 }}
               />
@@ -92,10 +93,10 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
                   referrerPolicy="no-referrer"
                   src={getCoverImageUrl(cover)}
                   onError={({ currentTarget }) => {
-                    currentTarget.src = getMd5CoverImageUrl(cell.row.original.md5);
+                    currentTarget.src = getMd5CoverImageUrl(md5);
                     currentTarget.onerror = () => {
-                      currentTarget.src =
-                        'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+                      currentTarget.style.display = 'none';
+                      currentTarget.src = white_pic;
                     };
                   }}
                 />

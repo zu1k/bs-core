@@ -24,7 +24,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Book } from '../scripts/searcher';
 import { filesize as formatFileSize } from 'filesize';
-import { getCoverImageUrl, getMd5CoverImageUrl } from '../scripts/cover';
+import { getCoverImageUrl, getMd5CoverImageUrl, white_pic } from '../scripts/cover';
 import { OnPaginationChange } from './DataTable';
 import Pagination from './Pagination';
 
@@ -130,6 +130,7 @@ export default function BookCardList<Data extends object>({
                 currentTarget.src = getMd5CoverImageUrl(book.md5);
                 currentTarget.onerror = () => {
                   currentTarget.style.display = 'none';
+                  currentTarget.src = white_pic;
                 };
               }}
             />
