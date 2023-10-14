@@ -16,7 +16,7 @@ import getIpfsGateways from './scripts/ipfs';
 import ExternalLink from './components/ExternalLink';
 import { FaGithub } from 'react-icons/fa';
 
-const Main: React.FC = () => {
+const Main: React.FC<{ searchComponentKey: number }> = ({ searchComponentKey }) => {
   const initialPagination = { pageSize: 20, pageIndex: 0 };
   const [pagination, setPagination] = React.useState(initialPagination);
   const [pageCount, setPageCount] = useState<number>(1);
@@ -25,6 +25,7 @@ const Main: React.FC = () => {
     <>
       <SkipNavContent />
       <Search
+        key={searchComponentKey}
         setBooks={setBooks}
         pagination={pagination}
         setPageCount={setPageCount}
@@ -48,6 +49,7 @@ const Settings =
 const App: React.FC = () => {
   const { t } = useTranslation();
   const [ipfsGateways, setIpfsGateways] = useState<string[]>([]);
+  const [searchComponentKey, setSearchComponentKey] = useState<number>(0);
 
   React.useEffect(() => {
     getIpfsGateways().then((gateways) => {
@@ -59,7 +61,7 @@ const App: React.FC = () => {
     <RootContext.Provider value={{ ipfsGateways, setIpfsGateways }}>
       <Flex direction="column" minH="100vh">
         <SkipNavLink>Skip to content</SkipNavLink>
-        <Header title="Book Searcher">
+        <Header title="Book Searcher" onClick={() => setSearchComponentKey((key) => key + 1)}>
           <HStack spacing={{ base: 1, md: 2 }}>
             <IconButton
               as={ExternalLink}
@@ -77,7 +79,7 @@ const App: React.FC = () => {
           </HStack>
         </Header>
 
-        <Main />
+        <Main searchComponentKey={searchComponentKey} />
 
         <Spacer />
         <Footer>

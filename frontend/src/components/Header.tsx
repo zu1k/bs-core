@@ -6,9 +6,10 @@ import { useInView } from 'react-intersection-observer';
 export interface HeaderProps {
   title: string;
   children: React.ReactNode;
+  onClick: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, children }) => {
+const Header: React.FC<HeaderProps> = ({ title, children, onClick }) => {
   const { ref, inView } = useInView({ threshold: 0 });
   const [bgColor, setBgColor] = React.useState('transparent');
   const { colorMode } = useColorMode();
@@ -35,7 +36,13 @@ const Header: React.FC<HeaderProps> = ({ title, children }) => {
         bgColor={bgColor}
         boxShadow={!inView ? 'sm' : 'none'}
       >
-        <Heading as="h1" fontSize="xl" my={import.meta.env.VITE_TAURI === '1' ? 0 : 2}>
+        <Heading
+          cursor="pointer"
+          onClick={onClick}
+          as="h1"
+          fontSize="xl"
+          my={import.meta.env.VITE_TAURI === '1' ? 0 : 2}
+        >
           {title}
         </Heading>
         <Spacer />
