@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "Book Searcher",
-    "version": "1.2.1"
+    "version": "1.2.2"
   },
   "tauri": {
     "bundle": {
