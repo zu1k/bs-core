@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   Collapse,
   Flex,
@@ -37,19 +37,19 @@ import {
 import { TbArrowNarrowDown, TbArrowNarrowUp, TbArrowsSort, TbFilter } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
 import Pagination from './Pagination';
-
+type Breakpoint = 'base' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 declare module '@tanstack/table-core' {
   interface ColumnMeta<TData extends RowData, TValue> {
     isNumeric?: boolean;
-    width?: number | string;
+    width?: number | string | Partial<Record<Breakpoint, number | string>>;
     filterRenderer?: (value: string) => JSX.Element;
-    breakpoint?: 'base' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+    breakpoint?: Breakpoint;
   }
 }
 
 const breakpoints = ['base', 'sm', 'md', 'lg', 'xl', '2xl'];
 
-function compareBreakpoints(a: string, b: string) {
+function compareBreakpoints(a: Breakpoint, b: Breakpoint) {
   return breakpoints.indexOf(a) >= breakpoints.indexOf(b);
 }
 
@@ -106,7 +106,7 @@ export default function DataTable<Data extends object>({
     onPaginationChange: setPagination
   });
 
-  const breakpoint = useBreakpoint();
+  const breakpoint = useBreakpoint() as Breakpoint;
 
   useEffect(() => {
     table.resetExpanded();
@@ -119,6 +119,27 @@ export default function DataTable<Data extends object>({
     });
   }, [breakpoint, data]);
 
+  const getColumnWidth = useCallback(
+    (
+      width: string | number | Partial<Record<Breakpoint, string | number>> | undefined,
+      breakpoint: Breakpoint
+    ) => {
+      if (typeof width === 'number' || typeof width === 'string') return width;
+      if (typeof width === 'object') {
+        const breakpointIndex = breakpoints.indexOf(breakpoint);
+        const widthBreakpoints = Object.keys(width).sort(
+          (a, b) => breakpoints.indexOf(b) - breakpoints.indexOf(a)
+        ) as Breakpoint[];
+        const widthBreakpoint = widthBreakpoints.find(
+          (bp) => breakpoints.indexOf(bp) <= breakpointIndex
+        );
+        if (widthBreakpoint) return width[widthBreakpoint];
+      }
+      return 'auto';
+    },
+    []
+  );
+
   return (
     <>
       <Table {...props}>
@@ -130,7 +151,7 @@ export default function DataTable<Data extends object>({
                 return header.column.getIsVisible() ? (
                   <Th
                     key={header.id}
-                    w={meta?.width ?? 'auto'}
+                    w={getColumnWidth(meta?.width, breakpoint)}
                     isNumeric={meta?.isNumeric ?? false}
                   >
                     {flexRender(header.column.columnDef.header, header.getContext())}
