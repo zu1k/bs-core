@@ -107,7 +107,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
       },
       enableColumnFilter: false,
       enableSorting: false,
-      meta: { width: '30px', breakpoint: 'lg' }
+      meta: { width: '30px', breakpoint: 'md' }
     }),
     columnHelper.accessor('title', {
       header: t('book.title') ?? 'Title',
@@ -151,7 +151,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
           cell: (cell) => renderer(cell.getValue()),
           enableSorting: false,
           filterFn: arrFilter,
-          meta: { breakpoint: 'lg', filterRenderer: renderer }
+          meta: { breakpoint: 'md', filterRenderer: renderer }
         };
       })()
     ),
@@ -184,7 +184,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
           enableSorting: false,
           filterFn: arrFilter,
           meta: {
-            breakpoint: 'lg',
+            breakpoint: 'md',
             filterRenderer: renderer
           }
         };
@@ -228,9 +228,10 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
           meta: {
             width: {
               xl: '90px',
-              lg: '60px'
+              lg: '60px',
+              md: '40px',
             },
-            breakpoint: 'lg'
+            breakpoint: 'md'
           }
         };
       })()
