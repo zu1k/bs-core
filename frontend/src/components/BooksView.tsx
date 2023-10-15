@@ -10,7 +10,7 @@ import {
   PopoverBody
 } from '@chakra-ui/react';
 import { FilterFn, createColumnHelper } from '@tanstack/react-table';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { filesize as formatFileSize } from 'filesize';
 import { useTranslation } from 'react-i18next';
 import MediaQuery from 'react-responsive';
@@ -107,7 +107,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
       },
       enableColumnFilter: false,
       enableSorting: false,
-      meta: { width: '30px', breakpoint: 'lg' }
+      meta: { width: '30px', breakpoint: 'md' }
     }),
     columnHelper.accessor('title', {
       header: t('book.title') ?? 'Title',
@@ -126,7 +126,13 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
       sortingFn: 'text',
       sortUndefined: 1,
       enableColumnFilter: false,
-      meta: { width: '18%', breakpoint: 'md' }
+      meta: {
+        width: {
+          xl: '18%',
+          lg: '12%'
+        },
+        breakpoint: 'md'
+      }
     }),
     columnHelper.accessor(
       'extension',
@@ -145,7 +151,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
           cell: (cell) => renderer(cell.getValue()),
           enableSorting: false,
           filterFn: arrFilter,
-          meta: { breakpoint: 'lg', filterRenderer: renderer }
+          meta: { breakpoint: 'md', filterRenderer: renderer }
         };
       })()
     ),
@@ -156,7 +162,9 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
         return <Box>{formatFileSize(filesize) as string}</Box>;
       },
       enableColumnFilter: false,
-      meta: { breakpoint: 'lg' }
+      meta: {
+        breakpoint: 'lg'
+      }
     }),
     columnHelper.accessor(
       'language',
@@ -176,7 +184,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
           enableSorting: false,
           filterFn: arrFilter,
           meta: {
-            breakpoint: 'lg',
+            breakpoint: 'md',
             filterRenderer: renderer
           }
         };
@@ -218,8 +226,12 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
           enableSorting: false,
           enableColumnFilter: false,
           meta: {
-            width: '90px',
-            breakpoint: 'lg'
+            width: {
+              xl: '90px',
+              lg: '60px',
+              md: '40px'
+            },
+            breakpoint: 'md'
           }
         };
       })()
