@@ -10,7 +10,7 @@ import {
   PopoverBody
 } from '@chakra-ui/react';
 import { FilterFn, createColumnHelper } from '@tanstack/react-table';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { filesize as formatFileSize } from 'filesize';
 import { useTranslation } from 'react-i18next';
 import MediaQuery from 'react-responsive';
@@ -126,7 +126,13 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
       sortingFn: 'text',
       sortUndefined: 1,
       enableColumnFilter: false,
-      meta: { width: '18%', breakpoint: 'md' }
+      meta: {
+        width: {
+          xl: '18%',
+          lg: '12%'
+        },
+        breakpoint: 'md'
+      }
     }),
     columnHelper.accessor(
       'extension',
@@ -156,7 +162,9 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
         return <Box>{formatFileSize(filesize) as string}</Box>;
       },
       enableColumnFilter: false,
-      meta: { breakpoint: 'lg' }
+      meta: {
+        breakpoint: 'lg'
+      }
     }),
     columnHelper.accessor(
       'language',
@@ -218,7 +226,10 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
           enableSorting: false,
           enableColumnFilter: false,
           meta: {
-            width: '90px',
+            width: {
+              xl: '90px',
+              lg: '60px'
+            },
             breakpoint: 'lg'
           }
         };
