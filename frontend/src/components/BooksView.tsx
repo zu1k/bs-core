@@ -229,7 +229,7 @@ const BooksView: React.FC<BooksViewProps> = ({ books, pagination, setPagination,
             width: {
               xl: '90px',
               lg: '60px',
-              md: '40px',
+              md: '40px'
             },
             breakpoint: 'md'
           }
