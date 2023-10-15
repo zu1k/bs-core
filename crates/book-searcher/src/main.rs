@@ -116,7 +116,7 @@ fn main() {
 
 #[actix_web::main]
 async fn run(opts: Run) -> std::io::Result<()> {
-    info!("book-searcher webserver started: {}", opts.bind);
+    info!("Webserver started: http://{}", opts.bind);
 
     let index_dir = std::env::current_exe()
         .unwrap()
