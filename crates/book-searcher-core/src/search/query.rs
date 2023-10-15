@@ -121,9 +121,9 @@ impl SearchQuery {
         }
 
         if let Some(query) = new_bool_query(queries, self.mode) {
-            return Ok(Box::new(query));
+            Ok(Box::new(query))
         } else {
-            return Err(QueryParserError::AllButQueryForbidden);
+            Err(QueryParserError::AllButQueryForbidden)
         }
     }
 }
