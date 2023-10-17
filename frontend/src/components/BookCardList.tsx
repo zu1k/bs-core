@@ -9,7 +9,9 @@ import {
   Image,
   Box,
   CardBody,
-  Tag
+  Tag,
+  Spacer,
+  Center
 } from '@chakra-ui/react';
 import {
   type ColumnDef,
@@ -28,6 +30,9 @@ import { getCoverImageUrl, getMd5CoverImageUrl, white_pic } from '../scripts/cov
 import { OnPaginationChange } from './DataTable';
 import Pagination from './Pagination';
 import getColorScheme from '../data/color';
+import IpfsDownloadButton from './IpfsDownloadButton';
+import RootContext from '../store';
+import MediaQuery from 'react-responsive';
 
 const rendererTag = (value: string) => {
   return <Tag colorScheme={getColorScheme(value)}>{value}</Tag>;
@@ -55,6 +60,7 @@ export default function BookCardList<Data extends object>({
 }: BookCardListProps<Data>) {
   const { t } = useTranslation();
   const { colorMode } = useColorMode();
+  const rootContext = React.useContext(RootContext);
 
   const table = useReactTable({
     columns,
@@ -118,19 +124,35 @@ export default function BookCardList<Data extends object>({
             />
 
             <CardBody alignSelf="center">
-              <Text marginBottom={2} fontSize="lg" noOfLines={2}>
-                {book.title}
-              </Text>
+              <Flex>
+                <Box>
+                  <Text marginBottom={2} fontSize="lg" noOfLines={2}>
+                    {book.title}
+                  </Text>
 
-              <Text marginBottom={2} color={'gray.500'} fontSize="xs" noOfLines={2}>
-                {book.author.length > 0 ? book.author : ''}
-                {book.author.length > 0 && book.publisher != undefined ? ' - ' : ''}
-                {book.publisher != undefined ? book.publisher : ''}
-              </Text>
-              <div>
-                {rendererTag(book.extension)} {rendererTag(book.language)}{' '}
-                {formatFileSize(book.filesize) as string}
-              </div>
+                  <Text marginBottom={2} color={'gray.500'} fontSize="xs" noOfLines={2}>
+                    {book.author.length > 0 ? book.author : ''}
+                    {book.author.length > 0 && book.publisher != undefined ? ' - ' : ''}
+                    {book.publisher != undefined ? book.publisher : ''}
+                  </Text>
+                  <div>
+                    {rendererTag(book.extension)} {rendererTag(book.language)}{' '}
+                    {formatFileSize(book.filesize) as string}
+                  </div>
+                </Box>
+
+                <Spacer />
+
+                <MediaQuery minWidth={600}>
+                  <Center width="80px" justifyContent="center">
+                    {book.ipfs_cid != undefined &&
+                    book.ipfs_cid.length > 0 &&
+                    rootContext.ipfsGateways.length > 0 ? (
+                      <IpfsDownloadButton book={book} onlyIcon></IpfsDownloadButton>
+                    ) : null}
+                  </Center>
+                </MediaQuery>
+              </Flex>
             </CardBody>
           </Card>
 
