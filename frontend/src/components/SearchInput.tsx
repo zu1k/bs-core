@@ -92,7 +92,7 @@ const SearchSelect: React.FC<SearchSelectProps> = ({
   };
 
   return (
-    <InputGroup>
+    <InputGroup isolation="auto">
       <InputLeftElement pointerEvents="none" children={icon} />
       <CreatableSelect
         isMulti
