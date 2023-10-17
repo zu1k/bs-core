@@ -80,12 +80,12 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
         variant="outline"
       >
         <CardHeader>
-          <Flex align="center" justify="space-between" gap="2">
-            <Heading as="h3" fontSize={['xl', '2xl', '2xl']} flexShrink={0} flex={1} minW="0">
+          <Flex align="flex-start" flexDirection={{sm: 'column', md: "row"}} justify="space-between" gap="2">
+            <Heading as="h3" fontSize={['xl', '2xl', '2xl']} whiteSpace='break-spaces' flexShrink={0} flex={1} minW="0">
               <Text>{title}</Text>
             </Heading>
             {md5 != undefined && md5.length > 0 ? (
-              <Button as={ExternalLink} href={import.meta.env.VITE_MD5_BASE_URL + md5}>
+              <Button as={ExternalLink} minWidth='unset' href={import.meta.env.VITE_MD5_BASE_URL + md5}>
                 {t('table.redirect2aa')}
               </Button>
             ) : null}
