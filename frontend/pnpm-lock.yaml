@@ -47,6 +47,9 @@ dependencies:
   axios:
     specifier: ^1.5.1
     version: 1.5.1
+  chakra-react-select:
+    specifier: ^4.7.4
+    version: 4.7.4(@chakra-ui/form-control@2.1.1)(@chakra-ui/icon@3.2.0)(@chakra-ui/layout@2.3.1)(@chakra-ui/media-query@3.3.0)(@chakra-ui/menu@2.2.1)(@chakra-ui/spinner@2.1.0)(@chakra-ui/system@2.6.1)(@emotion/react@11.11.1)(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0)
   epubjs:
     specifier: ^0.3.93
     version: 0.3.93
@@ -2822,6 +2825,23 @@ packages:
     dev: true
     optional: true
 
+  /@floating-ui/core@1.5.0:
+    resolution: {integrity: sha512-kK1h4m36DQ0UHGj5Ah4db7R0rHemTqqO0QLvUqi1/mUUp3LuAWbWxdxSIf/XsnH9VS6rRVPLJCncjRzUvyCLXg==}
+    dependencies:
+      '@floating-ui/utils': 0.1.6
+    dev: false
+
+  /@floating-ui/dom@1.5.3:
+    resolution: {integrity: sha512-ClAbQnEqJAKCJOEbbLo5IUlZHkNszqhuxS4fHAVxRPXPya6Ysf2G8KypnYcOTpx6I8xcgF9bbHb6g/2KpbV8qA==}
+    dependencies:
+      '@floating-ui/core': 1.5.0
+      '@floating-ui/utils': 0.1.6
+    dev: false
+
+  /@floating-ui/utils@0.1.6:
+    resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
+    dev: false
+
   /@isaacs/cliui@8.0.2:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
@@ -3279,6 +3299,12 @@ packages:
       '@types/react': 18.2.28
     dev: true
 
+  /@types/react-transition-group@4.4.7:
+    resolution: {integrity: sha512-ICCyBl5mvyqYp8Qeq9B5G/fyBSRC0zx3XM3sCC6KkcMsNeAHqXBKkmat4GqdJET5jtYUpZXrxI5flve5qhi2Eg==}
+    dependencies:
+      '@types/react': 18.2.28
+    dev: false
+
   /@types/react@18.2.28:
     resolution: {integrity: sha512-ad4aa/RaaJS3hyGz0BGegdnSRXQBkd1CCYDCdNjBPg90UUpLgo+WlJqb9fMYUxtehmzF3PJaTWqRZjko6BRzBg==}
     dependencies:
@@ -3631,6 +3657,35 @@ packages:
     resolution: {integrity: sha512-W7CrtIModMAxobGhz8iXmDfuJiiKg1WADMO/9x7/CLNin5cpSbuBjooyoIUVB5eyCc36QuTVlkVa1iB2S5+/eA==}
     dev: true
 
+  /chakra-react-select@4.7.4(@chakra-ui/form-control@2.1.1)(@chakra-ui/icon@3.2.0)(@chakra-ui/layout@2.3.1)(@chakra-ui/media-query@3.3.0)(@chakra-ui/menu@2.2.1)(@chakra-ui/spinner@2.1.0)(@chakra-ui/system@2.6.1)(@emotion/react@11.11.1)(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-PgBmoSUorvmhnJf7iQ4LZ3Cf3Yy3cIDMBquTOHelwE9pIWwNuk2I2TKltFOoTS5BV7IDfhETTykckb9CHrUU4Q==}
+    peerDependencies:
+      '@chakra-ui/form-control': ^2.0.0
+      '@chakra-ui/icon': ^3.0.0
+      '@chakra-ui/layout': ^2.0.0
+      '@chakra-ui/media-query': ^3.0.0
+      '@chakra-ui/menu': ^2.0.0
+      '@chakra-ui/spinner': ^2.0.0
+      '@chakra-ui/system': ^2.0.0
+      '@emotion/react': ^11.8.1
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      '@chakra-ui/form-control': 2.1.1(@chakra-ui/system@2.6.1)(react@18.2.0)
+      '@chakra-ui/icon': 3.2.0(@chakra-ui/system@2.6.1)(react@18.2.0)
+      '@chakra-ui/layout': 2.3.1(@chakra-ui/system@2.6.1)(react@18.2.0)
+      '@chakra-ui/media-query': 3.3.0(@chakra-ui/system@2.6.1)(react@18.2.0)
+      '@chakra-ui/menu': 2.2.1(@chakra-ui/system@2.6.1)(framer-motion@10.16.4)(react@18.2.0)
+      '@chakra-ui/spinner': 2.1.0(@chakra-ui/system@2.6.1)(react@18.2.0)
+      '@chakra-ui/system': 2.6.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(react@18.2.0)
+      '@emotion/react': 11.11.1(@types/react@18.2.28)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-select: 5.7.0(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
   /chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
     engines: {node: '>=4'}
@@ -3888,6 +3943,13 @@ packages:
 
   /detect-node-es@1.1.0:
     resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}
+    dev: false
+
+  /dom-helpers@5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
+    dependencies:
+      '@babel/runtime': 7.23.2
+      csstype: 3.1.2
     dev: false
 
   /dot-prop@6.0.1:
@@ -4939,6 +5001,10 @@ packages:
       css-mediaquery: 0.1.2
     dev: false
 
+  /memoize-one@6.0.0:
+    resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
+    dev: false
+
   /merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
     dev: true
@@ -5525,6 +5591,27 @@ packages:
       shallow-equal: 1.2.1
     dev: false
 
+  /react-select@5.7.0(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-lJGiMxCa3cqnUr2Jjtg9YHsaytiZqeNOKeibv6WF5zbK/fPegZ1hg3y/9P1RZVLhqBTs0PfqQLKuAACednYGhQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.23.2
+      '@emotion/cache': 11.11.0
+      '@emotion/react': 11.11.1(@types/react@18.2.28)(react@18.2.0)
+      '@floating-ui/dom': 1.5.3
+      '@types/react-transition-group': 4.4.7
+      memoize-one: 6.0.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
+      use-isomorphic-layout-effect: 1.1.2(@types/react@18.2.28)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
   /react-style-singleton@2.2.1(@types/react@18.2.28)(react@18.2.0):
     resolution: {integrity: sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==}
     engines: {node: '>=10'}
@@ -5540,6 +5627,20 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.6.2
+    dev: false
+
+  /react-transition-group@4.4.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.23.2
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:
@@ -6290,6 +6391,19 @@ packages:
       '@types/react': 18.2.28
       react: 18.2.0
       tslib: 2.6.2
+    dev: false
+
+  /use-isomorphic-layout-effect@1.1.2(@types/react@18.2.28)(react@18.2.0):
+    resolution: {integrity: sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': 18.2.28
+      react: 18.2.0
     dev: false
 
   /use-sidecar@1.1.2(@types/react@18.2.28)(react@18.2.0):
