@@ -95,7 +95,7 @@ const SearchSelect: React.FC<SearchSelectProps> = ({
 
   return (
     <InputGroup isolation="auto">
-      <InputLeftElement pointerEvents="none" children={icon} />
+      <InputLeftElement pointerEvents="none" children={icon} zIndex={0} />
       <CreatableSelect
         isMulti
         name={placeholder}
