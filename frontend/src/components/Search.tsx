@@ -11,7 +11,7 @@ import {
 import search, { Book } from '../scripts/searcher';
 
 import { IoLanguage } from 'react-icons/io5';
-import SearchInput from './SearchInput';
+import { SearchInput, SearchSelect } from './SearchInput';
 import { useDebounce, usePrevious } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
@@ -30,6 +30,21 @@ export interface SearchProps {
   resetPageIndex: () => void;
   setBooks: (books: Book[]) => void;
 }
+
+const extensionOptions = [
+  { value: 'epub', label: 'epub', colorScheme: 'orange' },
+  { value: 'azw3', label: 'azw3', colorScheme: 'purple' },
+  { value: 'mobi', label: 'mobi', colorScheme: 'gray' },
+  { value: 'pdf', label: 'pdf', colorScheme: 'yellow' },
+  { value: 'txt', label: 'txt', colorScheme: 'green' }
+];
+
+const languageOptions = [
+  { value: 'English', label: 'English', colorScheme: 'blue' },
+  { value: 'Chinese', label: 'Chinese', colorScheme: 'red' },
+  { value: 'French', label: 'French', colorScheme: 'blue' },
+  { value: 'Italian', label: 'Italian', colorScheme: 'green' }
+];
 
 const Search: React.FC<SearchProps> = ({ setBooks, pagination, setPageCount, resetPageIndex }) => {
   const { t } = useTranslation();
@@ -105,16 +120,18 @@ const Search: React.FC<SearchProps> = ({ setBooks, pagination, setPageCount, res
         value={publisher}
         onChange={setPublisher}
       />
-      <SearchInput
+      <SearchSelect
         icon={<Icon as={TbFileDescription} />}
         placeholder={t('book.extension')}
         value={extension}
+        options={extensionOptions}
         onChange={setExtension}
       />
-      <SearchInput
+      <SearchSelect
         icon={<Icon as={IoLanguage} />}
         placeholder={t('book.language')}
         value={language}
+        options={languageOptions}
         onChange={setLanguage}
       />
       <SearchInput

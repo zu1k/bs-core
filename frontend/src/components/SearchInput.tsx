@@ -11,6 +11,7 @@ import {
 import React from 'react';
 import { TbCircleX } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
+import { ChakraStylesConfig, CreatableSelect } from 'chakra-react-select';
 
 interface SearchInputProps {
   icon: React.ReactNode;
@@ -53,4 +54,61 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeholder, icon, value, onC
   );
 };
 
-export default SearchInput;
+interface SearchSelectProps {
+  icon: React.ReactNode;
+  placeholder: string;
+  value?: string;
+  options: { value: string; label: string }[];
+  onChange?: (value: string) => void;
+}
+
+const SearchSelect: React.FC<SearchSelectProps> = ({
+  placeholder,
+  icon,
+  value,
+  options,
+  onChange
+}) => {
+  const [controlledValue, setControlledValue] = useControllableState({
+    value,
+    onChange
+  });
+
+  const { t } = useTranslation();
+
+  const chakraStyles: ChakraStylesConfig = {
+    container: (provided, state) => ({
+      ...provided,
+      w: '100%'
+    }),
+    valueContainer: (provided, state) => ({
+      ...provided,
+      paddingInlineStart: '38px'
+    }),
+    dropdownIndicator: (provided, state) => ({
+      ...provided,
+      w: '20px'
+    })
+  };
+
+  return (
+    <InputGroup isolation="auto">
+      <InputLeftElement pointerEvents="none" children={icon} />
+      <CreatableSelect
+        isMulti
+        name={placeholder}
+        placeholder={placeholder}
+        aria-label={placeholder}
+        closeMenuOnSelect={false}
+        chakraStyles={chakraStyles}
+        options={options}
+        onChange={(newValue) => {
+          const value = newValue.map((v) => (v as { value: string }).value).join(' ');
+          setControlledValue(value);
+        }}
+      />
+    </InputGroup>
+  );
+};
+
+export { SearchInput, SearchSelect };

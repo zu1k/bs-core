@@ -29,6 +29,7 @@
     "@tauri-apps/plugin-shell": "latest",
     "ahooks": "^3.7.8",
     "axios": "^1.5.1",
+    "chakra-react-select": "^4.7.4",
     "epubjs": "^0.3.93",
     "filesize": "^10.1.0",
     "framer-motion": "^10.16.4",
