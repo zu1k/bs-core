@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import { TbCircleX } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
-import { ChakraStylesConfig, CreatableSelect } from 'chakra-react-select';
+import { ChakraStylesConfig, CreatableSelect, chakraComponents } from 'chakra-react-select';
 
 interface SearchInputProps {
   icon: React.ReactNode;
@@ -84,13 +84,17 @@ const SearchSelect: React.FC<SearchSelectProps> = ({
     valueContainer: (provided) => ({
       ...provided,
       paddingInlineStart: '38px'
-    }),
-    indicatorSeparator: () => ({
-      display: 'none'
-    }),
-    dropdownIndicator: () => ({
-      display: 'none'
     })
+  };
+
+  const components = {
+    ClearIndicator: (props: any) => (
+      <chakraComponents.ClearIndicator {...props}>
+        <Icon as={TbCircleX} color="GrayText" w={4} h={4} />
+      </chakraComponents.ClearIndicator>
+    ),
+    IndicatorSeparator: () => null,
+    DropdownIndicator: () => null
   };
 
   return (
@@ -103,6 +107,7 @@ const SearchSelect: React.FC<SearchSelectProps> = ({
         aria-label={placeholder}
         closeMenuOnSelect={false}
         chakraStyles={chakraStyles}
+        components={components}
         options={options}
         onChange={(newValue) => {
           const value = newValue.map((v) => (v as { value: string }).value).join(' ');
