@@ -246,7 +246,7 @@ export default function DataTable<Data extends object>({
                           ? '0'
                           : undefined
                       }
-                      textOverflow="hidden"
+                      textOverflow={cell.id.endsWith('title') ? 'ellipsis' : 'hidden'}
                       title={(cell.getValue() as any)?.toString()}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -80,21 +80,46 @@ const BookDetailView: React.FC<BookDetailViewProps> = ({ book }) => {
         variant="outline"
       >
         <CardHeader>
-          <Flex align="center" justify="space-between" gap="2">
-            <Heading as="h3" fontSize={['xl', '2xl', '2xl']} flexShrink={0} flex={1} minW="0">
+          <Flex
+            align="flex-start"
+            flexDirection={{ base: 'column', lg: 'row' }}
+            justify="space-between"
+            gap={{ base: '4', lg: '2' }}
+          >
+            <Heading
+              as="h3"
+              fontSize={['xl', '2xl', '2xl']}
+              whiteSpace="break-spaces"
+              flexShrink={0}
+              flex={1}
+              minW="0"
+            >
               <Text>{title}</Text>
             </Heading>
-            {md5 != undefined && md5.length > 0 ? (
-              <Button as={ExternalLink} href={import.meta.env.VITE_MD5_BASE_URL + md5}>
-                {t('table.redirect2aa')}
-              </Button>
-            ) : null}
-            {extension === 'epub' &&
-            ipfs_cid != undefined &&
-            ipfs_cid.length > 0 &&
-            rootContext.ipfsGateways.length > 0 ? (
-              <Button onClick={onOpen}>{t('table.preview')}</Button>
-            ) : null}
+            <Flex
+              gap="2"
+              flexDirection={{ base: 'column', sm: 'row' }}
+              w={{ base: '100%', sm: 'auto' }}
+            >
+              {md5 != undefined && md5.length > 0 ? (
+                <Button
+                  as={ExternalLink}
+                  minWidth="unset"
+                  w={{ base: '100%', sm: 'auto' }}
+                  href={import.meta.env.VITE_MD5_BASE_URL + md5}
+                >
+                  {t('table.redirect2aa')}
+                </Button>
+              ) : null}
+              {extension === 'epub' &&
+              ipfs_cid != undefined &&
+              ipfs_cid.length > 0 &&
+              rootContext.ipfsGateways.length > 0 ? (
+                <Button onClick={onOpen} w={{ base: '100%', sm: 'auto' }}>
+                  {t('table.preview')}
+                </Button>
+              ) : null}
+            </Flex>
           </Flex>
         </CardHeader>
         <Divider />
