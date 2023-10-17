@@ -22,13 +22,14 @@ const extensionColorSchemes: { [key: string]: string } = {
 };
 
 const languageColorSchemes: { [key: string]: string } = {
-  English: 'blue',
-  Chinese: 'red',
-  French: 'blue',
-  Italian: 'green'
+  english: 'blue',
+  chinese: 'red',
+  french: 'blue',
+  italian: 'green'
 };
 
 export default function getColorScheme(key: string) {
+  key = key.toLowerCase();
   if (key in extensionColorSchemes) {
     return extensionColorSchemes[key];
   } else if (key in languageColorSchemes) {
