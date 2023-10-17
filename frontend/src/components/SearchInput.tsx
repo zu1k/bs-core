@@ -77,17 +77,19 @@ const SearchSelect: React.FC<SearchSelectProps> = ({
   const { t } = useTranslation();
 
   const chakraStyles: ChakraStylesConfig = {
-    container: (provided, state) => ({
+    container: (provided) => ({
       ...provided,
       w: '100%'
     }),
-    valueContainer: (provided, state) => ({
+    valueContainer: (provided) => ({
       ...provided,
       paddingInlineStart: '38px'
     }),
-    dropdownIndicator: (provided, state) => ({
-      ...provided,
-      w: '20px'
+    indicatorSeparator: () => ({
+      display: 'none'
+    }),
+    dropdownIndicator: () => ({
+      display: 'none'
     })
   };
 
