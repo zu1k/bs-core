@@ -27,28 +27,10 @@ import { filesize as formatFileSize } from 'filesize';
 import { getCoverImageUrl, getMd5CoverImageUrl, white_pic } from '../scripts/cover';
 import { OnPaginationChange } from './DataTable';
 import Pagination from './Pagination';
+import getColorScheme from '../data/color';
 
-const colorSchemes = [
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'teal',
-  'blue',
-  'cyan',
-  'purple',
-  'pink',
-  'gray'
-];
-
-const rendererExtension = (value: string) => {
-  const colorScheme = colorSchemes[value.charCodeAt(0) % colorSchemes.length];
-  return <Tag colorScheme={colorScheme}>{value}</Tag>;
-};
-
-const rendererLanguage = (value: string) => {
-  const colorScheme = colorSchemes[value.length % colorSchemes.length];
-  return <Tag colorScheme={colorScheme}>{value}</Tag>;
+const rendererTag = (value: string) => {
+  return <Tag colorScheme={getColorScheme(value)}>{value}</Tag>;
 };
 
 export interface BookCardListProps<Data extends object> extends TableProps {
@@ -146,7 +128,7 @@ export default function BookCardList<Data extends object>({
                 {book.publisher != undefined ? book.publisher : ''}
               </Text>
               <div>
-                {rendererExtension(book.extension)} {rendererLanguage(book.language)}{' '}
+                {rendererTag(book.extension)} {rendererTag(book.language)}{' '}
                 {formatFileSize(book.filesize) as string}
               </div>
             </CardBody>
