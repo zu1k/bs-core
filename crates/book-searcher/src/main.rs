@@ -4,7 +4,7 @@ use actix_web::{
 use actix_web_static_files::ResourceFiles;
 use book_searcher_core::{Book, Searcher};
 use clap::Parser;
-use log::{info, LevelFilter};
+use log::info;
 use serde::{Deserialize, Serialize};
 use std::{path::PathBuf, sync::Arc};
 
@@ -105,7 +105,7 @@ struct Index {
 }
 
 fn main() {
-    env_logger::builder().filter_level(LevelFilter::Info).init();
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
 
     let args = AppOpts::parse();
     match args.subcmd {
