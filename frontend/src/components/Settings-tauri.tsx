@@ -22,7 +22,7 @@ import React from 'react';
 import RootContext from '../store';
 import { SettingsItem } from './SettingsItem';
 import CreateIndex from './CreateIndex';
-import { invoke } from '@tauri-apps/api';
+import { invoke } from '@tauri-apps/api/primitives';
 import { open } from '@tauri-apps/plugin-dialog';
 import { parseIpfsGateways } from '../scripts/ipfs';
 import { useForm } from 'react-hook-form';
