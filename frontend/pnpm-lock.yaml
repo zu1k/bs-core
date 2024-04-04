@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@chakra-ui/icons':
     specifier: ^2.1.1
@@ -34,13 +30,13 @@ dependencies:
     version: 8.10.7
   '@tauri-apps/api':
     specifier: next
-    version: 2.0.0-alpha.9
+    version: 2.0.0-beta.7
   '@tauri-apps/plugin-dialog':
     specifier: latest
-    version: 2.0.0-alpha.1
+    version: 2.0.0-beta.2
   '@tauri-apps/plugin-shell':
     specifier: latest
-    version: 2.0.0-alpha.1
+    version: 2.0.0-beta.2
   ahooks:
     specifier: ^3.7.8
     version: 3.7.8(react@18.2.0)
@@ -99,7 +95,7 @@ devDependencies:
     version: 7.23.2
   '@darkobits/vite-plugin-favicons':
     specifier: ^0.3.0
-    version: 0.3.0(typescript@5.2.2)(vite@4.5.0)
+    version: 0.3.0(typescript@5.2.2)(vite@4.5.3)
   '@types/lodash':
     specifier: ^4.14.200
     version: 4.14.200
@@ -114,7 +110,7 @@ devDependencies:
     version: 18.2.14
   '@vitejs/plugin-react':
     specifier: ^4.1.0
-    version: 4.1.0(vite@4.5.0)
+    version: 4.1.0(vite@4.5.3)
   prettier:
     specifier: ^2.8.8
     version: 2.8.8
@@ -122,14 +118,14 @@ devDependencies:
     specifier: ^5.2.2
     version: 5.2.2
   vite:
-    specifier: ^4.5.0
-    version: 4.5.0(@types/node@20.8.7)
+    specifier: ^4.5.3
+    version: 4.5.3(@types/node@20.8.7)
   vite-plugin-pwa:
     specifier: ^0.14.7
-    version: 0.14.7(vite@4.5.0)(workbox-build@6.6.0)(workbox-window@6.6.0)
+    version: 0.14.7(vite@4.5.3)(workbox-build@6.6.0)(workbox-window@6.6.0)
   vite-plugin-top-level-await:
     specifier: ^1.3.1
-    version: 1.3.1(rollup@2.79.1)(vite@4.5.0)
+    version: 1.3.1(rollup@2.79.1)(vite@4.5.3)
 
 packages:
 
@@ -2470,7 +2466,7 @@ packages:
       - typescript
     dev: true
 
-  /@darkobits/vite-plugin-favicons@0.3.0(typescript@5.2.2)(vite@4.5.0):
+  /@darkobits/vite-plugin-favicons@0.3.0(typescript@5.2.2)(vite@4.5.3):
     resolution: {integrity: sha512-V1jLNBeHU5zHEL+URENjr1g5+B5+iYil9212cNMiHa/pt1C2rXKXOsSrQP/yxUjgXCsrmVV2KyoA0cRBIrQ33w==}
     engines: {node: '>=16', npm: '>=8'}
     peerDependencies:
@@ -2486,7 +2482,7 @@ packages:
       parse5: 7.1.2
       ssri: 10.0.5
       ts-essentials: 9.4.1(typescript@5.2.2)
-      vite: 4.5.0(@types/node@20.8.7)
+      vite: 4.5.3(@types/node@20.8.7)
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -3201,26 +3197,26 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /@tauri-apps/api@2.0.0-alpha.6:
-    resolution: {integrity: sha512-ZMOc3eu9amwvkC6M69h3hWt4/EsFaAXmtkiw4xd2LN59/lTb4ZQiVfq2QKlRcu1rj3n/Tcr7U30ZopvHwXBGIg==}
-    engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
-    dev: false
-
-  /@tauri-apps/api@2.0.0-alpha.9:
-    resolution: {integrity: sha512-Q5BiIQa2ToICdaJSYZdmtwbKSfdk+uQbQ7xMnbWI5C5C3frEVFlT92kVXgZFKIwrTLZBWHfiowkPR6rbFqAHIg==}
+  /@tauri-apps/api@2.0.0-beta.4:
+    resolution: {integrity: sha512-Nxtj28NYUo5iwYkpYslxmOPkdI2WkELU2e3UH9nbJm9Ydki2CQwJVGQxx4EANtdZcMNsEsUzRqaDTvEUYH1l6w==}
     engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
-  /@tauri-apps/plugin-dialog@2.0.0-alpha.1:
-    resolution: {integrity: sha512-Fqv7zB7qvR6DkcH1dafHcRRNWRSFwj637/G2MQ+kKrmk1ErfV95lcYjpIhmUaETQSPKeogSI6A78kSnO89cvHQ==}
-    dependencies:
-      '@tauri-apps/api': 2.0.0-alpha.6
+  /@tauri-apps/api@2.0.0-beta.7:
+    resolution: {integrity: sha512-cM7SJQP4DBkLLMOdybLFYUURWn/tng2FEdAnXlu42f3NhFxKL4KVeeQTkuwlgC7ePwwwvDSqiXGiF+dKOadY7w==}
+    engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
-  /@tauri-apps/plugin-shell@2.0.0-alpha.1:
-    resolution: {integrity: sha512-vH4ODw/7pmMHackh1F+/uGmBXNGArVJ8FRO0xyL0xjPsMxbba4o90FJ7eiITENznBZRKn3JFaTedh8KhAZqU/g==}
+  /@tauri-apps/plugin-dialog@2.0.0-beta.2:
+    resolution: {integrity: sha512-WugTn/8d5jYA0GL1JRIJgA1OSxG0h2V4PSZZzehgA3v7rPlIU6w9s2+dSRqj55aMj6hm3Az9YbQqC18nuaHkpw==}
     dependencies:
-      '@tauri-apps/api': 2.0.0-alpha.6
+      '@tauri-apps/api': 2.0.0-beta.4
+    dev: false
+
+  /@tauri-apps/plugin-shell@2.0.0-beta.2:
+    resolution: {integrity: sha512-9rWsfN7Wt+EuWmpmNnK8bCs+04fzhEYrHtWyLIAYxb9diFdcJrEoctCP9YM2v+Uf8/y8qFC7VCbZ/9VQHANymQ==}
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.4
     dev: false
 
   /@types/babel__core@7.20.3:
@@ -3325,7 +3321,7 @@ packages:
     resolution: {integrity: sha512-I3pkr8j/6tmQtKV/ZzHtuaqYSQvyjGRKH4go60Rr0IDLlFxuRT5V32uvB1mecM5G1EVAUyF/4r4QZ1GHgz+mxA==}
     dev: true
 
-  /@vitejs/plugin-react@4.1.0(vite@4.5.0):
+  /@vitejs/plugin-react@4.1.0(vite@4.5.3):
     resolution: {integrity: sha512-rM0SqazU9iqPUraQ2JlIvReeaxOoRj6n+PzB1C0cBzIbd8qP336nC39/R9yPi3wVcah7E7j/kdU1uCUqMEU4OQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -3336,7 +3332,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.22.5(@babel/core@7.23.2)
       '@types/babel__core': 7.20.3
       react-refresh: 0.14.0
-      vite: 4.5.0(@types/node@20.8.7)
+      vite: 4.5.3(@types/node@20.8.7)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6455,7 +6451,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /vite-plugin-pwa@0.14.7(vite@4.5.0)(workbox-build@6.6.0)(workbox-window@6.6.0):
+  /vite-plugin-pwa@0.14.7(vite@4.5.3)(workbox-build@6.6.0)(workbox-window@6.6.0):
     resolution: {integrity: sha512-dNJaf0fYOWncmjxv9HiSa2xrSjipjff7IkYE5oIUJ2x5HKu3cXgA8LRgzOwTc5MhwyFYRSU0xyN0Phbx3NsQYw==}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
@@ -6467,14 +6463,14 @@ packages:
       fast-glob: 3.3.1
       pretty-bytes: 6.1.1
       rollup: 3.29.4
-      vite: 4.5.0(@types/node@20.8.7)
+      vite: 4.5.3(@types/node@20.8.7)
       workbox-build: 6.6.0
       workbox-window: 6.6.0
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite-plugin-top-level-await@1.3.1(rollup@2.79.1)(vite@4.5.0):
+  /vite-plugin-top-level-await@1.3.1(rollup@2.79.1)(vite@4.5.3):
     resolution: {integrity: sha512-55M1h4NAwkrpxPNOJIBzKZFihqLUzIgnElLSmPNPMR2Fn9+JHKaNg3sVX1Fq+VgvuBksQYxiD3OnwQAUu7kaPQ==}
     peerDependencies:
       vite: '>=2.8'
@@ -6482,14 +6478,14 @@ packages:
       '@rollup/plugin-virtual': 3.0.2(rollup@2.79.1)
       '@swc/core': 1.3.93
       uuid: 9.0.1
-      vite: 4.5.0(@types/node@20.8.7)
+      vite: 4.5.3(@types/node@20.8.7)
     transitivePeerDependencies:
       - '@swc/helpers'
       - rollup
     dev: true
 
-  /vite@4.5.0(@types/node@20.8.7):
-    resolution: {integrity: sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw==}
+  /vite@4.5.3(@types/node@20.8.7):
+    resolution: {integrity: sha512-kQL23kMeX92v3ph7IauVkXkikdDRsYMGTVl5KY2E9OY4ONLvkHf04MDTbnfo6NKxZiDLWzVpP5oTa8hQD8U3dg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -6649,6 +6645,7 @@ packages:
 
   /workbox-google-analytics@6.6.0:
     resolution: {integrity: sha512-p4DJa6OldXWd6M9zRl0H6vB9lkrmqYFkRQ2xEiNdBFp9U0LhsGO7hsBscVEyH9H2/3eZZt8c97NB2FD9U2NJ+Q==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 6.6.0
       workbox-core: 6.6.0
@@ -6764,3 +6761,7 @@ packages:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
     engines: {node: '>= 6'}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
